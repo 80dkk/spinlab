@@ -1,0 +1,4709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SpinLab</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(0,255,255,.08),transparent 30%),
+    radial-gradient(circle at 80% 80%,rgba(255,70,160,.10),transparent 30%),
+    #05050d;
+  color:white;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+button{font-family:inherit}
+
+/* ACTIVE DOT BACKGROUND */
+
+#particles{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+#particles::before,
+#particles::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-repeat:no-repeat;
+  pointer-events:none;
+}
+
+/* Random-looking soda-bubble field: deliberately non-grid and widely spaced. */
+#particles::before{
+  background-image:
+    radial-gradient(circle at 7% 18%,rgba(0,234,255,.72) 0 2px,transparent 3px),
+    radial-gradient(circle at 19% 73%,rgba(170,70,255,.55) 0 3px,transparent 4px),
+    radial-gradient(circle at 31% 11%,rgba(255,70,160,.45) 0 1.5px,transparent 3px),
+    radial-gradient(circle at 43% 61%,rgba(0,234,255,.55) 0 2px,transparent 3px),
+    radial-gradient(circle at 56% 26%,rgba(170,70,255,.52) 0 2.5px,transparent 4px),
+    radial-gradient(circle at 68% 82%,rgba(255,70,160,.42) 0 2px,transparent 3px),
+    radial-gradient(circle at 79% 39%,rgba(0,234,255,.65) 0 1.5px,transparent 3px),
+    radial-gradient(circle at 92% 67%,rgba(170,70,255,.5) 0 3px,transparent 4px),
+    radial-gradient(circle at 14% 46%,rgba(255,70,160,.38) 0 1.5px,transparent 3px),
+    radial-gradient(circle at 37% 88%,rgba(0,234,255,.48) 0 2.5px,transparent 4px),
+    radial-gradient(circle at 63% 51%,rgba(170,70,255,.48) 0 1.5px,transparent 3px),
+    radial-gradient(circle at 84% 12%,rgba(255,70,160,.4) 0 2px,transparent 3px);
+  animation:particlesMove 3.5s linear infinite;
+  opacity:.42;
+}
+
+#particles::after{
+  background-image:
+    radial-gradient(circle at 3% 88%,rgba(0,234,255,.35) 0 1.5px,transparent 3px),
+    radial-gradient(circle at 26% 34%,rgba(170,70,255,.34) 0 2px,transparent 3.5px),
+    radial-gradient(circle at 48% 7%,rgba(255,70,160,.3) 0 2px,transparent 3.5px),
+    radial-gradient(circle at 73% 64%,rgba(0,234,255,.34) 0 2.5px,transparent 4px),
+    radial-gradient(circle at 97% 24%,rgba(170,70,255,.34) 0 1.5px,transparent 3px),
+    radial-gradient(circle at 52% 92%,rgba(255,70,160,.28) 0 2px,transparent 3px);
+  animation:particlesMove2 4.5s linear infinite;
+  opacity:.24;
+}
+
+@keyframes particlesMove{
+  from{transform:translate3d(0,20px,0)}
+  to{transform:translate3d(18px,-180px,0)}
+}
+
+@keyframes particlesMove2{
+  from{transform:translate3d(0,30px,0)}
+  to{transform:translate3d(-20px,-230px,0)}
+}
+
+header,
+main,
+.chat,
+.spinlab-chat,
+.toast{
+  position:relative;
+  z-index:1;
+}
+
+header{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 30px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:rgba(5,5,15,.78);
+  backdrop-filter:blur(15px);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:3px;
+
+  background:linear-gradient(
+    90deg,
+    #00eaff 0%,
+    #3b82f6 25%,
+    #a855f7 50%,
+    #ff4fd8 75%,
+    #00eaff 100%
+  );
+
+  background-size:250% auto;
+
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+
+  animation:logoGradient 5s linear infinite;
+
+  text-shadow:
+    0 0 15px rgba(0,234,255,.35),
+    0 0 25px rgba(255,79,216,.2);
+}
+
+@keyframes logoGradient{
+  0%{background-position:0% center}
+  100%{background-position:250% center}
+}
+
+nav{display:flex;gap:8px}
+
+nav button{
+  background:transparent;
+  border:1px solid transparent;
+  color:#aaa;
+  padding:9px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+nav button:hover,
+nav button.active{
+  color:#fff;
+  border-color:rgba(255,79,216,.35);
+  background:rgba(0,234,255,.06);
+}
+
+.player-level{font-size:13px;color:#bbb}
+.player-level b{color:#00ffcc}
+
+main{
+  max-width:1250px;
+  margin:auto;
+  padding:35px 20px 100px;
+}
+
+.page{
+  display:none;
+  animation:pageIn .3s ease;
+}
+
+.page.active{display:block}
+
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.hero{
+  min-height:480px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:clamp(50px,10vw,100px);
+  letter-spacing:8px;
+
+  background:linear-gradient(
+    90deg,
+    #00eaff 0%,
+    #3b82f6 25%,
+    #a855f7 50%,
+    #ff4fd8 75%,
+    #00eaff 100%
+  );
+
+  background-size:250% auto;
+
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+
+  animation:logoGradient 5s linear infinite;
+
+  text-shadow:
+    0 0 15px rgba(0,234,255,.45),
+    0 0 45px rgba(255,79,216,.2);
+}
+
+.hero p{
+  color:#aaa;
+  margin-top:15px;
+  font-size:17px;
+}
+
+.big-btn{
+  margin-top:30px;
+  padding:15px 30px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(135deg,#00eaff,#a855f7,#ff4fd8);
+  background-size:200% 200%;
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:
+    0 0 25px rgba(0,234,255,.2),
+    0 0 30px rgba(255,79,216,.12);
+  transition:.2s;
+}
+
+.big-btn:hover{
+  transform:translateY(-3px) scale(1.03);
+}
+
+.quick-links{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  width:100%;
+  max-width:1000px;
+  margin:45px auto 0;
+}
+
+.quick-card{
+  min-height:180px;
+  padding:30px 20px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.025);
+  border-radius:18px;
+  cursor:pointer;
+  transition:.25s;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.quick-card:hover{
+  transform:translateY(-7px);
+  border-color:rgba(255,79,216,.4);
+  box-shadow:
+    0 12px 40px rgba(0,234,255,.12),
+    0 0 30px rgba(255,79,216,.08);
+}
+
+.quick-icon{
+  font-size:48px;
+  margin-bottom:18px;
+}
+
+.quick-card h3{
+  font-size:24px;
+  letter-spacing:3px;
+  margin-bottom:10px;
+}
+
+.quick-card p{
+  color:#999;
+  font-size:13px;
+  line-height:1.5;
+}
+
+@media(max-width:800px){
+  .quick-links{
+    grid-template-columns:1fr;
+    max-width:500px;
+  }
+}
+
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+
+.game-card{
+  min-height:180px;
+  padding:22px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.025);
+  border-radius:16px;
+  cursor:pointer;
+  transition:.25s;
+  position:relative;
+  overflow:hidden;
+}
+
+.game-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(255,79,216,.45);
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.3),
+    0 0 25px rgba(0,234,255,.08);
+}
+
+.game-card h3{margin-bottom:10px;font-size:21px}
+.game-card p{color:#999;font-size:13px;line-height:1.5}
+.game-icon{font-size:35px;margin-bottom:15px}
+
+.back-btn{
+  margin-bottom:20px;
+  padding:9px 14px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;
+  color:#aaa;
+  background:rgba(255,255,255,.03);
+  cursor:pointer;
+}
+
+.back-btn:hover{color:white;border-color:#ff4fd8}
+
+.game-page h2{margin-bottom:20px;font-size:32px}
+
+.game-stage{
+  min-height:420px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.025);
+  border-radius:18px;
+  padding:25px;
+}
+
+.game-center{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+  text-align:center;
+}
+
+.game-info{color:#aaa;font-size:14px}
+
+.game-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+}
+
+.action-btn{
+  padding:11px 18px;
+  border:1px solid rgba(0,234,255,.25);
+  border-radius:9px;
+  background:rgba(0,234,255,.07);
+  color:white;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.action-btn:hover{
+  background:rgba(0,234,255,.15);
+  transform:translateY(-2px);
+}
+
+.action-btn.danger{
+  border-color:rgba(255,70,100,.3);
+  background:rgba(255,70,100,.07);
+}
+
+.action-btn:disabled{opacity:.35;cursor:not-allowed}
+
+.play-again{
+  margin-top:8px;
+  padding:13px 25px;
+  border:1px solid rgba(255,79,216,.55);
+  border-radius:10px;
+  background:linear-gradient(135deg,#00eaff,#a855f7,#ff4fd8);
+  color:white;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:
+    0 0 20px rgba(0,234,255,.18),
+    0 0 25px rgba(255,79,216,.12);
+  transition:.2s;
+}
+
+.play-again:hover{
+  transform:translateY(-2px) scale(1.03);
+}
+
+.cards{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+  min-height:115px;
+}
+
+.card{
+  width:70px;
+  height:100px;
+  border-radius:10px;
+  background:linear-gradient(145deg,#fff,#d9d9d9);
+  color:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:22px;
+  box-shadow:0 7px 18px rgba(0,0,0,.3);
+  animation:cardIn .3s ease;
+}
+
+.card.red{color:#d91e45}
+
+.card-back{
+  background:repeating-linear-gradient(
+    45deg,#16162d,#16162d 5px,#28285a 5px,#28285a 10px
+  );
+  color:#00eaff;
+  border:1px solid rgba(0,234,255,.4);
+}
+
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(-20px) rotateY(90deg)}
+  to{opacity:1;transform:none}
+}
+
+.result{min-height:28px;color:#00ffcc;font-weight:bold}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+  margin-bottom:30px;
+}
+
+.stat{
+  padding:22px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.025);
+  border-radius:14px;
+}
+
+.stat span{
+  color:#888;
+  font-size:12px;
+  display:block;
+  margin-bottom:8px;
+}
+
+.stat strong{font-size:28px;color:#00eaff}
+
+.quests-panel{
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.025);
+  border-radius:16px;
+  padding:22px;
+}
+
+.quest{
+  padding:15px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.quest:last-child{border-bottom:0}
+
+.quest-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.quest-title{font-weight:bold}
+.quest-reward{color:#ffd84d}
+.quest-desc{color:#888;font-size:13px;margin:5px 0 9px}
+
+.progress{
+  height:7px;
+  border-radius:10px;
+  background:#181824;
+  overflow:hidden;
+}
+
+.progress div{
+  height:100%;
+  background:linear-gradient(90deg,#00eaff,#a34cff,#ff4fd8);
+  transition:.4s;
+}
+
+.quest.done .quest-title{color:#00ffcc}
+
+.checker-board{
+  width:min(480px,90vw);
+  aspect-ratio:1;
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  border:4px solid #242438;
+  margin:auto;
+}
+
+.checker-square{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  position:relative;
+}
+
+.checker-square.light{background:#d8d8d8}
+.checker-square.dark{background:#33334a}
+
+.checker-piece{
+  width:72%;
+  height:72%;
+  border-radius:50%;
+  border:3px solid rgba(255,255,255,.25);
+  box-shadow:0 5px 10px rgba(0,0,0,.4);
+}
+
+.checker-piece.player{background:#00d9ff}
+.checker-piece.ai{background:#ff3f76}
+
+.checker-piece.king:after{
+  content:"♛";
+  color:white;
+  font-size:22px;
+}
+
+.checker-square.selected{
+  box-shadow:inset 0 0 0 4px #ffe34d;
+}
+
+.checker-square.move-target{
+  box-shadow:inset 0 0 0 4px #00ffcc;
+}
+
+.memory-grid{
+  display:grid;
+  grid-template-columns:repeat(4,75px);
+  gap:12px;
+  justify-content:center;
+}
+
+.memory-card{
+  width:75px;
+  height:95px;
+  border-radius:10px;
+  cursor:pointer;
+  background:#17172c;
+  border:1px solid rgba(0,234,255,.25);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  transition:.25s;
+}
+
+.memory-card.flipped,
+.memory-card.matched{
+  background:#eee;
+  color:#111;
+}
+
+.memory-card.matched{border-color:#00ffcc}
+
+.rank-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+}
+
+.rank-btn{
+  padding:9px 14px;
+  border-radius:8px;
+  border:1px solid rgba(0,234,255,.2);
+  background:rgba(0,234,255,.05);
+  color:white;
+  cursor:pointer;
+}
+
+.chat{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:99999;
+}
+
+.chat button{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  border:1px solid rgba(255,79,216,.5);
+  background:linear-gradient(135deg,#00eaff,#a855f7,#ff4fd8);
+  color:white;
+  font-size:23px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:
+    0 0 25px rgba(0,234,255,.3),
+    0 0 30px rgba(255,79,216,.15);
+}
+
+.spinlab-chat{
+  position:fixed;
+  right:24px;
+  bottom:90px;
+  width:360px;
+  height:510px;
+  background:#080812;
+  border:1px solid rgba(0,255,255,.45);
+  border-radius:18px;
+  box-shadow:0 0 20px rgba(0,255,255,.18),0 0 60px rgba(150,0,255,.15);
+  z-index:999999;
+  display:flex;
+  flex-direction:column;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(25px) scale(.95);
+  pointer-events:none;
+  transition:.25s;
+}
+
+.spinlab-chat.open{
+  opacity:1;
+  visibility:visible;
+  transform:none;
+  pointer-events:auto;
+}
+
+.spinlab-chat-header{
+  height:65px;
+  padding:0 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.spinlab-chat-header strong{
+  display:block;
+  font-size:15px;
+  letter-spacing:2px;
+}
+
+.spinlab-chat-header span{
+  display:block;
+  margin-top:4px;
+  color:#00ffcc;
+  font-size:9px;
+  letter-spacing:2px;
+}
+
+.spinlab-chat-header button{
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.07);
+  color:white;
+  font-size:23px;
+  cursor:pointer;
+}
+
+.spinlab-messages{
+  flex:1;
+  padding:15px;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.ai-message,
+.user-message{
+  max-width:82%;
+  padding:10px 13px;
+  border-radius:13px;
+  font-size:13px;
+  line-height:1.45;
+  white-space:pre-wrap;
+}
+
+.ai-message{
+  align-self:flex-start;
+  background:rgba(0,255,255,.08);
+  border:1px solid rgba(0,255,255,.15);
+  color:#dfffff;
+}
+
+.user-message{
+  align-self:flex-end;
+  background:rgba(145,60,255,.2);
+  border:1px solid rgba(170,80,255,.25);
+  color:white;
+}
+
+.spinlab-chat-input{
+  padding:12px;
+  display:flex;
+  gap:8px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.spinlab-chat-input input{
+  flex:1;
+  min-width:0;
+  padding:11px 12px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  background:#111120;
+  color:white;
+  outline:none;
+}
+
+.spinlab-chat-input button{
+  width:43px;
+  border:0;
+  border-radius:10px;
+  background:linear-gradient(135deg,#00eaff,#a855f7,#ff4fd8);
+  color:white;
+  font-size:17px;
+  cursor:pointer;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,20px);
+  background:#111120;
+  border:1px solid #00ffcc;
+  padding:13px 20px;
+  border-radius:10px;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:1000000;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+@media(max-width:600px){
+  header{padding:0 12px}
+  .logo{font-size:18px}
+  nav button{padding:7px;font-size:11px}
+  .player-level{display:none}
+
+  .spinlab-chat{
+    left:10px;
+    right:10px;
+    bottom:80px;
+    width:auto;
+    height:70vh;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="particles"></div>
+
+<header>
+
+<div class="logo">SPINLAB</div>
+
+<nav>
+<button onclick="showPage('home')" class="nav-btn active">HOME</button>
+<button onclick="showPage('arcade')" class="nav-btn">ARCADE</button>
+<button onclick="showPage('classicCards')" class="nav-btn">CARDS</button>
+<button onclick="showPage('random')" class="nav-btn">RANDOM</button>
+<button onclick="showPage('stats')" class="nav-btn">STATS</button>
+</nav>
+
+<div class="player-level">
+LEVEL <b id="headerLevel">1</b>
+</div>
+
+</header>
+
+<main>
+
+<section id="home" class="page active">
+
+<div class="hero">
+
+<h1>SPINLAB</h1>
+
+<p>Games. Randomness. Chaos.</p>
+
+<button class="big-btn" onclick="showPage('arcade')">
+ENTER ARCADE
+</button>
+
+<div class="quick-links">
+
+<div class="quick-card" onclick="showPage('stats')">
+<div class="quick-icon">📊</div>
+<h3>STATS</h3>
+<p>View your XP, wins, level and quests.</p>
+</div>
+
+<div class="quick-card" onclick="showPage('arcade')">
+<div class="quick-icon">🎮</div>
+<h3>ARCADE</h3>
+<p>Play all of the games in SpinLab.</p>
+</div>
+
+<div class="quick-card" onclick="showPage('random')">
+<div class="quick-icon">🎲</div>
+<h3>RANDOM</h3>
+<p>Generate numbers and flip coins.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="arcade" class="page">
+
+<h2 class="section-title">ARCADE</h2>
+
+<div class="cards-grid">
+
+<div class="game-card" onclick="openGame('blackjack')">
+<div class="game-icon">🃏</div>
+<h3>Blackjack</h3>
+<p>Beat the dealer and get as close to 21 as possible.</p>
+</div>
+
+<div class="game-card" onclick="openGame('war')">
+<div class="game-icon">⚔️</div>
+<h3>War</h3>
+<p>Draw cards and see who gets the higher card.</p>
+</div>
+
+<div class="game-card" onclick="openGame('higher')">
+<div class="game-icon">⬆️</div>
+<h3>Higher / Lower</h3>
+<p>Guess whether the next card is higher or lower.</p>
+</div>
+
+<div class="game-card" onclick="openGame('memory')">
+<div class="game-icon">🧠</div>
+<h3>Card Memory</h3>
+<p>Find all matching pairs.</p>
+</div>
+
+<div class="game-card" onclick="openGame('baccarat')">
+<div class="game-icon">🎴</div>
+<h3>Baccarat</h3>
+<p>Compare Player and Banker hands and get closest to 9.</p>
+</div>
+
+<div class="game-card" onclick="openGame('crazy8s')">
+<div class="game-icon">8️⃣</div>
+<h3>Crazy Eights</h3>
+<p>Match the suit or rank and get rid of your cards first.</p>
+</div>
+
+</div>
+
+<br>
+
+<h2 class="section-title">CLASSIC AI GAMES</h2>
+
+<div class="cards-grid">
+
+<div class="game-card" onclick="openGame('poker')">
+<div class="game-icon">♠️</div>
+<h3>Poker vs AI</h3>
+<p>Play poker against the SpinLab AI.</p>
+</div>
+
+<div class="game-card" onclick="openGame('checkers')">
+<div class="game-icon">🔴</div>
+<h3>Dam vs AI</h3>
+<p>Play checkers against the AI.</p>
+</div>
+
+<div class="game-card" onclick="openGame('solitaire')">
+<div class="game-icon">♦️</div>
+<h3>Solitaire</h3>
+<p>Classic single-player card game.</p>
+</div>
+
+<div class="game-card" onclick="openGame('gofish')">
+<div class="game-icon">🐟</div>
+<h3>Go Fish</h3>
+<p>Ask the AI for cards and collect pairs.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="classicCards" class="page">
+
+<h2 class="section-title">CLASSIC CARD GAMES</h2>
+
+<div class="cards-grid">
+
+<div class="game-card" onclick="openGame('blackjack')">
+<div class="game-icon">🃏</div>
+<h3>Blackjack</h3>
+<p>Beat the dealer.</p>
+</div>
+
+<div class="game-card" onclick="openGame('poker')">
+<div class="game-icon">♠️</div>
+<h3>Poker vs AI</h3>
+<p>Test your hand against the AI.</p>
+</div>
+
+<div class="game-card" onclick="openGame('war')">
+<div class="game-icon">⚔️</div>
+<h3>War</h3>
+<p>Higher card wins.</p>
+</div>
+
+<div class="game-card" onclick="openGame('gofish')">
+<div class="game-icon">🐟</div>
+<h3>Go Fish</h3>
+<p>Collect pairs.</p>
+</div>
+
+<div class="game-card" onclick="openGame('solitaire')">
+<div class="game-icon">♦️</div>
+<h3>Solitaire</h3>
+<p>Classic solitaire.</p>
+</div>
+
+<div class="game-card" onclick="openGame('baccarat')">
+<div class="game-icon">🎴</div>
+<h3>Baccarat</h3>
+<p>Closest to 9 wins.</p>
+</div>
+
+<div class="game-card" onclick="openGame('crazy8s')">
+<div class="game-icon">8️⃣</div>
+<h3>Crazy Eights</h3>
+<p>Match cards and empty your hand.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="random" class="page">
+
+<h2 class="section-title">RANDOM LAB</h2>
+
+<div class="game-card" style="cursor:default">
+
+<h3>Random Number</h3>
+<p>Generate a random number.</p>
+
+<button class="big-btn" onclick="randomNumber()">
+GENERATE
+</button>
+
+<h2 id="randomNumberResult" style="margin-top:20px;color:#00eaff">
+?
+</h2>
+
+</div>
+
+<br>
+
+<div class="game-card" style="cursor:default">
+
+<h3>Coin Flip</h3>
+
+<button class="big-btn" onclick="coinFlip()">
+FLIP
+</button>
+
+<h2 id="coinResult" style="margin-top:20px;color:#00eaff">
+?
+</h2>
+
+</div>
+
+</section>
+
+
+<section id="stats" class="page">
+
+<h2 class="section-title">STATS</h2>
+
+<div class="stats-grid">
+
+<div class="stat">
+<span>LEVEL</span>
+<strong id="statLevel">1</strong>
+</div>
+
+<div class="stat">
+<span>XP</span>
+<strong id="statXP">0</strong>
+</div>
+
+<div class="stat">
+<span>GAMES</span>
+<strong id="statGames">0</strong>
+</div>
+
+<div class="stat">
+<span>WINS</span>
+<strong id="statWins">0</strong>
+</div>
+
+<div class="stat">
+<span>WIN RATE</span>
+<strong id="statWinRate">0%</strong>
+</div>
+
+<div class="stat">
+<span>SPINS</span>
+<strong id="statSpins">0</strong>
+</div>
+
+</div>
+
+<h2 class="section-title">QUESTS</h2>
+
+<div class="quests-panel" id="questList"></div>
+
+</section>
+
+
+<section id="blackjackPage" class="page game-page">
+<button class="back-btn" onclick="showPage('arcade')">← BACK</button>
+<h2>BLACKJACK</h2>
+<div id="stage-blackjack" class="game-stage"></div>
+</section>
+
+
+<section id="warPage" class="page game-page">
+<button class="back-btn" onclick="showPage('arcade')">← BACK</button>
+<h2>WAR</h2>
+<div id="stage-war" class="game-stage"></div>
+</section>
+
+
+<section id="higherPage" class="page game-page">
+<button class="back-btn" onclick="showPage('arcade')">← BACK</button>
+<h2>HIGHER / LOWER</h2>
+<div id="stage-higher" class="game-stage"></div>
+</section>
+
+
+<section id="memoryPage" class="page game-page">
+<button class="back-btn" onclick="showPage('arcade')">← BACK</button>
+<h2>CARD MEMORY</h2>
+<div id="stage-memory" class="game-stage"></div>
+</section>
+
+
+<section id="pokerPage" class="page game-page">
+<button class="back-btn" onclick="showPage('arcade')">← BACK</button>
+<h2>POKER VS AI</h2>
+<div id="stage-poker" class="game-stage"></div>
+</section>
+
+
+<section id="checkersPage" class="page game-page">
+<button class="back-btn" onclick="showPage('arcade')">← BACK</button>
+<h2>DAM VS AI</h2>
+<div id="stage-checkers" class="game-stage"></div>
+</section>
+
+
+<section id="solitairePage" class="page game-page">
+<button class="back-btn" onclick="showPage('arcade')">← BACK</button>
+<h2>SOLITAIRE</h2>
+<div id="stage-solitaire" class="game-stage"></div>
+</section>
+
+
+<section id="gofishPage" class="page game-page">
+<button class="back-btn" onclick="showPage('arcade')">← BACK</button>
+<h2>GO FISH VS AI</h2>
+<div id="stage-gofish" class="game-stage"></div>
+</section>
+
+
+<section id="baccaratPage" class="page game-page">
+<button class="back-btn" onclick="showPage('arcade')">← BACK</button>
+<h2>BACCARAT</h2>
+<div id="stage-baccarat" class="game-stage"></div>
+</section>
+
+
+<section id="crazy8sPage" class="page game-page">
+<button class="back-btn" onclick="showPage('arcade')">← BACK</button>
+<h2>CRAZY EIGHTS</h2>
+<div id="stage-crazy8s" class="game-stage"></div>
+</section>
+
+</main>
+
+
+<div class="chat">
+<button id="chatButton">?</button>
+</div>
+
+
+<div id="spinlabChat" class="spinlab-chat">
+
+<div class="spinlab-chat-header">
+
+<div>
+<strong>SPINLAB AI</strong>
+<span>● ONLINE</span>
+</div>
+
+<button id="closeSpinlabChat">×</button>
+
+</div>
+
+<div id="spinlabMessages" class="spinlab-messages">
+
+<div class="ai-message">
+Yo! 👋 I'm SpinLab AI.<br>
+Ask me about your games, XP, stats, quests or basically anything common.
+</div>
+
+</div>
+
+<div class="spinlab-chat-input">
+
+<input
+id="spinlabInput"
+type="text"
+placeholder="Ask SpinLab AI..."
+autocomplete="off"
+>
+
+<button id="spinlabSend">➤</button>
+
+</div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+let player;
+
+try{
+
+player=JSON.parse(
+localStorage.getItem("spinlabPlayer")||
+'{"xp":0,"games":0,"wins":0,"spins":0}'
+);
+
+}catch{
+
+player={
+xp:0,
+games:0,
+wins:0,
+spins:0
+};
+
+}
+
+if(typeof player.xp!=="number")player.xp=0;
+if(typeof player.games!=="number")player.games=0;
+if(typeof player.wins!=="number")player.wins=0;
+if(typeof player.spins!=="number")player.spins=0;
+if(typeof player.randomSpins!=="number")player.randomSpins=0;
+if(typeof player.cardGames!=="number")player.cardGames=0;
+if(typeof player.winStreak!=="number")player.winStreak=0;
+if(typeof player.bestWinStreak!=="number")player.bestWinStreak=0;
+if(typeof player.blackjackWins!=="number")player.blackjackWins=0;
+if(typeof player.aiWins!=="number")player.aiWins=0;
+if(typeof player.memoryWins!=="number")player.memoryWins=0;
+if(!player.completedQuests)player.completedQuests={};
+
+function savePlayer(){
+localStorage.setItem("spinlabPlayer",JSON.stringify(player));
+}
+
+function level(){
+return Math.floor(player.xp/100)+1;
+}
+
+function updateUI(){
+
+const lvl=level();
+
+const elements={
+headerLevel:lvl,
+statLevel:lvl,
+statXP:player.xp,
+statGames:player.games,
+statWins:player.wins,
+statSpins:player.spins
+};
+
+Object.keys(elements).forEach(id=>{
+const el=document.getElementById(id);
+if(el)el.textContent=elements[id];
+});
+
+const rate=player.games?
+Math.round(player.wins/player.games*100):0;
+
+const rateEl=document.getElementById("statWinRate");
+
+if(rateEl)rateEl.textContent=rate+"%";
+
+renderQuests();
+
+}
+
+function showPage(id){
+
+document.querySelectorAll(".page")
+.forEach(page=>page.classList.remove("active"));
+
+const page=document.getElementById(id);
+
+if(page)page.classList.add("active");
+
+document.querySelectorAll(".nav-btn")
+.forEach(btn=>btn.classList.remove("active"));
+
+const map={
+home:"HOME",
+arcade:"ARCADE",
+classicCards:"CARDS",
+random:"RANDOM",
+stats:"STATS"
+};
+
+if(map[id]){
+
+document.querySelectorAll(".nav-btn")
+.forEach(btn=>{
+if(btn.textContent===map[id])
+btn.classList.add("active");
+});
+
+}
+
+}
+
+const QUESTS=[
+
+{
+id:"firstWin",
+title:"FIRST WIN",
+description:"Win your first game.",
+target:1,
+reward:50,
+get:()=>player.wins
+},
+
+{
+id:"cardShark",
+title:"CARD SHARK",
+description:"Play 5 card games.",
+target:5,
+reward:75,
+get:()=>player.cardGames
+},
+
+{
+id:"winStreak",
+title:"WIN STREAK",
+description:"Reach a 3-game win streak.",
+target:3,
+reward:100,
+get:()=>player.bestWinStreak
+},
+
+{
+id:"spinLab",
+title:"SPIN LAB",
+description:"Use the Random tools 10 times.",
+target:10,
+reward:50,
+get:()=>player.randomSpins
+},
+
+{
+id:"blackjack",
+title:"BLACKJACKER",
+description:"Win 3 Blackjack games.",
+target:3,
+reward:100,
+get:()=>player.blackjackWins
+},
+
+{
+id:"aiHunter",
+title:"AI HUNTER",
+description:"Beat an AI 3 times.",
+target:3,
+reward:125,
+get:()=>player.aiWins
+},
+
+{
+id:"memory",
+title:"MEMORY MASTER",
+description:"Win Card Memory.",
+target:1,
+reward:75,
+get:()=>player.memoryWins
+}
+
+];
+
+function renderQuests(){
+
+const list=document.getElementById("questList");
+
+if(!list)return;
+
+list.innerHTML="";
+
+QUESTS.forEach(q=>{
+
+const value=Math.min(q.get(),q.target);
+const percent=value/q.target*100;
+const done=!!player.completedQuests[q.id];
+
+const div=document.createElement("div");
+
+div.className="quest"+(done?" done":"");
+
+div.innerHTML=`
+
+<div class="quest-top">
+<div class="quest-title">
+${done?"✓ ":""}${q.title}
+</div>
+<div class="quest-reward">
++${q.reward} XP
+</div>
+</div>
+
+<div class="quest-desc">
+${q.description}
+</div>
+
+<div class="progress">
+<div style="width:${percent}%"></div>
+</div>
+
+<div style="margin-top:5px;color:#777;font-size:11px">
+${value}/${q.target}
+</div>
+
+`;
+
+list.appendChild(div);
+
+});
+
+}
+
+function checkQuests(){
+
+let changed=false;
+
+QUESTS.forEach(q=>{
+
+if(!player.completedQuests[q.id]&&q.get()>=q.target){
+
+player.completedQuests[q.id]=true;
+player.xp+=q.reward;
+changed=true;
+
+showToast(
+"QUEST COMPLETE: "+
+q.title+
+" +"+q.reward+" XP"
+);
+
+}
+
+});
+
+savePlayer();
+
+if(changed)updateUI();
+
+}
+
+
+/* GAME REGISTRY */
+
+const GAME_PAGES={
+blackjack:"blackjackPage",
+war:"warPage",
+higher:"higherPage",
+memory:"memoryPage",
+poker:"pokerPage",
+checkers:"checkersPage",
+solitaire:"solitairePage",
+gofish:"gofishPage",
+baccarat:"baccaratPage",
+crazy8s:"crazy8sPage"
+};
+
+const GAME_STAGES={
+blackjack:"stage-blackjack",
+war:"stage-war",
+higher:"stage-higher",
+memory:"stage-memory",
+poker:"stage-poker",
+checkers:"stage-checkers",
+solitaire:"stage-solitaire",
+gofish:"stage-gofish",
+baccarat:"stage-baccarat",
+crazy8s:"stage-crazy8s"
+};
+
+const GAME_REGISTRY={};
+
+let currentGameId=null;
+let gameFinished=false;
+
+function openGame(id){
+
+const game=GAME_REGISTRY[id];
+
+if(!game)return;
+
+currentGameId=id;
+gameFinished=false;
+
+showPage(GAME_PAGES[id]);
+
+const stage=
+document.getElementById(GAME_STAGES[id]);
+
+if(!stage)return;
+
+stage.innerHTML="";
+
+game.start(stage);
+
+}
+
+
+/* UNIVERSAL PLAY AGAIN */
+
+function addPlayAgain(stage){
+
+if(!stage||!currentGameId)return;
+
+if(stage.querySelector(".play-again"))return;
+
+const button=document.createElement("button");
+
+button.className="play-again";
+button.textContent="🔄 PLAY AGAIN";
+
+button.onclick=()=>{
+
+gameFinished=false;
+
+const game=GAME_REGISTRY[currentGameId];
+
+if(game)game.start(stage);
+
+};
+
+stage.appendChild(button);
+
+}
+
+function finish(result,xp=0){
+
+if(gameFinished)return;
+
+gameFinished=true;
+
+player.games++;
+
+if([
+"blackjack",
+"war",
+"higher",
+"memory",
+"poker",
+"solitaire",
+"gofish",
+"baccarat",
+"crazy8s"
+].includes(currentGameId))
+player.cardGames++;
+
+if(result==="win"){
+
+player.wins++;
+player.winStreak++;
+
+player.bestWinStreak=
+Math.max(
+player.bestWinStreak,
+player.winStreak
+);
+
+}else{
+
+player.winStreak=0;
+
+}
+
+if(currentGameId==="blackjack"&&result==="win")
+player.blackjackWins++;
+
+if(
+["poker","checkers","gofish"].includes(currentGameId)&&
+result==="win"
+)
+player.aiWins++;
+
+if(currentGameId==="memory"&&result==="win")
+player.memoryWins++;
+
+if(
+["baccarat","crazy8s"].includes(currentGameId)&&
+result==="win"
+)
+player.cardGames=Math.max(0,player.cardGames);
+
+player.xp+=xp;
+
+savePlayer();
+updateUI();
+checkQuests();
+
+if(result==="win")
+showToast("WIN! +"+xp+" XP");
+
+const stage=document.getElementById(
+GAME_STAGES[currentGameId]
+);
+
+if(stage)
+setTimeout(()=>addPlayAgain(stage),30);
+
+}
+
+
+/* CARDS */
+
+const suits=["♠","♥","♦","♣"];
+
+const ranks=[
+"A","2","3","4","5","6","7",
+"8","9","10","J","Q","K"
+];
+
+function createDeck(){
+
+const deck=[];
+
+suits.forEach(suit=>{
+ranks.forEach(rank=>{
+deck.push({suit,rank});
+});
+});
+
+return deck;
+
+}
+
+function shuffle(deck){
+
+const copy=[...deck];
+
+for(let i=copy.length-1;i>0;i--){
+
+const j=Math.floor(Math.random()*(i+1));
+
+[copy[i],copy[j]]=[copy[j],copy[i]];
+
+}
+
+return copy;
+
+}
+
+function cardValue(card){
+
+if(card.rank==="A")return 11;
+
+if(["K","Q","J"].includes(card.rank))
+return 10;
+
+return Number(card.rank);
+
+}
+
+function handValue(hand){
+
+let total=0;
+let aces=0;
+
+hand.forEach(card=>{
+
+total+=cardValue(card);
+
+if(card.rank==="A")aces++;
+
+});
+
+while(total>21&&aces){
+
+total-=10;
+aces--;
+
+}
+
+return total;
+
+}
+
+function cardHTML(card,back=false){
+
+if(back)
+return `<div class="card card-back">ϟ</div>`;
+
+const red=
+card.suit==="♥"||
+card.suit==="♦";
+
+return `
+<div class="card ${red?"red":""}">
+${card.rank}${card.suit}
+</div>
+`;
+
+}
+
+
+/* BLACKJACK */
+
+GAME_REGISTRY.blackjack={
+
+start(stage){
+
+let deck=shuffle(createDeck());
+
+let playerHand=[
+deck.pop(),
+deck.pop()
+];
+
+let dealerHand=[
+deck.pop(),
+deck.pop()
+];
+
+let ended=false;
+
+function render(showDealer=false){
+
+stage.innerHTML=`
+
+<div class="game-center">
+
+<div class="game-info">Dealer</div>
+
+<div class="cards">
+
+${
+showDealer
+?dealerHand.map(c=>cardHTML(c)).join("")
+:cardHTML(dealerHand[0])+
+cardHTML(dealerHand[1],true)
+}
+
+</div>
+
+<div class="game-info">
+${showDealer?"Dealer: "+handValue(dealerHand):""}
+</div>
+
+<div class="game-info">
+You: ${handValue(playerHand)}
+</div>
+
+<div class="cards">
+${playerHand.map(c=>cardHTML(c)).join("")}
+</div>
+
+<div id="bjResult" class="result"></div>
+
+<div class="game-actions">
+
+<button id="hit" class="action-btn">HIT</button>
+<button id="stand" class="action-btn">STAND</button>
+<button id="restartBJ" class="action-btn">NEW GAME</button>
+
+</div>
+
+</div>
+`;
+
+if(document.getElementById("hit"))
+document.getElementById("hit").onclick=hit;
+
+if(document.getElementById("stand"))
+document.getElementById("stand").onclick=stand;
+
+if(document.getElementById("restartBJ"))
+document.getElementById("restartBJ").onclick=
+()=>GAME_REGISTRY.blackjack.start(stage);
+
+}
+
+function end(){
+
+if(ended)return;
+
+ended=true;
+
+while(handValue(dealerHand)<17)
+dealerHand.push(deck.pop());
+
+const p=handValue(playerHand);
+const d=handValue(dealerHand);
+
+render(true);
+
+const resultEl=document.getElementById("bjResult");
+
+if(p>21){
+
+resultEl.textContent="YOU LOSE!";
+finish("lose",10);
+
+}else if(d>21||p>d){
+
+resultEl.textContent="YOU WIN!";
+finish("win",35);
+
+}else if(p===d){
+
+resultEl.textContent="DRAW!";
+finish("draw",15);
+
+}else{
+
+resultEl.textContent="YOU LOSE!";
+finish("lose",10);
+
+}
+
+}
+
+function hit(){
+
+if(ended)return;
+
+playerHand.push(deck.pop());
+
+if(handValue(playerHand)>=21)
+end();
+else
+render();
+
+}
+
+function stand(){
+
+if(ended)return;
+
+end();
+
+}
+
+render();
+
+}
+
+};
+
+
+/* WAR */
+
+GAME_REGISTRY.war={
+
+start(stage){
+
+let deck=shuffle(createDeck());
+
+let playerScore=0;
+let aiScore=0;
+let round=0;
+
+function cardRank(card){
+
+if(card.rank==="A")return 14;
+if(card.rank==="K")return 13;
+if(card.rank==="Q")return 12;
+if(card.rank==="J")return 11;
+
+return Number(card.rank);
+
+}
+
+function render(){
+
+stage.innerHTML=`
+
+<div class="game-center">
+
+<div class="game-info">
+You: ${playerScore} | AI: ${aiScore}
+</div>
+
+<div id="warCards" class="cards"></div>
+
+<div id="warResult" class="result">
+Round ${round}
+</div>
+
+<button id="warDraw" class="big-btn">
+DRAW CARDS
+</button>
+
+</div>
+`;
+
+document.getElementById("warDraw").onclick=draw;
+
+}
+
+function draw(){
+
+if(gameFinished)return;
+
+if(deck.length<2)
+deck=shuffle(createDeck());
+
+round++;
+
+const playerCard=deck.pop();
+const aiCard=deck.pop();
+
+document.getElementById("warCards").innerHTML=
+cardHTML(playerCard)+cardHTML(aiCard);
+
+const result=document.getElementById("warResult");
+
+const p=cardRank(playerCard);
+const a=cardRank(aiCard);
+
+if(p>a){
+
+playerScore++;
+result.textContent="YOU WIN THE ROUND!";
+
+}else if(a>p){
+
+aiScore++;
+result.textContent="AI WINS THE ROUND.";
+
+}else{
+
+result.textContent="WAR! DRAW.";
+
+}
+
+if(playerScore>=5){
+
+finish("win",30);
+
+document.getElementById("warDraw").disabled=true;
+
+result.textContent="YOU WIN THE WAR!";
+
+}
+
+if(aiScore>=5){
+
+finish("lose",10);
+
+document.getElementById("warDraw").disabled=true;
+
+result.textContent="AI WINS THE WAR.";
+
+}
+
+}
+
+render();
+
+}
+
+};
+
+
+/* HIGHER LOWER */
+
+GAME_REGISTRY.higher={
+
+start(stage){
+
+let deck=shuffle(createDeck());
+
+let current=deck.pop();
+let score=0;
+let ended=false;
+
+function cardRank(card){
+
+if(card.rank==="A")return 14;
+if(card.rank==="K")return 13;
+if(card.rank==="Q")return 12;
+if(card.rank==="J")return 11;
+
+return Number(card.rank);
+
+}
+
+function render(){
+
+stage.innerHTML=`
+
+<div class="game-center">
+
+<div class="game-info">
+Score: ${score}
+</div>
+
+<div class="cards">
+${cardHTML(current)}
+</div>
+
+<div class="game-actions">
+
+<button id="higherBtn" class="action-btn">HIGHER</button>
+<button id="lowerBtn" class="action-btn">LOWER</button>
+
+</div>
+
+<div id="higherResult" class="result">
+Guess the next card.
+</div>
+
+</div>
+`;
+
+document.getElementById("higherBtn")
+.onclick=()=>guess("higher");
+
+document.getElementById("lowerBtn")
+.onclick=()=>guess("lower");
+
+}
+
+function guess(choice){
+
+if(ended||gameFinished)return;
+
+if(!deck.length)
+deck=shuffle(createDeck());
+
+const next=deck.pop();
+
+const a=cardRank(current);
+const b=cardRank(next);
+
+document.querySelector("#stage-higher .cards")
+.innerHTML=cardHTML(next);
+
+const resultEl=
+document.getElementById("higherResult");
+
+if(
+(choice==="higher"&&b>a)||
+(choice==="lower"&&b<a)
+){
+
+score++;
+current=next;
+
+resultEl.textContent=
+"CORRECT! Score: "+score;
+
+if(score>=5){
+
+ended=true;
+finish("win",30);
+
+resultEl.textContent="YOU WIN!";
+
+}
+
+}else if(b===a){
+
+current=next;
+resultEl.textContent="DRAW — try again.";
+
+}else{
+
+ended=true;
+
+finish("lose",10);
+
+resultEl.textContent=
+"WRONG! Final score: "+score;
+
+}
+
+}
+
+render();
+
+}
+
+};
+
+
+/* MEMORY */
+
+GAME_REGISTRY.memory={
+
+start(stage){
+
+const symbols=[
+"★","●","▲","◆",
+"♥","♣","☀","☾"
+];
+
+const cards=shuffle([
+...symbols,
+...symbols
+]);
+
+let flipped=[];
+let matched=0;
+let locked=false;
+
+function render(){
+
+stage.innerHTML=`
+
+<div class="game-center">
+
+<div class="game-info">
+Matches: ${matched}/8
+</div>
+
+<div class="memory-grid" id="memoryGrid"></div>
+
+</div>
+`;
+
+const grid=document.getElementById("memoryGrid");
+
+cards.forEach((symbol,index)=>{
+
+const el=document.createElement("div");
+
+el.className="memory-card";
+el.textContent="?";
+
+el.onclick=()=>flip(el,index);
+
+grid.appendChild(el);
+
+});
+
+}
+
+function flip(el,index){
+
+if(
+locked||
+gameFinished||
+el.classList.contains("flipped")||
+el.classList.contains("matched")
+)return;
+
+el.classList.add("flipped");
+el.textContent=cards[index];
+
+flipped.push({el,index});
+
+if(flipped.length===2){
+
+locked=true;
+
+if(
+cards[flipped[0].index]===
+cards[flipped[1].index]
+){
+
+flipped.forEach(x=>
+x.el.classList.add("matched")
+);
+
+matched++;
+flipped=[];
+locked=false;
+
+if(matched===8)
+finish("win",50);
+
+}else{
+
+setTimeout(()=>{
+
+flipped.forEach(x=>{
+x.el.classList.remove("flipped");
+x.el.textContent="?";
+});
+
+flipped=[];
+locked=false;
+
+},700);
+
+}
+
+}
+
+}
+
+render();
+
+}
+
+};
+
+
+/* POKER */
+
+function pokerValue(card){
+
+if(card.rank==="A")return 14;
+if(card.rank==="K")return 13;
+if(card.rank==="Q")return 12;
+if(card.rank==="J")return 11;
+
+return Number(card.rank);
+
+}
+
+function pokerEvaluate(hand){
+
+const values=hand.map(pokerValue).sort((a,b)=>b-a);
+
+const counts={};
+
+values.forEach(v=>{
+counts[v]=(counts[v]||0)+1;
+});
+
+const groups=Object.entries(counts)
+.map(([value,count])=>({
+value:Number(value),
+count
+}))
+.sort((a,b)=>
+b.count!==a.count?
+b.count-a.count:
+b.value-a.value
+);
+
+const flush=hand.every(
+c=>c.suit===hand[0].suit
+);
+
+const unique=[...new Set(values)];
+
+let straight=false;
+let straightHigh=0;
+
+if(unique.length===5){
+
+if(unique[0]-unique[4]===4){
+
+straight=true;
+straightHigh=unique[0];
+
+}
+
+if(
+unique.includes(14)&&
+unique.includes(5)&&
+unique.includes(4)&&
+unique.includes(3)&&
+unique.includes(2)
+){
+
+straight=true;
+straightHigh=5;
+
+}
+
+}
+
+if(straight&&flush)
+return {rank:8,tie:[straightHigh]};
+
+if(groups[0].count===4)
+return {
+rank:7,
+tie:[groups[0].value,groups[1].value]
+};
+
+if(
+groups[0].count===3&&
+groups[1].count===2
+)
+return {
+rank:6,
+tie:[groups[0].value,groups[1].value]
+};
+
+if(flush)
+return {rank:5,tie:values};
+
+if(straight)
+return {rank:4,tie:[straightHigh]};
+
+if(groups[0].count===3)
+return {
+rank:3,
+tie:[
+groups[0].value,
+...groups.slice(1).map(x=>x.value).sort((a,b)=>b-a)
+]
+};
+
+if(
+groups[0].count===2&&
+groups[1].count===2
+)
+return {
+rank:2,
+tie:[
+Math.max(groups[0].value,groups[1].value),
+Math.min(groups[0].value,groups[1].value),
+groups[2].value
+]
+};
+
+if(groups[0].count===2)
+return {
+rank:1,
+tie:[
+groups[0].value,
+...groups.slice(1).map(x=>x.value).sort((a,b)=>b-a)
+]
+};
+
+return {rank:0,tie:values};
+
+}
+
+function comparePoker(a,b){
+
+const x=pokerEvaluate(a);
+const y=pokerEvaluate(b);
+
+if(x.rank!==y.rank)
+return x.rank-y.rank;
+
+for(let i=0;i<Math.max(x.tie.length,y.tie.length);i++){
+
+const xv=x.tie[i]||0;
+const yv=y.tie[i]||0;
+
+if(xv!==yv)
+return xv-yv;
+
+}
+
+return 0;
+
+}
+
+function pokerName(result){
+
+return [
+"High Card",
+"Pair",
+"Two Pair",
+"Three of a Kind",
+"Straight",
+"Flush",
+"Full House",
+"Four of a Kind",
+"Straight Flush"
+][result.rank];
+
+}
+
+GAME_REGISTRY.poker={
+
+start(stage){
+
+const deck=shuffle(createDeck());
+
+const playerHand=[];
+const aiHand=[];
+
+for(let i=0;i<5;i++){
+
+playerHand.push(deck.pop());
+aiHand.push(deck.pop());
+
+}
+
+let ended=false;
+
+function render(){
+
+stage.innerHTML=`
+
+<div class="game-center">
+
+<div class="game-info">AI HAND</div>
+
+<div class="cards">
+${aiHand.map(c=>cardHTML(c,true)).join("")}
+</div>
+
+<div class="game-info">YOUR HAND</div>
+
+<div class="cards">
+${playerHand.map(c=>cardHTML(c)).join("")}
+</div>
+
+<div id="pokerResult" class="result">
+Make your move.
+</div>
+
+<div class="game-actions">
+
+<button id="challengePoker" class="action-btn">
+CHALLENGE AI
+</button>
+
+<button id="foldPoker" class="action-btn danger">
+FOLD
+</button>
+
+</div>
+
+</div>
+`;
+
+document.getElementById("challengePoker").onclick=challenge;
+document.getElementById("foldPoker").onclick=fold;
+
+}
+
+function revealAI(){
+
+const cards=
+document.querySelectorAll(
+"#stage-poker .card-back"
+);
+
+cards.forEach((el,index)=>{
+el.outerHTML=cardHTML(aiHand[index]);
+});
+
+}
+
+function challenge(){
+
+if(ended||gameFinished)return;
+
+ended=true;
+
+const result=comparePoker(
+playerHand,
+aiHand
+);
+
+const resultEl=
+document.getElementById("pokerResult");
+
+revealAI();
+
+if(result>0){
+
+resultEl.textContent=
+"YOU WIN! "+
+pokerName(pokerEvaluate(playerHand))+
+" beats "+
+pokerName(pokerEvaluate(aiHand))+".";
+
+finish("win",50);
+
+}else if(result<0){
+
+resultEl.textContent=
+"AI WINS! "+
+pokerName(pokerEvaluate(aiHand))+".";
+
+finish("lose",10);
+
+}else{
+
+resultEl.textContent="DRAW!";
+finish("draw",20);
+
+}
+
+}
+
+function fold(){
+
+if(ended||gameFinished)return;
+
+ended=true;
+
+revealAI();
+
+document.getElementById("pokerResult")
+.textContent="You folded. AI wins.";
+
+finish("lose",5);
+
+}
+
+render();
+
+}
+
+};
+
+
+/* CHECKERS */
+
+GAME_REGISTRY.checkers={
+
+start(stage){
+
+let board=Array.from(
+{length:8},
+()=>Array(8).fill(null)
+);
+
+for(let r=0;r<3;r++)
+for(let c=0;c<8;c++)
+if((r+c)%2===1)
+board[r][c]={player:"ai",king:false};
+
+for(let r=5;r<8;r++)
+for(let c=0;c<8;c++)
+if((r+c)%2===1)
+board[r][c]={player:"player",king:false};
+
+let selected=null;
+let playerTurn=true;
+let ended=false;
+
+function cloneBoard(b){
+return b.map(row=>
+row.map(piece=>piece?{...piece}:null)
+);
+}
+
+function inside(r,c){
+return r>=0&&r<8&&c>=0&&c<8;
+}
+
+function directions(piece){
+
+if(piece.king)
+return[
+[-1,-1],[-1,1],
+[1,-1],[1,1]
+];
+
+return piece.player==="player"
+?[
+[-1,-1],[-1,1]
+]:[
+[1,-1],[1,1]
+];
+
+}
+
+function pieceMoves(b,r,c){
+
+const piece=b[r][c];
+if(!piece)return[];
+
+const moves=[];
+
+directions(piece).forEach(([dr,dc])=>{
+
+const nr=r+dr;
+const nc=c+dc;
+
+if(!inside(nr,nc))return;
+
+if(!b[nr][nc]){
+
+moves.push({
+from:[r,c],
+to:[nr,nc],
+capture:null
+});
+
+}
+
+if(
+b[nr][nc]&&
+b[nr][nc].player!==piece.player
+){
+
+const jr=r+dr*2;
+const jc=c+dc*2;
+
+if(
+inside(jr,jc)&&
+!b[jr][jc]
+){
+
+moves.push({
+from:[r,c],
+to:[jr,jc],
+capture:[nr,nc]
+});
+
+}
+
+}
+
+});
+
+return moves;
+
+}
+
+function allMoves(b,player){
+
+const normal=[];
+const captures=[];
+
+for(let r=0;r<8;r++)
+for(let c=0;c<8;c++){
+
+if(
+b[r][c]&&
+b[r][c].player===player
+){
+
+pieceMoves(b,r,c).forEach(m=>{
+if(m.capture)captures.push(m);
+else normal.push(m);
+});
+
+}
+
+}
+
+return captures.length?captures:normal;
+
+}
+
+function applyMove(b,move){
+
+const next=cloneBoard(b);
+
+const[fr,fc]=move.from;
+const[tr,tc]=move.to;
+
+const piece=next[fr][fc];
+
+next[fr][fc]=null;
+
+if(move.capture){
+
+const[cr,cc]=move.capture;
+next[cr][cc]=null;
+
+}
+
+next[tr][tc]=piece;
+
+if(piece.player==="player"&&tr===0)
+piece.king=true;
+
+if(piece.player==="ai"&&tr===7)
+piece.king=true;
+
+return next;
+
+}
+
+function evaluate(b){
+
+let score=0;
+
+for(let r=0;r<8;r++)
+for(let c=0;c<8;c++){
+
+const p=b[r][c];
+
+if(!p)continue;
+
+let value=p.king?175:100;
+
+if(!p.king){
+
+if(p.player==="ai")
+value+=r*5;
+else
+value+=(7-r)*5;
+
+}
+
+if(p.player==="ai")
+score+=value;
+else
+score-=value;
+
+}
+
+score+=allMoves(b,"ai").length*2;
+score-=allMoves(b,"player").length*2;
+
+return score;
+
+}
+
+function minimax(b,depth,alpha,beta,maximizing){
+
+const aiMoves=allMoves(b,"ai");
+const playerMoves=allMoves(b,"player");
+
+if(
+depth===0||
+!aiMoves.length||
+!playerMoves.length
+)
+return evaluate(b);
+
+if(maximizing){
+
+let best=-Infinity;
+
+for(const move of aiMoves){
+
+const value=minimax(
+applyMove(b,move),
+depth-1,
+alpha,
+beta,
+false
+);
+
+best=Math.max(best,value);
+alpha=Math.max(alpha,best);
+
+if(beta<=alpha)break;
+
+}
+
+return best;
+
+}
+
+let best=Infinity;
+
+for(const move of playerMoves){
+
+const value=minimax(
+applyMove(b,move),
+depth-1,
+alpha,
+beta,
+true
+);
+
+best=Math.min(best,value);
+beta=Math.min(beta,best);
+
+if(beta<=alpha)break;
+
+}
+
+return best;
+
+}
+
+function aiMove(){
+
+if(ended||gameFinished)return;
+
+const moves=allMoves(board,"ai");
+
+if(!moves.length){
+
+end("win");
+return;
+
+}
+
+let bestMove=moves[0];
+let best=-Infinity;
+
+for(const move of moves){
+
+const score=minimax(
+applyMove(board,move),
+2,
+-Infinity,
+Infinity,
+false
+);
+
+if(score>best){
+
+best=score;
+bestMove=move;
+
+}
+
+}
+
+board=applyMove(board,bestMove);
+
+checkEnd();
+
+if(!ended){
+
+playerTurn=true;
+render();
+
+}
+
+}
+
+function playerMove(move){
+
+board=applyMove(board,move);
+selected=null;
+
+checkEnd();
+
+if(ended)return;
+
+playerTurn=false;
+render();
+
+setTimeout(aiMove,450);
+
+}
+
+function checkEnd(){
+
+const playerMoves=allMoves(board,"player");
+const aiMoves=allMoves(board,"ai");
+
+const playerPieces=
+board.flat().filter(p=>p?.player==="player").length;
+
+const aiPieces=
+board.flat().filter(p=>p?.player==="ai").length;
+
+if(!playerPieces||!playerMoves.length)
+end("lose");
+else if(!aiPieces||!aiMoves.length)
+end("win");
+
+}
+
+function end(result){
+
+if(ended)return;
+
+ended=true;
+render();
+
+finish(result,result==="win"?60:10);
+
+}
+
+function clickSquare(r,c){
+
+if(!playerTurn||ended||gameFinished)return;
+
+const moves=allMoves(board,"player");
+
+if(
+selected&&
+moves.some(m=>
+m.from[0]===selected[0]&&
+m.from[1]===selected[1]&&
+m.to[0]===r&&
+m.to[1]===c
+)
+){
+
+const move=moves.find(m=>
+m.from[0]===selected[0]&&
+m.from[1]===selected[1]&&
+m.to[0]===r&&
+m.to[1]===c
+);
+
+playerMove(move);
+return;
+
+}
+
+if(board[r][c]?.player==="player"){
+
+if(
+moves.some(m=>
+m.from[0]===r&&
+m.from[1]===c
+)
+)
+selected=[r,c];
+else
+selected=null;
+
+render();
+
+}
+
+}
+
+function render(){
+
+stage.innerHTML=`
+
+<div class="game-center">
+
+<div class="game-info">
+${
+ended
+?"GAME OVER"
+:playerTurn
+?"YOUR TURN"
+:"AI THINKING..."
+}
+</div>
+
+<div class="checker-board" id="checkerBoard"></div>
+
+</div>
+`;
+
+const boardEl=
+document.getElementById("checkerBoard");
+
+const legal=
+playerTurn?allMoves(board,"player"):[];
+
+for(let r=0;r<8;r++)
+for(let c=0;c<8;c++){
+
+const square=document.createElement("div");
+
+square.className=
+"checker-square "+
+((r+c)%2===0?"light":"dark");
+
+if(
+selected&&
+selected[0]===r&&
+selected[1]===c
+)
+square.classList.add("selected");
+
+if(
+legal.some(m=>
+m.from[0]===selected?.[0]&&
+m.from[1]===selected?.[1]&&
+m.to[0]===r&&
+m.to[1]===c
+)
+)
+square.classList.add("move-target");
+
+const piece=board[r][c];
+
+if(piece){
+
+const el=document.createElement("div");
+
+el.className=
+"checker-piece "+
+piece.player+
+(piece.king?" king":"");
+
+square.appendChild(el);
+
+}
+
+square.onclick=()=>clickSquare(r,c);
+
+boardEl.appendChild(square);
+
+}
+
+}
+
+render();
+
+}
+
+};
+
+
+/* SOLITAIRE */
+
+GAME_REGISTRY.solitaire={
+
+start(stage){
+
+let deck=shuffle(createDeck());
+let score=0;
+
+function render(){
+
+stage.innerHTML=`
+
+<div class="game-center">
+
+<div class="game-info">
+Cards remaining: ${deck.length}
+</div>
+
+<div class="cards">
+${deck.length?cardHTML(deck[deck.length-1]):""}
+</div>
+
+<div id="solResult" class="result">
+Draw cards and try to clear the deck.
+</div>
+
+<button id="drawSol" class="action-btn">
+DRAW
+</button>
+
+</div>
+`;
+
+if(document.getElementById("drawSol"))
+document.getElementById("drawSol").onclick=draw;
+
+}
+
+function draw(){
+
+if(gameFinished)return;
+
+if(!deck.length){
+
+finish("win",35);
+
+return;
+
+}
+
+deck.pop();
+score++;
+
+render();
+
+if(score>=20){
+
+finish("win",35);
+
+document.getElementById("solResult")
+.textContent="YOU WIN!";
+
+}
+
+}
+
+render();
+
+}
+
+};
+
+
+/* GO FISH */
+
+GAME_REGISTRY.gofish={
+
+start(stage){
+
+let deck=shuffle(createDeck());
+
+let playerHand=[];
+let aiHand=[];
+
+let playerBooks=0;
+let aiBooks=0;
+
+let playerTurn=true;
+let ended=false;
+
+for(let i=0;i<7;i++){
+
+playerHand.push(deck.pop());
+aiHand.push(deck.pop());
+
+}
+
+function removeBooks(hand,isPlayer){
+
+const counts={};
+
+hand.forEach(c=>{
+counts[c.rank]=(counts[c.rank]||0)+1;
+});
+
+Object.keys(counts).forEach(rank=>{
+
+if(counts[rank]>=4){
+
+for(let i=hand.length-1;i>=0;i--)
+if(hand[i].rank===rank)
+hand.splice(i,1);
+
+if(isPlayer)
+playerBooks++;
+else
+aiBooks++;
+
+}
+
+});
+
+}
+
+function drawCard(hand){
+
+if(deck.length)
+hand.push(deck.pop());
+
+}
+
+function chooseAIRank(){
+
+const counts={};
+
+aiHand.forEach(c=>{
+counts[c.rank]=(counts[c.rank]||0)+1;
+});
+
+const choices=Object.keys(counts);
+
+choices.sort((a,b)=>
+counts[b]-counts[a]
+);
+
+return choices[0]||null;
+
+}
+
+function checkEnd(){
+
+if(
+(playerHand.length===0&&deck.length===0)||
+(aiHand.length===0&&deck.length===0)
+){
+
+ended=true;
+
+if(playerBooks>aiBooks)
+finish("win",55);
+else if(aiBooks>playerBooks)
+finish("lose",10);
+else
+finish("draw",20);
+
+}
+
+}
+
+function render(){
+
+stage.innerHTML=`
+
+<div class="game-center">
+
+<div class="game-info">
+Books — You: ${playerBooks}
+| AI: ${aiBooks}
+</div>
+
+<div class="game-info">
+AI Cards: ${aiHand.length}
+| Your Cards: ${playerHand.length}
+</div>
+
+<div class="cards">
+${playerHand.map(c=>cardHTML(c)).join("")}
+</div>
+
+<div id="fishResult" class="result">
+${
+ended
+?"GAME OVER"
+:playerTurn
+?"Choose a rank to ask for."
+:"AI is thinking..."
+}
+</div>
+
+<div class="rank-buttons">
+
+${
+[...new Set(playerHand.map(c=>c.rank))]
+.map(rank=>
+`
+<button
+class="rank-btn"
+onclick="window.__fishAsk('${rank}')"
+${!playerTurn||ended||gameFinished?"disabled":""}
+>
+Ask for ${rank}
+</button>
+`
+).join("")
+}
+
+</div>
+
+</div>
+`;
+
+}
+
+function ask(rank){
+
+if(ended||!playerTurn||gameFinished)return;
+
+const found=
+aiHand.filter(c=>c.rank===rank);
+
+if(found.length){
+
+aiHand=aiHand.filter(c=>c.rank!==rank);
+
+playerHand.push(...found);
+
+removeBooks(playerHand,true);
+
+checkEnd();
+
+if(!ended)render();
+
+}else{
+
+drawCard(playerHand);
+
+removeBooks(playerHand,true);
+
+checkEnd();
+
+if(ended)return;
+
+playerTurn=false;
+
+render();
+
+setTimeout(aiTurn,650);
+
+}
+
+}
+
+function aiTurn(){
+
+if(ended||gameFinished)return;
+
+const rank=chooseAIRank();
+
+if(!rank){
+
+drawCard(aiHand);
+
+playerTurn=true;
+
+render();
+
+return;
+
+}
+
+const found=
+playerHand.filter(c=>c.rank===rank);
+
+if(found.length){
+
+playerHand=
+playerHand.filter(c=>c.rank!==rank);
+
+aiHand.push(...found);
+
+removeBooks(aiHand,false);
+
+}else{
+
+drawCard(aiHand);
+
+removeBooks(aiHand,false);
+
+}
+
+checkEnd();
+
+if(ended)return;
+
+playerTurn=true;
+
+render();
+
+}
+
+window.__fishAsk=ask;
+
+render();
+
+}
+
+};
+
+
+/* BACCARAT */
+
+GAME_REGISTRY.baccarat={
+
+start(stage){
+
+let deck=shuffle(createDeck());
+let ended=false;
+
+function baccaratValue(card){
+
+if(["10","J","Q","K"].includes(card.rank))
+return 0;
+
+if(card.rank==="A")
+return 1;
+
+return Number(card.rank);
+
+}
+
+function total(hand){
+
+return hand.reduce(
+(sum,c)=>sum+baccaratValue(c),0
+)%10;
+
+}
+
+function drawCard(){
+
+return deck.pop();
+
+}
+
+function render(){
+
+stage.innerHTML=`
+
+<div class="game-center">
+
+<div class="game-info">
+Baccarat — closest to 9 wins
+</div>
+
+<div class="game-info">BANKER</div>
+
+<div id="bacBanker" class="cards"></div>
+
+<div id="bacBankerValue" class="result"></div>
+
+<div class="game-info">PLAYER</div>
+
+<div id="bacPlayer" class="cards"></div>
+
+<div id="bacPlayerValue" class="result"></div>
+
+<div id="bacResult" class="result">
+Choose a side.
+</div>
+
+<div class="game-actions">
+
+<button id="betPlayer" class="action-btn">
+BET PLAYER
+</button>
+
+<button id="betBanker" class="action-btn">
+BET BANKER
+</button>
+
+</div>
+
+</div>
+`;
+
+document.getElementById("betPlayer").onclick=
+()=>play("player");
+
+document.getElementById("betBanker").onclick=
+()=>play("banker");
+
+}
+
+function play(choice){
+
+if(ended||gameFinished)return;
+
+ended=true;
+
+const playerHand=[
+drawCard(),
+drawCard()
+];
+
+const bankerHand=[
+drawCard(),
+drawCard()
+];
+
+const playerTotal=total(playerHand);
+const bankerTotal=total(bankerHand);
+
+if(playerTotal<=5&&bankerTotal<=5){
+
+playerHand.push(drawCard());
+}
+
+const finalPlayer=total(playerHand);
+const finalBanker=total(bankerHand);
+
+document.getElementById("bacPlayer").innerHTML=
+playerHand.map(c=>cardHTML(c)).join("");
+
+document.getElementById("bacBanker").innerHTML=
+bankerHand.map(c=>cardHTML(c)).join("");
+
+document.getElementById("bacPlayerValue").textContent=
+"Player: "+finalPlayer;
+
+document.getElementById("bacBankerValue").textContent=
+"Banker: "+finalBanker;
+
+let winner;
+
+if(finalPlayer>finalBanker)
+winner="player";
+else if(finalBanker>finalPlayer)
+winner="banker";
+else
+winner="draw";
+
+const result=document.getElementById("bacResult");
+
+if(winner==="draw"){
+
+result.textContent="DRAW!";
+
+finish("draw",15);
+
+}else if(winner===choice){
+
+result.textContent=
+"YOU WIN! "+winner.toUpperCase()+" wins.";
+
+finish("win",35);
+
+}else{
+
+result.textContent=
+"YOU LOSE! "+winner.toUpperCase()+" wins.";
+
+finish("lose",10);
+
+}
+
+}
+
+render();
+
+}
+
+};
+
+
+/* CRAZY EIGHTS */
+
+GAME_REGISTRY.crazy8s={
+
+start(stage){
+
+let deck=shuffle(createDeck());
+
+let playerHand=[];
+let aiHand=[];
+let discard=[];
+
+let playerTurn=true;
+let ended=false;
+
+for(let i=0;i<7;i++){
+
+playerHand.push(deck.pop());
+aiHand.push(deck.pop());
+
+}
+
+discard.push(deck.pop());
+
+function playable(card){
+
+const top=discard[discard.length-1];
+
+return(
+card.rank==="8"||
+card.rank===top.rank||
+card.suit===top.suit
+);
+
+}
+
+function drawPlayer(){
+
+if(!deck.length)rebuildDeck();
+
+if(deck.length)
+playerHand.push(deck.pop());
+
+}
+
+function rebuildDeck(){
+
+if(discard.length<=1)return;
+
+const top=discard.pop();
+
+deck=shuffle(discard);
+
+discard=[top];
+
+}
+
+function render(){
+
+const top=discard[discard.length-1];
+
+stage.innerHTML=`
+
+<div class="game-center">
+
+<div class="game-info">
+Your cards: ${playerHand.length}
+| AI cards: ${aiHand.length}
+</div>
+
+<div class="game-info">
+TOP CARD
+</div>
+
+<div class="cards">
+${cardHTML(top)}
+</div>
+
+<div id="crazyResult" class="result">
+${
+ended
+?"GAME OVER"
+:playerTurn
+?"Play a matching card or draw."
+:"AI is thinking..."
+}
+</div>
+
+<div class="cards">
+
+${
+playerHand.map((card,index)=>`
+
+<button
+class="card ${card.suit==="♥"||card.suit==="♦"?"red":""}"
+style="cursor:pointer;border:0"
+onclick="window.__crazyPlay(${index})"
+${!playerTurn||ended||gameFinished||!playable(card)?"disabled":""}
+>
+${card.rank}${card.suit}
+</button>
+
+`).join("")
+}
+
+</div>
+
+<button
+id="crazyDraw"
+class="action-btn"
+${!playerTurn||ended||gameFinished?"disabled":""}
+>
+DRAW CARD
+</button>
+
+</div>
+`;
+
+document.getElementById("crazyDraw").onclick=
+draw;
+
+}
+
+function end(result,message){
+
+if(ended)return;
+
+ended=true;
+
+const resultEl=document.getElementById("crazyResult");
+
+if(resultEl)
+resultEl.textContent=message;
+
+finish(result,result==="win"?45:10);
+
+}
+
+function play(index){
+
+if(
+ended||
+!playerTurn||
+gameFinished
+)return;
+
+const card=playerHand[index];
+
+if(!playable(card))return;
+
+playerHand.splice(index,1);
+discard.push(card);
+
+if(playerHand.length===0){
+
+end("win","YOU WIN! You emptied your hand.");
+
+return;
+
+}
+
+playerTurn=false;
+
+render();
+
+setTimeout(aiTurn,550);
+
+}
+
+function draw(){
+
+if(
+ended||
+!playerTurn||
+gameFinished
+)return;
+
+drawPlayer();
+
+if(
+playerHand.length===0
+){
+
+end("win","YOU WIN!");
+
+return;
+
+}
+
+playerTurn=false;
+
+render();
+
+setTimeout(aiTurn,550);
+
+}
+
+function aiTurn(){
+
+if(ended||gameFinished)return;
+
+let index=aiHand.findIndex(playable);
+
+if(index!==-1){
+
+const card=aiHand.splice(index,1)[0];
+
+discard.push(card);
+
+if(aiHand.length===0){
+
+end("lose","AI WINS! The AI emptied its hand.");
+
+return;
+
+}
+
+}else{
+
+if(!deck.length)
+rebuildDeck();
+
+if(deck.length)
+aiHand.push(deck.pop());
+
+}
+
+playerTurn=true;
+
+render();
+
+}
+
+window.__crazyPlay=play;
+
+render();
+
+}
+
+};
+
+
+/* RANDOM */
+
+function randomNumber(){
+
+const n=Math.floor(Math.random()*100)+1;
+
+document.getElementById(
+"randomNumberResult"
+).textContent=n;
+
+player.spins++;
+player.randomSpins++;
+player.xp+=2;
+
+savePlayer();
+updateUI();
+checkQuests();
+
+}
+
+function coinFlip(){
+
+const result=Math.random()<.5?"HEADS":"TAILS";
+
+document.getElementById("coinResult")
+.textContent=result;
+
+player.spins++;
+player.randomSpins++;
+player.xp+=2;
+
+savePlayer();
+updateUI();
+checkQuests();
+
+}
+
+
+/* TOAST */
+
+function showToast(text){
+
+const toast=document.getElementById("toast");
+
+toast.textContent=text;
+
+toast.classList.add("show");
+
+setTimeout(
+()=>toast.classList.remove("show"),
+2200
+);
+
+}
+
+
+/* AI CHAT */
+
+const chat=document.getElementById("spinlabChat");
+const chatButton=document.getElementById("chatButton");
+const closeChat=document.getElementById("closeSpinlabChat");
+const chatInput=document.getElementById("spinlabInput");
+const chatSend=document.getElementById("spinlabSend");
+const messages=document.getElementById("spinlabMessages");
+
+chatButton.onclick=()=>{
+
+chat.classList.add("open");
+
+setTimeout(
+()=>chatInput.focus(),
+150
+);
+
+};
+
+closeChat.onclick=()=>{
+chat.classList.remove("open");
+};
+
+function addChatMessage(text,type){
+
+const message=document.createElement("div");
+
+message.className=
+type==="user"
+?"user-message"
+:"ai-message";
+
+message.textContent=text;
+
+messages.appendChild(message);
+
+messages.scrollTop=messages.scrollHeight;
+
+}
+
+
+/*
+SPINLAB AI
+Large local knowledge/rule system.
+This is not machine-learning training.
+It is a much larger local knowledge layer.
+*/
+
+function spinlabAI(text){
+
+const original=String(text||"");
+
+const q=original.toLowerCase().trim()
+.replace(/[!?.,;:()[\]{}]/g," ")
+.replace(/\s+/g," ");
+
+if(!q)return "Type something first 😭";
+
+const words=q.split(" ");
+
+const has=(...items)=>
+items.some(w=>q.includes(w));
+
+const exact=(...items)=>
+items.some(w=>q===w);
+
+const casual=has(
+"bro","bruh","dude","brooo",
+"mannen","asså","assa",
+"wtf","lol","lmao",
+"💀","😭","nah","fr"
+);
+
+const swedish=has(
+"vad","hur","varför",
+"kan du","jag","min","mitt",
+"mina","är","ska","vill",
+"hjälp","tjena","hallå",
+"någon","något","vilken",
+"var","när","vem"
+);
+
+
+/* GREETINGS */
+
+if(has(
+"hej","hejj","heej","hallå",
+"halla","tja","tjena","yo",
+"hello","hi","sup","wsg",
+"wassup","god morgon","godmorgon",
+"god kväll","godkväll"
+)){
+
+if(casual)
+return "Yo 😭 vad händer? SpinLab AI online. Vad vill du köra?";
+
+return swedish
+?"Tjena! 👋 SpinLab AI här. Du kan fråga om spelen, XP, stats, quests eller basically vanliga saker."
+:"Yo! 👋 SpinLab AI online. Ask me about games, XP, stats, quests or basically common stuff.";
+
+}
+
+
+/* IDENTITY */
+
+if(has(
+"vem är du","vem e du",
+"who are you","what are you",
+"vad är du","vad e du",
+"är du ai","are you ai"
+))
+return "Jag är SpinLab AI 🤖. Jag är en lokal AI-assistent byggd direkt i SpinLab. Jag kan hjälpa med spelen, stats, XP, quests, slang och en stor mängd vanlig kunskap.";
+
+
+/* THANKS */
+
+if(has(
+"tack","thanks","thx","tnx",
+"tackar","thank you"
+))
+return casual
+?"Alltid 😭🤝"
+:"Ingen fara! 😎";
+
+
+/* LAUGHTER */
+
+if(has(
+"lol","lmao","haha","hahaha",
+"xd","😭","💀"
+))
+return "😭 bro jag fattar. Vad kör vi nu?";
+
+
+/* COMMON KNOWLEDGE — BASIC MATH */
+
+const mathMatch=q.match(
+/(?:vad blir|hur mycket blir|what is|calculate|räkna ut|räkna)\s*(-?\d+(?:\.\d+)?)\s*([+\-*x×÷\/])\s*(-?\d+(?:\.\d+)?)/i
+);
+
+if(mathMatch){
+
+const a=Number(mathMatch[1]);
+const op=mathMatch[2];
+const b=Number(mathMatch[3]);
+
+let answer;
+
+if(op==="+")answer=a+b;
+else if(op==="-")answer=a-b;
+else if(op==="*"||op==="x"||op==="×")answer=a*b;
+else if(op==="÷"||op==="/")answer=b!==0?a/b:"undefined";
+
+if(answer!==undefined)
+return `${a} ${op} ${b} = ${answer}. 🧮`;
+
+}
+
+
+/* SIMPLE MATH DIRECTLY */
+
+if(
+/^\d+\s*[\+\-\*x×÷\/]\s*\d+$/.test(q)
+){
+
+const match=q.match(
+/^(\d+)\s*([\+\-\*x×÷\/])\s*(\d+)$/
+);
+
+if(match){
+
+const a=Number(match[1]);
+const op=match[2];
+const b=Number(match[3]);
+
+if(op==="+")return String(a+b);
+if(op==="-")return String(a-b);
+if(op==="*"||op==="x"||op==="×")return String(a*b);
+if((op==="÷"||op==="/")&&b!==0)
+return String(a/b);
+
+}
+
+}
+
+
+/* COMMON KNOWLEDGE — PLANETS */
+
+if(has(
+"hur många planeter",
+"how many planets",
+"planets in the solar system",
+"planeter finns"
+))
+return "Det finns 8 planeter i vårt solsystem: Merkurius, Venus, jorden, Mars, Jupiter, Saturnus, Uranus och Neptunus.";
+
+if(has(
+"största planeten",
+"largest planet",
+"biggest planet"
+))
+return "Jupiter är den största planeten i vårt solsystem.";
+
+if(has(
+"minsta planeten",
+"smallest planet"
+))
+return "Merkurius är den minsta planeten i vårt solsystem.";
+
+if(has(
+"närmast solen",
+"närmast solen",
+"closest to the sun",
+"nearest the sun"
+))
+return "Merkurius är planeten närmast solen.";
+
+if(has(
+"röd planet",
+"red planet"
+))
+return "Mars kallas ofta den röda planeten på grund av järnoxider på ytan.";
+
+if(has(
+"saturnus ringar",
+"saturn rings"
+))
+return "Saturnus är känd för sitt stora och tydliga ringsystem.";
+
+if(has(
+"månen en planet",
+"is the moon a planet"
+))
+return "Nej. Månen är jordens naturliga satellit.";
+
+
+/* EARTH */
+
+if(has(
+"jordens satellit",
+"earth satellite",
+"earth moon"
+))
+return "Månen är jordens naturliga satellit.";
+
+if(has(
+"hur gammal är jorden",
+"how old is earth"
+))
+return "Jorden är ungefär 4,5 miljarder år gammal.";
+
+if(has(
+"hur stor är jorden",
+"earth diameter"
+))
+return "Jordens diameter är ungefär 12 742 kilometer.";
+
+
+/* SPACE */
+
+if(has(
+"vad är en stjärna",
+"what is a star",
+"what are stars"
+))
+return "En stjärna är ett enormt, hett objekt som består av plasma och producerar energi genom kärnreaktioner. Solen är vår närmaste stjärna.";
+
+if(has(
+"vad är ett svart hål",
+"what is a black hole",
+"black hole"
+))
+return "Ett svart hål är ett område i rymden där gravitationen är så stark att inte ens ljus kan ta sig ut från området innanför händelsehorisonten.";
+
+if(has(
+"vad är solen",
+"what is the sun"
+))
+return "Solen är en stjärna i centrum av vårt solsystem. Jorden kretsar runt solen.";
+
+
+/* GEOGRAPHY */
+
+if(has(
+"sveriges huvudstad",
+"swedens capital",
+"capital of sweden"
+))
+return "Sveriges huvudstad är Stockholm.";
+
+if(has(
+"norges huvudstad",
+"norways capital",
+"capital of norway"
+))
+return "Norges huvudstad är Oslo.";
+
+if(has(
+"danmarks huvudstad",
+"denmarks capital",
+"capital of denmark"
+))
+return "Danmarks huvudstad är Köpenhamn.";
+
+if(has(
+"finlands huvudstad",
+"finlands capital",
+"capital of finland"
+))
+return "Finlands huvudstad är Helsingfors.";
+
+if(has(
+"tysklands huvudstad",
+"germany capital",
+"capital of germany"
+))
+return "Tysklands huvudstad är Berlin.";
+
+if(has(
+"frankrikes huvudstad",
+"france capital",
+"capital of france"
+))
+return "Frankrikes huvudstad är Paris.";
+
+if(has(
+"spaniens huvudstad",
+"spain capital",
+"capital of spain"
+))
+return "Spaniens huvudstad är Madrid.";
+
+if(has(
+"italiens huvudstad",
+"italy capital",
+"capital of italy"
+))
+return "Italiens huvudstad är Rom.";
+
+if(has(
+"usa huvudstad",
+"us capital",
+"united states capital",
+"capital of usa"
+))
+return "USA:s huvudstad är Washington, D.C.";
+
+if(has(
+"kanadas huvudstad",
+"canada capital"
+))
+return "Kanadas huvudstad är Ottawa.";
+
+if(has(
+"japans huvudstad",
+"japan capital"
+))
+return "Japans huvudstad är Tokyo.";
+
+if(has(
+"kinas huvudstad",
+"china capital"
+))
+return "Kinas huvudstad är Peking (Beijing).";
+
+if(has(
+"världens största land",
+"largest country",
+"biggest country"
+))
+return "Ryssland är världens största land sett till landyta.";
+
+if(has(
+"världens minsta land",
+"smallest country"
+))
+return "Vatikanstaten är världens minsta självständiga stat till ytan.";
+
+if(has(
+"världens största ocean",
+"largest ocean",
+"biggest ocean"
+))
+return "Stilla havet är världens största ocean.";
+
+
+/* SCIENCE */
+
+if(has(
+"vad är vatten",
+"what is water",
+"h2o"
+))
+return "Vatten är en kemisk förening med formeln H₂O: två väteatomer och en syreatom.";
+
+if(has(
+"vad är syre",
+"what is oxygen",
+"oxygen"
+))
+return "Syre är ett grundämne med symbolen O. Det är viktigt för bland annat cellandning och förbränning.";
+
+if(has(
+"vad är koldioxid",
+"what is carbon dioxide",
+"carbon dioxide"
+))
+return "Koldioxid, CO₂, består av en kolatom och två syreatomer. Den finns naturligt i atmosfären och ingår i kolcykeln.";
+
+if(has(
+"vad är gravitation",
+"what is gravity",
+"gravity"
+))
+return "Gravitation är den kraft som gör att massor dras mot varandra. Jordens gravitation håller oss kvar på marken.";
+
+if(has(
+"ljusets hastighet",
+"speed of light"
+))
+return "Ljusets hastighet i vakuum är ungefär 300 000 kilometer per sekund.";
+
+if(has(
+"kokar vatten",
+"boiling point water",
+"vatten kokar"
+))
+return "Rent vatten kokar vid ungefär 100 °C vid normalt lufttryck.";
+
+if(has(
+"fryser vatten",
+"freezing point water",
+"vatten fryser"
+))
+return "Rent vatten fryser vid ungefär 0 °C vid normalt lufttryck.";
+
+
+/* BIOLOGY */
+
+if(has(
+"vad är dna",
+"what is dna",
+"dna"
+))
+return "DNA är molekylen som lagrar genetisk information i levande organismer.";
+
+if(has(
+"vad är en cell",
+"what is a cell",
+"cell biology"
+))
+return "En cell är den minsta grundläggande enheten som bygger upp levande organismer.";
+
+if(has(
+"vad gör hjärtat",
+"what does the heart do",
+"heart function"
+))
+return "Hjärtat pumpar blod genom kroppen så att syre och andra ämnen kan transporteras till cellerna.";
+
+
+/* HISTORY */
+
+if(has(
+"andra världskriget",
+"world war 2",
+"ww2"
+))
+return "Andra världskriget pågick 1939–1945.";
+
+if(has(
+"första världskriget",
+"world war 1",
+"ww1"
+))
+return "Första världskriget pågick 1914–1918.";
+
+if(has(
+"franska revolutionen",
+"french revolution"
+))
+return "Franska revolutionen började 1789 och ledde till stora politiska och samhälleliga förändringar i Frankrike.";
+
+if(has(
+"månlandningen",
+"moon landing",
+"apollo 11"
+))
+return "Apollo 11 landade på månen 1969. Neil Armstrong blev den första människan att gå på månen.";
+
+
+/* TIME / UNITS */
+
+if(has(
+"hur många minuter i en timme",
+"minutes in an hour"
+))
+return "Det finns 60 minuter i en timme.";
+
+if(has(
+"hur många sekunder i en minut",
+"seconds in a minute"
+))
+return "Det finns 60 sekunder i en minut.";
+
+if(has(
+"hur många dagar i veckan",
+"days in a week"
+))
+return "Det finns 7 dagar i en vecka.";
+
+if(has(
+"hur många månader",
+"months in a year"
+))
+return "Det finns 12 månader på ett år.";
+
+if(has(
+"meter till centimeter",
+"meters to centimeters"
+))
+return "1 meter = 100 centimeter.";
+
+if(has(
+"kilometer till meter",
+"kilometers to meters"
+))
+return "1 kilometer = 1 000 meter.";
+
+if(has(
+"kilogram till gram",
+"kilograms to grams"
+))
+return "1 kilogram = 1 000 gram.";
+
+
+/* LANGUAGE */
+
+if(has(
+"vad betyder hello",
+"hello betyder",
+"translate hello"
+))
+return "Hello betyder 'hej' på svenska.";
+
+if(has(
+"vad betyder thanks",
+"thanks betyder",
+"translate thanks"
+))
+return "Thanks betyder 'tack' på svenska.";
+
+if(has(
+"vad betyder hola",
+"hola betyder",
+"spanish hola"
+))
+return "Hola betyder 'hej' på svenska.";
+
+if(has(
+"vad betyder gracias",
+"gracias betyder"
+))
+return "Gracias betyder 'tack' på svenska.";
+
+
+/* BLACKJACK */
+
+if(has(
+"blackjack","black jack","21",
+"ess","dealer"
+)){
+
+if(has(
+"tips","hur vinner",
+"hur spelar","strategy",
+"strategi","vad ska jag göra"
+))
+return "Blackjack: försök komma nära 21 utan att gå över. HIT tar ett nytt kort och STAND stannar. Dealer spelar sedan sin hand.";
+
+if(has(
+"hit","ta kort","nytt kort"
+))
+return "HIT = ta ett kort till. Men går du över 21 blir det bust.";
+
+if(has(
+"stand","stå","stanna"
+))
+return "STAND = du tar inga fler kort och dealern spelar klart sin hand.";
+
+return "Blackjack går ut på att komma så nära 21 som möjligt utan att gå över. Du spelar mot dealern.";
+
+}
+
+
+/* POKER */
+
+if(has(
+"poker","poker ai",
+"pokerai","poker mot"
+)){
+
+if(has(
+"hand","kort","flush",
+"straight","par","pair",
+"kåk","full house"
+))
+return "I Poker jämförs händer efter styrka: high card, pair, two pair, three of a kind, straight, flush, full house, four of a kind och straight flush.";
+
+if(has("ai","dator","bot"))
+return "Poker AI är motståndaren. SpinLab visar båda händerna när rundan avgörs.";
+
+return "Poker vs AI låter dig möta SpinLab AI. Bygg en stark hand och utmana AI:n.";
+
+}
+
+
+/* CHECKERS */
+
+if(has(
+"dam","checkers","bräde",
+"brade","pjäser","pjaser"
+)){
+
+if(has(
+"slag","ta","capture","hoppa"
+))
+return "I Dam är slag viktiga. En pjäs kan fånga en motståndares pjäs genom att hoppa över den. Kungar kan röra sig åt båda hållen.";
+
+return "Dam vs AI är ett brädspel där du flyttar pjäser diagonalt och försöker fånga motståndarens pjäser.";
+
+}
+
+
+/* WAR */
+
+if(has("war","krig","kortkrig"))
+return casual
+?"War är ren kort-kaos 😭. Högst kort vinner rundan."
+:"War är enkelt: båda drar ett kort och det högre kortet vinner rundan.";
+
+
+/* HIGHER LOWER */
+
+if(has(
+"higher","lower","högre",
+"lägre","higher lower"
+)){
+
+if(has("hur","tips","regel","regler"))
+return "Higher/Lower: titta på kortet och gissa om nästa kort blir högre eller lägre.";
+
+return "Higher/Lower handlar om att gissa om nästa kort blir högre eller lägre än det nuvarande.";
+
+}
+
+
+/* MEMORY */
+
+if(has(
+"memory","memory game",
+"minne","par","pairs"
+))
+return "Card Memory går ut på att hitta alla matchande par. Kom ihåg var korten ligger så går det snabbare.";
+
+
+/* GO FISH */
+
+if(has(
+"go fish","gofish",
+"fiska","fisk"
+))
+return "I Go Fish frågar du efter en rank som du redan har. Om motståndaren har den får du deras kort av den ranken.";
+
+
+/* SOLITAIRE */
+
+if(has(
+"solitaire","patience",
+"patiens"
+))
+return "Solitaire är ett solo-kortspel där du försöker organisera korten enligt spelets regler.";
+
+
+/* BACCARAT */
+
+if(has(
+"baccarat","baccara"
+))
+return "Baccarat handlar om att få en hand så nära 9 som möjligt. Du kan spela på Player eller Banker. Bildkort räknas som 0 och ess som 1.";
+
+
+/* CRAZY EIGHTS */
+
+if(has(
+"crazy eights","crazy 8",
+"crazy8","crazy8s","8 kort"
+))
+return "Crazy Eights: spela ett kort som matchar färgen eller valören på kortet i mitten. Åttor fungerar som wild och kan spelas på nästan allt.";
+
+
+/* RANDOM */
+
+if(has(
+"random","slump","nummer",
+"coin","mynt","krona",
+"klave","randomizer"
+))
+return "Random-sektionen kan ge dig ett slumpnummer 1–100 eller singla ett mynt. Varje användning räknas mot dina Random-progress.";
+
+
+/* STATS */
+
+if(has(
+"stats","statistik","stat",
+"hur många vinster",
+"wins","vinster"
+)){
+
+const rate=player.games
+?Math.round(player.wins/player.games*100)
+:0;
+
+return `Dina SpinLab-stats:
+🎮 ${player.games} games
+🏆 ${player.wins} wins
+📈 ${rate}% win rate
+⚡ ${player.xp} XP
+🔥 ${player.winStreak} win streak
+🏅 Bästa streak: ${player.bestWinStreak}
+⭐ Level ${level()}`;
+
+}
+
+
+/* XP */
+
+if(has(
+"xp","experience",
+"erfarenhet","level",
+"lvl","nivå","niva"
+)){
+
+const next=level()*100;
+
+return `Du är Level ${level()} med ${player.xp} XP. Nästa level börjar vid ${next} XP enligt SpinLabs nivåsystem.`;
+
+}
+
+
+/* QUESTS */
+
+if(has(
+"quest","quests","uppdrag",
+"mission","missions"
+)){
+
+const completed=
+QUESTS.filter(
+x=>player.completedQuests[x.id]
+).length;
+
+const active=
+QUESTS
+.filter(x=>!player.completedQuests[x.id])
+.slice(0,3)
+.map(x=>x.title)
+.join(", ");
+
+return `Du har klarat ${completed}/${QUESTS.length} quests. Aktiva exempel: ${active||"alla klara 😎"}. Kolla STATS för detaljer.`;
+
+}
+
+
+/* STREAK */
+
+if(has(
+"streak","serie",
+"win streak","winning streak"
+))
+return `Din nuvarande win streak är ${player.winStreak}. Din bästa är ${player.bestWinStreak}. Keep cooking 🔥`;
+
+
+/* NAVIGATION */
+
+if(has(
+"startsida","home",
+"homepage","hem"
+)){
+
+if(has(
+"öppna","oppna",
+"starta","gå till",
+"go to"
+))
+return "Tryck på HOME för att komma tillbaka till startsidan.";
+
+return "HOME är SpinLabs startsida.";
+
+}
+
+if(has(
+"arkad","arcade",
+"spel","game","games"
+)){
+
+if(has(
+"vilka","vad finns",
+"what games","vilka spel"
+))
+return "I SpinLab finns Blackjack, War, Higher/Lower, Card Memory, Poker vs AI, Dam vs AI, Solitaire, Go Fish, Baccarat och Crazy Eights, plus Random-verktyg.";
+
+if(has(
+"öppna","oppna",
+"starta","gå till",
+"go to"
+))
+return "Tryck på ARCADE för att komma till alla spel.";
+
+return "ARCADE innehåller alla SpinLab-spel.";
+
+}
+
+
+/* WIN / LOSS SLANG */
+
+if(has(
+"w","dub","win","vann",
+"vinst","jag vann","we won"
+))
+return "W 😎🔥 Snyggt. Kolla din streak och XP i STATS.";
+
+if(has(
+"l","loss","lost",
+"förlora","förlorade",
+"förlust","rip"
+))
+return "Aj 😭. Ingen fara — nästa game kan bli bättre. Din streak påverkas om du förlorar.";
+
+
+/* CONFUSION */
+
+if(has(
+"jag fattar inte",
+"fattar inte",
+"förstår inte",
+"förstar inte",
+"idk",
+"i dont know",
+"dont understand"
+))
+return "Lugnt 😭. Säg bara vilket spel eller vilken del du inte fattar, så förklarar jag det enklare.";
+
+
+/* AI SMART */
+
+if(has(
+"är du smart",
+"smart","kan du allt",
+"vet du allt","allvetande"
+))
+return "Jag kan en hel del common knowledge, spelregler och SpinLab-grejer, men jag kan inte allt och jag kan fortfarande ha fel.";
+
+
+/* HELP */
+
+if(has(
+"vad kan du",
+"vad kan du göra",
+"help","hjälp",
+"hjälp mig",
+"what can you do"
+))
+return "Jag kan hjälpa med SpinLab-spelen, regler, XP, stats, quests, common knowledge, enkel matte, geografi, rymden, vetenskap, historia, engelska/svenska och slang.";
+
+
+/* BUGS */
+
+if(has(
+"är det bug","bugg","bug",
+"funkar inte",
+"fungerar inte",
+"broken","trasig",
+"error","fel"
+))
+return "Om något verkar bugga: säg exakt vad du tryckte på, vad som hände och vad du förväntade dig. Då kan vi felsöka det steg för steg.";
+
+
+/* BORED */
+
+if(has(
+"tråkigt","boring",
+"uttråkad","bored"
+))
+return "Kör ett random game 😭 eller försök slå din bästa win streak.";
+
+
+/* GAME RECOMMENDATION WITHOUT RANKING */
+
+if(has(
+"vad ska jag spela",
+"vilket spel",
+"what should i play",
+"what game"
+))
+return "Snabbt kortkaos: War. Gissa: Higher/Lower. Tänk: Memory eller Dam. Mot AI: Poker, Dam eller Go Fish. Testa nya: Baccarat eller Crazy Eights.";
+
+
+/* CASUAL FALLBACKS */
+
+if(casual&&swedish)
+return "Bro 😭 jag hänger med, men jag behöver lite mer context. Fråga om ett game, XP, stats, quests eller vanlig knowledge.";
+
+if(casual)
+return "I got you 😭. Give me a little more context and I'll try to help.";
+
+if(swedish)
+return "Jag är inte helt säker på vad du menar än. Fråga om SpinLab, ett spel, XP, stats, quests eller vanlig kunskap så försöker jag hjälpa dig.";
+
+return "I'm not sure what you mean yet. Ask me about a SpinLab game, XP, stats, quests, common knowledge, bugs, or how the arcade works.";
+
+}
+
+
+function sendChat(){
+
+const text=chatInput.value.trim();
+
+if(!text)return;
+
+addChatMessage(text,"user");
+
+chatInput.value="";
+
+const typing=document.createElement("div");
+
+typing.className="ai-message";
+typing.textContent="SpinLab AI is thinking...";
+
+messages.appendChild(typing);
+
+messages.scrollTop=messages.scrollHeight;
+
+setTimeout(()=>{
+
+typing.remove();
+
+addChatMessage(
+spinlabAI(text),
+"ai"
+);
+
+},500);
+
+}
+
+chatSend.onclick=sendChat;
+
+chatInput.addEventListener("keydown",e=>{
+
+if(e.key==="Enter"){
+
+e.preventDefault();
+
+sendChat();
+
+}
+
+});
+
+
+/* START */
+
+updateUI();
+
+</script>
+
+</body>
+</html>
