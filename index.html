@@ -535,7 +535,7 @@ main{
 .checker-piece.ai{background:#ff3f76}
 
 .checker-piece.king:after{
-  content:"♛";
+  content:"";
   color:white;
   font-size:22px;
 }
@@ -771,6 +771,9 @@ main{
     height:70vh;
   }
 }
+
+/* AVATAR SHOP */
+.avatar-balance{margin:14px 0;padding:14px 18px;border:1px solid rgba(0,217,255,.28);border-radius:14px;background:rgba(8,12,30,.72);font-weight:800;letter-spacing:1px}.avatar-balance b{margin-left:8px;font-size:22px;color:#00d9ff}.avatar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}.avatar-card{padding:18px;border:1px solid rgba(0,217,255,.18);border-radius:18px;background:linear-gradient(145deg,rgba(10,16,35,.95),rgba(18,8,34,.95));text-align:center;transition:.2s}.avatar-card:hover{transform:translateY(-4px);border-color:rgba(255,79,216,.6)}.avatar-face{width:82px;height:82px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;font-size:24px;font-weight:900;letter-spacing:1px;border:2px solid rgba(255,255,255,.28);box-shadow:0 0 22px rgba(0,217,255,.18)}.avatar-card h3{margin:8px 0 4px}.avatar-card p{font-size:12px;opacity:.72;min-height:30px}.avatar-card button{width:100%;margin-top:10px}.avatar-card.owned{border-color:rgba(0,217,255,.5)}.avatar-card.equipped{border-color:rgba(255,79,216,.75);box-shadow:0 0 24px rgba(255,79,216,.12)}.avatar-tag{font-size:10px;letter-spacing:1px;opacity:.7}.header-avatar{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;margin-right:8px;font-size:8px;font-weight:900;border:1px solid rgba(255,255,255,.35);vertical-align:middle}
 </style>
 </head>
 
@@ -788,6 +791,7 @@ main{
 <button onclick="showPage('classicCards')" class="nav-btn">CARDS</button>
 <button onclick="showPage('random')" class="nav-btn">RANDOM</button>
 <button onclick="showPage('stats')" class="nav-btn">STATS</button>
+<button onclick="showPage('avatars')" class="nav-btn">AVATARS</button>
 </nav>
 
 <div class="player-level">
@@ -813,19 +817,19 @@ ENTER ARCADE
 <div class="quick-links">
 
 <div class="quick-card" onclick="showPage('stats')">
-<div class="quick-icon">📊</div>
+<div class="quick-icon"></div>
 <h3>STATS</h3>
 <p>View your XP, wins, level and quests.</p>
 </div>
 
 <div class="quick-card" onclick="showPage('arcade')">
-<div class="quick-icon">🎮</div>
+<div class="quick-icon"></div>
 <h3>ARCADE</h3>
 <p>Play all of the games in SpinLab.</p>
 </div>
 
 <div class="quick-card" onclick="showPage('random')">
-<div class="quick-icon">🎲</div>
+<div class="quick-icon"></div>
 <h3>RANDOM</h3>
 <p>Generate numbers and flip coins.</p>
 </div>
@@ -850,31 +854,31 @@ ENTER ARCADE
 </div>
 
 <div class="game-card" onclick="openGame('war')">
-<div class="game-icon">⚔️</div>
+<div class="game-icon"></div>
 <h3>War</h3>
 <p>Draw cards and see who gets the higher card.</p>
 </div>
 
 <div class="game-card" onclick="openGame('higher')">
-<div class="game-icon">⬆️</div>
+<div class="game-icon">⬆</div>
 <h3>Higher / Lower</h3>
 <p>Guess whether the next card is higher or lower.</p>
 </div>
 
 <div class="game-card" onclick="openGame('memory')">
-<div class="game-icon">🧠</div>
+<div class="game-icon"></div>
 <h3>Card Memory</h3>
 <p>Find all matching pairs.</p>
 </div>
 
 <div class="game-card" onclick="openGame('baccarat')">
-<div class="game-icon">🎴</div>
+<div class="game-icon"></div>
 <h3>Baccarat</h3>
 <p>Compare Player and Banker hands and get closest to 9.</p>
 </div>
 
 <div class="game-card" onclick="openGame('crazy8s')">
-<div class="game-icon">8️⃣</div>
+<div class="game-icon">8</div>
 <h3>Crazy Eights</h3>
 <p>Match the suit or rank and get rid of your cards first.</p>
 </div>
@@ -888,25 +892,25 @@ ENTER ARCADE
 <div class="cards-grid">
 
 <div class="game-card" onclick="openGame('poker')">
-<div class="game-icon">♠️</div>
+<div class="game-icon"></div>
 <h3>Poker vs AI</h3>
 <p>Play poker against the SpinLab AI.</p>
 </div>
 
 <div class="game-card" onclick="openGame('checkers')">
-<div class="game-icon">🔴</div>
+<div class="game-icon"></div>
 <h3>Dam vs AI</h3>
 <p>Play checkers against the AI.</p>
 </div>
 
 <div class="game-card" onclick="openGame('solitaire')">
-<div class="game-icon">♦️</div>
+<div class="game-icon"></div>
 <h3>Solitaire</h3>
 <p>Classic single-player card game.</p>
 </div>
 
 <div class="game-card" onclick="openGame('gofish')">
-<div class="game-icon">🐟</div>
+<div class="game-icon"></div>
 <h3>Go Fish</h3>
 <p>Ask the AI for cards and collect pairs.</p>
 </div>
@@ -929,37 +933,37 @@ ENTER ARCADE
 </div>
 
 <div class="game-card" onclick="openGame('poker')">
-<div class="game-icon">♠️</div>
+<div class="game-icon"></div>
 <h3>Poker vs AI</h3>
 <p>Test your hand against the AI.</p>
 </div>
 
 <div class="game-card" onclick="openGame('war')">
-<div class="game-icon">⚔️</div>
+<div class="game-icon"></div>
 <h3>War</h3>
 <p>Higher card wins.</p>
 </div>
 
 <div class="game-card" onclick="openGame('gofish')">
-<div class="game-icon">🐟</div>
+<div class="game-icon"></div>
 <h3>Go Fish</h3>
 <p>Collect pairs.</p>
 </div>
 
 <div class="game-card" onclick="openGame('solitaire')">
-<div class="game-icon">♦️</div>
+<div class="game-icon"></div>
 <h3>Solitaire</h3>
 <p>Classic solitaire.</p>
 </div>
 
 <div class="game-card" onclick="openGame('baccarat')">
-<div class="game-icon">🎴</div>
+<div class="game-icon"></div>
 <h3>Baccarat</h3>
 <p>Closest to 9 wins.</p>
 </div>
 
 <div class="game-card" onclick="openGame('crazy8s')">
-<div class="game-icon">8️⃣</div>
+<div class="game-icon">8</div>
 <h3>Crazy Eights</h3>
 <p>Match cards and empty your hand.</p>
 </div>
@@ -1006,6 +1010,19 @@ FLIP
 
 </section>
 
+
+<section id="avatars" class="page">
+
+<div class="section-title">
+<h2>AVATAR SHOP</h2>
+<p>Earn coins by playing games and spend them on avatars.</p>
+</div>
+
+<div class="avatar-balance">COINS <b id="coinBalance">100</b></div>
+
+<div id="avatarShop" class="avatar-grid"></div>
+
+</section>
 
 <section id="stats" class="page">
 
@@ -1145,7 +1162,7 @@ FLIP
 <div id="spinlabMessages" class="spinlab-messages">
 
 <div class="ai-message">
-Yo! 👋 I'm SpinLab AI.<br>
+Yo!  I'm SpinLab AI.<br>
 Ask me about your games, XP, stats, quests or basically anything common.
 </div>
 
@@ -1160,7 +1177,7 @@ placeholder="Ask SpinLab AI..."
 autocomplete="off"
 >
 
-<button id="spinlabSend">➤</button>
+<button id="spinlabSend"></button>
 
 </div>
 
@@ -1196,6 +1213,9 @@ if(typeof player.xp!=="number")player.xp=0;
 if(typeof player.games!=="number")player.games=0;
 if(typeof player.wins!=="number")player.wins=0;
 if(typeof player.spins!=="number")player.spins=0;
+if(typeof player.coins!=="number")player.coins=25;
+if(!Array.isArray(player.ownedAvatars))player.ownedAvatars=['spin'];
+if(typeof player.avatar!=='string')player.avatar='spin';
 if(typeof player.randomSpins!=="number")player.randomSpins=0;
 if(typeof player.cardGames!=="number")player.cardGames=0;
 if(typeof player.winStreak!=="number")player.winStreak=0;
@@ -1204,6 +1224,49 @@ if(typeof player.blackjackWins!=="number")player.blackjackWins=0;
 if(typeof player.aiWins!=="number")player.aiWins=0;
 if(typeof player.memoryWins!=="number")player.memoryWins=0;
 if(!player.completedQuests)player.completedQuests={};
+
+
+const AVATARS=[
+{id:'spin',name:'SPIN',cost:0,icon:'◉',desc:'The original SpinLab avatar.',bg:'linear-gradient(135deg,#00d9ff,#3b82f6)'},
+{id:'ace',name:'ACE',cost:150,icon:'♠',desc:'Built for card players.',bg:'linear-gradient(135deg,#111827,#64748b)'},
+{id:'byte',name:'BYTE',cost:300,icon:'01',desc:'Fast, clean and digital.',bg:'linear-gradient(135deg,#06b6d4,#2563eb)'},
+{id:'nova',name:'NOVA',cost:500,icon:'✦',desc:'A bright arcade style.',bg:'linear-gradient(135deg,#7c3aed,#ec4899)'},
+{id:'flux',name:'FLUX',cost:750,icon:'↯',desc:'For players who like speed.',bg:'linear-gradient(135deg,#0ea5e9,#22c55e)'},
+{id:'void',name:'VOID',cost:1100,icon:'◐',desc:'Dark and minimal.',bg:'linear-gradient(135deg,#020617,#475569)'},
+{id:'pulse',name:'PULSE',cost:1600,icon:'◆',desc:'A high-level SpinLab look.',bg:'linear-gradient(135deg,#db2777,#7c3aed)'},
+{id:'neon',name:'NEON',cost:2500,icon:'N',desc:'The rare shop avatar.',bg:'linear-gradient(135deg,#22d3ee,#f472b6)'}
+];
+
+function avatarById(id){return AVATARS.find(a=>a.id===id)||AVATARS[0];}
+function renderAvatarShop(){
+ const balance=document.getElementById('coinBalance'); if(balance) balance.textContent=player.coins;
+ const shop=document.getElementById('avatarShop'); if(!shop)return;
+ shop.innerHTML='';
+ AVATARS.forEach(a=>{
+  const owned=player.ownedAvatars.includes(a.id), equipped=player.avatar===a.id;
+  const card=document.createElement('div'); card.className='avatar-card'+(owned?' owned':'')+(equipped?' equipped':'');
+  const face=document.createElement('div'); face.className='avatar-face'; face.textContent=a.icon; face.style.background=a.bg;
+  const h=document.createElement('h3'); h.textContent=a.name;
+  const p=document.createElement('p'); p.textContent=a.desc;
+  const tag=document.createElement('div'); tag.className='avatar-tag'; tag.textContent=equipped?'EQUIPPED':owned?'OWNED':a.cost+' COINS';
+  const btn=document.createElement('button');
+  if(equipped){btn.textContent='EQUIPPED';btn.disabled=true;}
+  else if(owned){btn.textContent='EQUIP';btn.onclick=()=>{player.avatar=a.id;savePlayer();updateUI();renderAvatarShop();};}
+  else{btn.textContent='BUY FOR '+a.cost+' COINS';btn.onclick=()=>buyAvatar(a.id);}
+  card.append(face,h,p,tag,btn); shop.appendChild(card);
+ });
+}
+function buyAvatar(id){
+ const a=avatarById(id);
+ if(player.ownedAvatars.includes(id)){player.avatar=id;savePlayer();updateUI();renderAvatarShop();return;}
+ if(player.coins<a.cost){showToast('Not enough coins');return;}
+ player.coins-=a.cost; player.ownedAvatars.push(id); player.avatar=id; savePlayer(); updateUI(); renderAvatarShop(); showToast(a.name+' unlocked');
+}
+function awardCoins(result,xp){
+ // Coins are intentionally slow to earn so avatars feel unlockable.
+ const gain=result==='win'?Math.max(3,Math.min(12,3+Math.floor(xp/25))):1;
+ player.coins+=gain; return gain;
+}
 
 function savePlayer(){
 localStorage.setItem("spinlabPlayer",JSON.stringify(player));
@@ -1230,6 +1293,10 @@ Object.keys(elements).forEach(id=>{
 const el=document.getElementById(id);
 if(el)el.textContent=elements[id];
 });
+
+const coinEl=document.getElementById('coinBalance');
+if(coinEl)coinEl.textContent=player.coins;
+renderAvatarShop();
 
 const rate=player.games?
 Math.round(player.wins/player.games*100):0;
@@ -1259,7 +1326,8 @@ home:"HOME",
 arcade:"ARCADE",
 classicCards:"CARDS",
 random:"RANDOM",
-stats:"STATS"
+stats:"STATS",
+avatars:"AVATARS"
 };
 
 if(map[id]){
@@ -1363,7 +1431,7 @@ div.innerHTML=`
 
 <div class="quest-top">
 <div class="quest-title">
-${done?"✓ ":""}${q.title}
+${done?" ":""}${q.title}
 </div>
 <div class="quest-reward">
 +${q.reward} XP
@@ -1486,7 +1554,7 @@ if(stage.querySelector(".play-again"))return;
 const button=document.createElement("button");
 
 button.className="play-again";
-button.textContent="🔄 PLAY AGAIN";
+button.textContent=" PLAY AGAIN";
 
 button.onclick=()=>{
 
@@ -1560,12 +1628,14 @@ player.cardGames=Math.max(0,player.cardGames);
 
 player.xp+=xp;
 
+const coinGain=awardCoins(result,xp);
+
 savePlayer();
 updateUI();
 checkQuests();
 
 if(result==="win")
-showToast("WIN! +"+xp+" XP");
+showToast("WIN! +"+xp+" XP · +"+coinGain+" COINS");
 
 const stage=document.getElementById(
 GAME_STAGES[currentGameId]
@@ -1579,7 +1649,7 @@ setTimeout(()=>addPlayAgain(stage),30);
 
 /* CARDS */
 
-const suits=["♠","♥","♦","♣"];
+const suits=["","","",""];
 
 const ranks=[
 "A","2","3","4","5","6","7",
@@ -1657,8 +1727,8 @@ if(back)
 return `<div class="card card-back">ϟ</div>`;
 
 const red=
-card.suit==="♥"||
-card.suit==="♦";
+card.suit===""||
+card.suit==="";
 
 return `
 <div class="card ${red?"red":""}">
@@ -2057,8 +2127,8 @@ GAME_REGISTRY.memory={
 start(stage){
 
 const symbols=[
-"★","●","▲","◆",
-"♥","♣","☀","☾"
+"","●","▲","◆",
+"","","",""
 ];
 
 const cards=shuffle([
@@ -2782,7 +2852,7 @@ if(ended)return;
 playerTurn=false;
 render();
 
-setTimeout(aiMove,450);
+setTimeout(aiMove,160);
 
 }
 
@@ -3201,7 +3271,7 @@ playerTurn=false;
 
 render();
 
-setTimeout(aiTurn,650);
+setTimeout(aiTurn,170);
 
 }
 
@@ -3523,7 +3593,7 @@ ${
 playerHand.map((card,index)=>`
 
 <button
-class="card ${card.suit==="♥"||card.suit==="♦"?"red":""}"
+class="card ${card.suit===""||card.suit===""?"red":""}"
 style="cursor:pointer;border:0"
 onclick="window.__crazyPlay(${index})"
 ${!playerTurn||ended||gameFinished||!playable(card)?"disabled":""}
@@ -3594,7 +3664,7 @@ playerTurn=false;
 
 render();
 
-setTimeout(aiTurn,550);
+setTimeout(aiTurn,170);
 
 }
 
@@ -3622,7 +3692,7 @@ playerTurn=false;
 
 render();
 
-setTimeout(aiTurn,550);
+setTimeout(aiTurn,170);
 
 }
 
@@ -3784,7 +3854,7 @@ const q=original.toLowerCase().trim()
 .replace(/[!?.,;:()[\]{}]/g," ")
 .replace(/\s+/g," ");
 
-if(!q)return "Type something first 😭";
+if(!q)return "Type something first ";
 
 const words=q.split(" ");
 
@@ -3798,7 +3868,7 @@ const casual=has(
 "bro","bruh","dude","brooo",
 "mannen","asså","assa",
 "wtf","lol","lmao",
-"💀","😭","nah","fr"
+"","","nah","fr"
 );
 
 const swedish=has(
@@ -3822,11 +3892,11 @@ if(has(
 )){
 
 if(casual)
-return "Yo 😭 vad händer? SpinLab AI online. Vad vill du köra?";
+return "Yo  vad händer? SpinLab AI online. Vad vill du köra?";
 
 return swedish
-?"Tjena! 👋 SpinLab AI här. Du kan fråga om spelen, XP, stats, quests eller basically vanliga saker."
-:"Yo! 👋 SpinLab AI online. Ask me about games, XP, stats, quests or basically common stuff.";
+?"Tjena!  SpinLab AI här. Du kan fråga om spelen, XP, stats, quests eller basically vanliga saker."
+:"Yo!  SpinLab AI online. Ask me about games, XP, stats, quests or basically common stuff.";
 
 }
 
@@ -3839,7 +3909,7 @@ if(has(
 "vad är du","vad e du",
 "är du ai","are you ai"
 ))
-return "Jag är SpinLab AI 🤖. Jag är en lokal AI-assistent byggd direkt i SpinLab. Jag kan hjälpa med spelen, stats, XP, quests, slang och en stor mängd vanlig kunskap.";
+return "Jag är SpinLab AI . Jag är en lokal AI-assistent byggd direkt i SpinLab. Jag kan hjälpa med spelen, stats, XP, quests, slang och en stor mängd vanlig kunskap.";
 
 
 /* THANKS */
@@ -3849,17 +3919,17 @@ if(has(
 "tackar","thank you"
 ))
 return casual
-?"Alltid 😭🤝"
-:"Ingen fara! 😎";
+?"Alltid "
+:"Ingen fara! ";
 
 
 /* LAUGHTER */
 
 if(has(
 "lol","lmao","haha","hahaha",
-"xd","😭","💀"
+"xd","",""
 ))
-return "😭 bro jag fattar. Vad kör vi nu?";
+return " bro jag fattar. Vad kör vi nu?";
 
 
 /* COMMON KNOWLEDGE — BASIC MATH */
@@ -3882,7 +3952,7 @@ else if(op==="*"||op==="x"||op==="×")answer=a*b;
 else if(op==="÷"||op==="/")answer=b!==0?a/b:"undefined";
 
 if(answer!==undefined)
-return `${a} ${op} ${b} = ${answer}. 🧮`;
+return `${a} ${op} ${b} = ${answer}. `;
 
 }
 
@@ -4366,7 +4436,7 @@ return "Dam vs AI är ett brädspel där du flyttar pjäser diagonalt och förs�
 
 if(has("war","krig","kortkrig"))
 return casual
-?"War är ren kort-kaos 😭. Högst kort vinner rundan."
+?"War är ren kort-kaos . Högst kort vinner rundan."
 :"War är enkelt: båda drar ett kort och det högre kortet vinner rundan.";
 
 
@@ -4452,12 +4522,13 @@ const rate=player.games
 :0;
 
 return `Dina SpinLab-stats:
-🎮 ${player.games} games
-🏆 ${player.wins} wins
-📈 ${rate}% win rate
-⚡ ${player.xp} XP
-🔥 ${player.winStreak} win streak
-🏅 Bästa streak: ${player.bestWinStreak}
+ ${player.games} games
+ ${player.wins} wins
+ ${rate}% win rate
+ ${player.xp} XP
+ ${player.coins} coins
+ ${player.winStreak} win streak
+ Bästa streak: ${player.bestWinStreak}
 ⭐ Level ${level()}`;
 
 }
@@ -4497,7 +4568,7 @@ QUESTS
 .map(x=>x.title)
 .join(", ");
 
-return `Du har klarat ${completed}/${QUESTS.length} quests. Aktiva exempel: ${active||"alla klara 😎"}. Kolla STATS för detaljer.`;
+return `Du har klarat ${completed}/${QUESTS.length} quests. Aktiva exempel: ${active||"alla klara "}. Kolla STATS för detaljer.`;
 
 }
 
@@ -4508,7 +4579,7 @@ if(has(
 "streak","serie",
 "win streak","winning streak"
 ))
-return `Din nuvarande win streak är ${player.winStreak}. Din bästa är ${player.bestWinStreak}. Keep cooking 🔥`;
+return `Din nuvarande win streak är ${player.winStreak}. Din bästa är ${player.bestWinStreak}. Keep cooking `;
 
 
 /* NAVIGATION */
@@ -4558,14 +4629,14 @@ if(has(
 "w","dub","win","vann",
 "vinst","jag vann","we won"
 ))
-return "W 😎🔥 Snyggt. Kolla din streak och XP i STATS.";
+return "W  Snyggt. Kolla din streak och XP i STATS.";
 
 if(has(
 "l","loss","lost",
 "förlora","förlorade",
 "förlust","rip"
 ))
-return "Aj 😭. Ingen fara — nästa game kan bli bättre. Din streak påverkas om du förlorar.";
+return "Aj . Ingen fara — nästa game kan bli bättre. Din streak påverkas om du förlorar.";
 
 
 /* CONFUSION */
@@ -4579,7 +4650,7 @@ if(has(
 "i dont know",
 "dont understand"
 ))
-return "Lugnt 😭. Säg bara vilket spel eller vilken del du inte fattar, så förklarar jag det enklare.";
+return "Lugnt . Säg bara vilket spel eller vilken del du inte fattar, så förklarar jag det enklare.";
 
 
 /* AI SMART */
@@ -4622,7 +4693,7 @@ if(has(
 "tråkigt","boring",
 "uttråkad","bored"
 ))
-return "Kör ett random game 😭 eller försök slå din bästa win streak.";
+return "Kör ett random game  eller försök slå din bästa win streak.";
 
 
 /* GAME RECOMMENDATION WITHOUT RANKING */
@@ -4639,10 +4710,10 @@ return "Snabbt kortkaos: War. Gissa: Higher/Lower. Tänk: Memory eller Dam. Mot 
 /* CASUAL FALLBACKS */
 
 if(casual&&swedish)
-return "Bro 😭 jag hänger med, men jag behöver lite mer context. Fråga om ett game, XP, stats, quests eller vanlig knowledge.";
+return "Bro  jag hänger med, men jag behöver lite mer context. Fråga om ett game, XP, stats, quests eller vanlig knowledge.";
 
 if(casual)
-return "I got you 😭. Give me a little more context and I'll try to help.";
+return "I got you . Give me a little more context and I'll try to help.";
 
 if(swedish)
 return "Jag är inte helt säker på vad du menar än. Fråga om SpinLab, ett spel, XP, stats, quests eller vanlig kunskap så försöker jag hjälpa dig.";
@@ -4680,29 +4751,695 @@ spinlabAI(text),
 "ai"
 );
 
-},500);
+},0);
 
 }
 
 chatSend.onclick=sendChat;
 
-chatInput.addEventListener("keydown",e=>{
 
-if(e.key==="Enter"){
 
-e.preventDefault();
 
-sendChat();
-
+(function(){
+/* SPINLAB CARD ARCADE UPGRADE */
+const oldFinish=finish;
+function ensureCardGamePage(id,title){
+  if(!GAME_PAGES[id]){
+    const sec=document.createElement('section');
+    sec.id=id+'Page'; sec.className='page game-page';
+    sec.innerHTML=`<button class="back-btn" onclick="showPage('arcade')">← BACK</button><h2>${title}</h2><div id="stage-${id}" class="game-stage"></div>`;
+    document.querySelector('main').appendChild(sec);
+    GAME_PAGES[id]=sec.id; GAME_STAGES[id]='stage-'+id;
+  }
 }
+['freecell','hearts','speed'].forEach((id,i)=>ensureCardGamePage(id,['FREECELL','HEARTS','SPEED'][i]));
 
-});
+function addArcadeCard(id,icon,title,desc,group){
+ const grids=[...document.querySelectorAll('#arcade .cards-grid')];
+ const grid=group===1?grids[1]:grids[0]; if(!grid||grid.querySelector('[data-game="'+id+'"]'))return;
+ const d=document.createElement('div'); d.className='game-card'; d.dataset.game=id; d.onclick=()=>openGame(id);
+ d.innerHTML=`<div class="game-icon">${icon}</div><h3>${title}</h3><p>${desc}</p>`; grid.appendChild(d);
+}
+addArcadeCard('freecell','','FreeCell','Every card is visible. Plan your moves and build all four foundations.');
+addArcadeCard('hearts','','Hearts','Avoid hearts and the Queen of Spades. Take the fewest points.');
+addArcadeCard('speed','','Speed','Fast real-time-style card race against the AI. Play cards one rank higher or lower.');
 
+const extraStyle=document.createElement('style');
+extraStyle.textContent=`
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,234,255,.18)}
+.tableau,.foundations,.freecells,.poker-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.tableau{align-items:flex-start}.sol-col{width:90px;min-height:300px;padding:6px;border:1px dashed rgba(255,255,255,.12);border-radius:10px;background:rgba(255,255,255,.025)}
+.sol-col .card{margin-bottom:-72px;position:relative;cursor:pointer}.sol-col .card:last-child{margin-bottom:0}.sol-col .card.selected{outline:3px solid #00ffcc;transform:translateY(-6px)}
+.slot{width:70px;height:100px;border:1px dashed rgba(0,234,255,.3);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#555;cursor:pointer}
+.small-card{width:58px;height:82px;font-size:18px}.card.disabled{opacity:.4}.selected-card{outline:3px solid #ff4fd8;transform:translateY(-5px)}
+.freecell-wrap{display:flex;flex-direction:column;gap:18px}.freecell-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.fc-col{width:70px;min-height:280px}.fc-col .card{margin-bottom:-72px;position:relative;cursor:pointer}.fc-col .card:last-child{margin-bottom:0}
+.heart-score{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:700px;width:100%}.score-box{padding:10px;border:1px solid rgba(255,255,255,.08);border-radius:10px;background:rgba(255,255,255,.03)}
+.game-status{padding:10px 14px;border-radius:10px;background:rgba(0,234,255,.05);border:1px solid rgba(0,234,255,.12);color:#bff}
+.poker-choice{cursor:pointer}.poker-choice.selected-card{box-shadow:0 0 25px rgba(255,79,216,.35)}
+`;document.head.appendChild(extraStyle);
+
+function rank(c){return c.rank==='A'?14:c.rank==='K'?13:c.rank==='Q'?12:c.rank==='J'?11:Number(c.rank)}
+function red(c){return c.suit===''||c.suit===''}
+function isBlack(c){return !red(c)}
+function sameColor(a,b){return red(a)===red(b)}
+function canBuild(a,b){return rank(a)===rank(b)+1 && sameColor(a,b)===false}
+function canFoundation(card, pile){ if(!pile.length)return card.rank==='A'; return card.suit===pile[0].suit && rank(card)===rank(pile[pile.length-1])+1; }
+function show(stage,msg){const e=stage.querySelector('.game-status');if(e)e.textContent=msg}
+function suitSymbol(s){return s}
+
+/* BETTER BLACKJACK */
+GAME_REGISTRY.blackjack={start(stage){
+ let deck=shuffle(createDeck()),playerHand=[deck.pop(),deck.pop()],dealerHand=[deck.pop(),deck.pop()],ended=false,doubled=false;
+ function render(reveal=false){stage.innerHTML=`<div class="game-center"><div class="game-status">Dealer: ${reveal?handValue(dealerHand):'?'} </div><div class="cards">${reveal?dealerHand.map(cardHTML).join(''):cardHTML(dealerHand[0])+cardHTML(dealerHand[1],true)}</div><div class="game-info">You: ${handValue(playerHand)}</div><div class="cards">${playerHand.map(cardHTML).join('')}</div><div id="bjResult" class="result"></div><div class="game-actions"><button id="bjHit" class="action-btn">HIT</button><button id="bjStand" class="action-btn">STAND</button><button id="bjDouble" class="action-btn">DOUBLE</button><button id="bjNew" class="action-btn">NEW GAME</button></div></div>`;
+  const hit=document.getElementById('bjHit'),st=document.getElementById('bjStand'),dbl=document.getElementById('bjDouble');
+  hit.onclick=()=>{if(ended)return;playerHand.push(deck.pop());if(handValue(playerHand)>=21)end();else render()};st.onclick=end;dbl.onclick=()=>{if(ended||playerHand.length!==2)return;doubled=true;playerHand.push(deck.pop());if(handValue(playerHand)<22)end();else end()};
+ }
+ function end(){if(ended)return;ended=true;while(handValue(dealerHand)<17)dealerHand.push(deck.pop());render(true);const p=handValue(playerHand),d=handValue(dealerHand),e=document.getElementById('bjResult');if(p>21){e.textContent='BUST — YOU LOSE';finish('lose',doubled?15:10)}else if(p===21&&playerHand.length===2&&!(d===21&&dealerHand.length===2)){e.textContent='BLACKJACK!';finish('win',doubled?80:60)}else if(d>21||p>d){e.textContent='YOU WIN!';finish('win',doubled?60:35)}else if(p===d){e.textContent='PUSH — DRAW';finish('draw',15)}else{e.textContent='DEALER WINS';finish('lose',10)}}
+ render();
+}};
+
+/* REAL KLONDIKE */
+GAME_REGISTRY.solitaire={start(stage){
+ let deck=shuffle(createDeck()),tableau=Array.from({length:7},()=>[]),hidden=Array.from({length:7},()=>[]),found={"":[],"":[],"":[],"":[]},stock=[],waste=[],selected=null,moves=0;
+ for(let i=0;i<7;i++)for(let j=0;j<=i;j++){const c=deck.pop();if(j===i)tableau[i].push(c);else hidden[i].push(c)}
+ stock=deck;
+ function visibleCol(i){return tableau[i]}
+ function render(){stage.innerHTML=`<div class="game-center"><div class="game-status">Moves: ${moves} · Stock: ${stock.length} · Waste: ${waste.length}</div><div class="freecell-row"><div class="slot" id="solStock">${stock.length?'ϟ':'↻'}</div><div class="slot" id="solWaste">${waste.length?cardHTML(waste[waste.length-1]):'WASTE'}</div><div style="width:30px"></div>${['','','',''].map(s=>`<div class="slot" id="f-${s}">${found[s].length?cardHTML(found[s][found[s].length-1]):s}</div>`).join('')}</div><div class="tableau">${tableau.map((col,i)=>`<div class="sol-col" data-col="${i}">${hidden[i].map(()=>cardHTML({},true)).join('')}${col.map((c,j)=>`<div class="${'card '+(red(c)?'red ':'')+(selected&&selected.col===i&&selected.index===j?'selected':'')}" data-c="${i}-${j}">${c.rank}${c.suit}</div>`).join('')||'<div class="slot">A</div>'}</div>`).join('')}</div><div class="game-actions"><button id="solNew" class="action-btn">NEW GAME</button><button id="solUndo" class="action-btn">UNDO</button></div><div class="game-status" id="solMsg">Click a card, then click its destination.</div></div>`;
+  document.getElementById('solStock').onclick=()=>{if(stock.length)waste.push(stock.pop());else{stock=waste.reverse();waste=[]}moves++;render()};
+  document.getElementById('solWaste').onclick=()=>{if(waste.length)selected={type:'waste',card:waste[waste.length-1]};render()};
+  ['','','',''].forEach(s=>document.getElementById('f-'+s).onclick=()=>{if(!selected)return;const c=selected.card;if(c&&c.suit===s&&canFoundation(c,found[s])){removeSelected();found[s].push(c);moves++;selected=null;checkWin();render()}});
+  stage.querySelectorAll('[data-c]').forEach(el=>el.onclick=()=>clickTableau(el));
+  document.getElementById('solNew').onclick=()=>GAME_REGISTRY.solitaire.start(stage);document.getElementById('solUndo').onclick=()=>show(stage,'Undo is available in the full game engine for future moves.');
+ }
+ function removeSelected(){if(selected.type==='waste')waste.pop();else tableau[selected.col].splice(selected.index,1)}
+ function reveal(col){if(!tableau[col].length&&hidden[col].length)tableau[col].push(hidden[col].pop())}
+ function clickTableau(el){const [ci,ji]=el.dataset.c.split('-').map(Number),col=tableau[ci],c=col[ji];if(!selected){selected={type:'tableau',col:ci,index:ji,card:c};render();return} if(selected.type==='tableau'&&selected.col===ci&&selected.index===ji){selected=null;render();return} if(selected.card&&canBuild(c,selected.card)===false&&selected.card.rank!=='K'){show(stage,'That card cannot be placed there.');return} const moving=selected.card;if(canBuild(c,moving)||(!col.length&&moving.rank==='K')){if(selected.type==='waste'){waste.pop();col.push(moving)}else{const src=tableau[selected.col];const seq=src.splice(selected.index);col.push(...seq);reveal(selected.col)}moves++;selected=null;checkWin();render()}else{show(stage,'Build downward with alternating colors.');}}
+ function checkWin(){if(Object.values(found).reduce((n,a)=>n+a.length,0)===52){finish('win',100);show(stage,'SOLITAIRE COMPLETE!')}}
+ render();
+}};
+
+/* FREECELL */
+GAME_REGISTRY.freecell={start(stage){
+ let deck=shuffle(createDeck()),cols=Array.from({length:8},()=>[]),cells=[null,null,null,null],found={"":[],"":[],"":[],"":[]},selected=null,moves=0;
+ deck.forEach((c,i)=>cols[i%8].push(c));
+ function maxSeq(){let empty=cells.filter(Boolean=>false).length;return 1<<cells.filter(x=>x===null).length}
+ function render(){stage.innerHTML=`<div class="game-center freecell-wrap"><div class="game-status">Moves: ${moves} · Free cells: ${cells.filter(Boolean).length}/4</div><div class="freecell-row"><div class="freecell-row">${cells.map((c,i)=>`<div class="slot" id="fc-cell-${i}">${c?cardHTML(c):'FREE'}</div>`).join('')}</div><div style="width:30px"></div>${['','','',''].map(s=>`<div class="slot" id="fc-f-${s}">${found[s].length?cardHTML(found[s][found[s].length-1]):s}</div>`).join('')}</div><div class="tableau">${cols.map((col,i)=>`<div class="fc-col" data-col="${i}">${col.map((c,j)=>`<div class="card ${red(c)?'red ':''}${selected&&selected.col===i&&selected.index===j?'selected':''}" data-fc="${i}-${j}">${c.rank}${c.suit}</div>`).join('')||'<div class="slot">EMPTY</div>'}</div>`).join('')}</div><div class="game-actions"><button id="fcNew" class="action-btn">NEW GAME</button></div><div class="game-status" id="fcMsg">Move one card at a time. Alternate colors downward.</div></div>`;
+  stage.querySelectorAll('[data-fc]').forEach(e=>e.onclick=()=>clickCol(e));cells.forEach((c,i)=>document.getElementById('fc-cell-'+i).onclick=()=>{if(selected&&cells[i]===null){moveSelectedToCell(i);}});['','','',''].forEach(s=>document.getElementById('fc-f-'+s).onclick=()=>{if(selected&&selected.card.suit===s&&canFoundation(selected.card,found[s])){removeSelected();found[s].push(selected.card);selected=null;moves++;check();render()}});document.getElementById('fcNew').onclick=()=>GAME_REGISTRY.freecell.start(stage);
+ }
+ function removeSelected(){cols[selected.col].splice(selected.index,1)}function moveSelectedToCell(i){cells[i]=selected.card;removeSelected();selected=null;moves++;check();render()}
+ function clickCol(e){const [ci,ji]=e.dataset.fc.split('-').map(Number),c=cols[ci][ji];if(!selected){selected={col:ci,index:ji,card:c};render();return}if(selected.col===ci&&selected.index===ji){selected=null;render();return}if(canBuild(c,selected.card)){cols[ci].push(selected.card);removeSelected();selected=null;moves++;check();render()}else if(!cols[ci].length){cols[ci].push(selected.card);removeSelected();selected=null;moves++;check();render()}else show(stage,'Only alternating-color descending moves are allowed.');}
+ function check(){if(Object.values(found).reduce((n,a)=>n+a.length,0)===52){finish('win',120);show(stage,'FREECELL COMPLETE!')}}
+ render();
+}};
+
+/* 5 CARD DRAW POKER */
+GAME_REGISTRY.poker={start(stage){
+ let deck=shuffle(createDeck()),player=Array.from({length:5},()=>deck.pop()),ai=Array.from({length:5},()=>deck.pop()),phase='draw',selected=new Set();
+ function evaluate(h){const v=h.map(rank).sort((a,b)=>b-a),flush=h.every(c=>c.suit===h[0].suit),uniq=[...new Set(v)],straight=uniq.length===5&&(uniq[0]-uniq[4]===4||uniq.join(',')==='14,5,4,3,2');const cnt={};v.forEach(x=>cnt[x]=(cnt[x]||0)+1);const groups=Object.entries(cnt).map(([x,n])=>[n,+x]).sort((a,b)=>b[0]-a[0]||b[1]-a[1]);if(straight&&flush)return [8,...v];if(groups[0][0]===4)return [7,groups[0][1],groups[1][1]];if(groups[0][0]===3&&groups[1]?.[0]===2)return [6,groups[0][1],groups[1][1]];if(flush)return [5,...v];if(straight)return [4,...v];if(groups[0][0]===3)return [3,groups[0][1],...v.filter(x=>x!==groups[0][1])];if(groups[0][0]===2&&groups[1]?.[0]===2)return [2,Math.max(groups[0][1],groups[1][1]),Math.min(groups[0][1],groups[1][1]),groups[2][1]];if(groups[0][0]===2)return [1,groups[0][1],...v.filter(x=>x!==groups[0][1])];return [0,...v]}
+ function cmp(a,b){for(let i=0;i<Math.max(a.length,b.length);i++){if((a[i]||0)!==(b[i]||0))return (a[i]||0)-(b[i]||0)}return 0}
+ function label(x){return ['High Card','Pair','Two Pair','Three of a Kind','Straight','Flush','Full House','Four of a Kind','Straight Flush'][x[0]]}
+ function render(){stage.innerHTML=`<div class="game-center"><div class="game-status">5-Card Draw · ${phase==='draw'?'Select up to 3 cards to discard, then DRAW.':'Showdown'}</div><div class="game-info">AI</div><div class="cards">${phase==='draw'?ai.map(()=>cardHTML({},true)).join(''):ai.map(cardHTML).join('')}</div><div class="game-info">YOU</div><div class="cards">${player.map((c,i)=>`<div class="poker-choice ${selected.has(i)?'selected-card':''}" data-p="${i}">${cardHTML(c)}</div>`).join('')}</div><div id="pokerResult" class="result"></div><div class="game-actions">${phase==='draw'?'<button id="drawPoker" class="action-btn">DRAW</button>':'<button id="againPoker" class="action-btn">NEW HAND</button>'}</div></div>`;stage.querySelectorAll('[data-p]').forEach(e=>e.onclick=()=>{if(phase==='draw'){const i=+e.dataset.p;if(selected.has(i))selected.delete(i);else if(selected.size<3)selected.add(i);render()}});if(document.getElementById('drawPoker'))document.getElementById('drawPoker').onclick=draw;if(document.getElementById('againPoker'))document.getElementById('againPoker').onclick=()=>GAME_REGISTRY.poker.start(stage)}
+ function draw(){[...selected].sort((a,b)=>b-a).forEach(i=>player.splice(i,1));while(player.length<5)player.push(deck.pop());const counts={};ai.forEach(c=>counts[rank(c)]=(counts[rank(c)]||0)+1);let keep=ai.filter(c=>counts[rank(c)]>=2);while(keep.length<3)keep.push(ai.find(c=>!keep.includes(c)));const kept=[...new Set(keep)].slice(0,5);ai=kept;while(ai.length<5)ai.push(deck.pop());phase='show';render();const a=evaluate(ai),p=evaluate(player),r=cmp(p,a),e=document.getElementById('pokerResult');e.textContent=`You: ${label(p)} · AI: ${label(a)} · ${r>0?'YOU WIN!':r<0?'AI WINS':'DRAW'}`;if(r>0)finish('win',60);else if(r<0)finish('lose',10);else finish('draw',20)}
+ render();
+}};
+
+/* CRAZY EIGHTS */
+GAME_REGISTRY.crazy8s={start(stage){
+ let deck=shuffle(createDeck()),player=[],ai=[],pile=[],currentSuit='',turn='player',ended=false;for(let i=0;i<7;i++){player.push(deck.pop());ai.push(deck.pop())}pile.push(deck.pop());currentSuit=pile[0].suit;
+ function playable(c){return c.rank==='8'||c.suit===currentSuit||c.rank===pile[pile.length-1].rank}
+ function drawTo(hand){if(!deck.length){const top=pile.pop();deck=shuffle(pile.splice(0));pile=[top]}if(deck.length)hand.push(deck.pop())}
+ function render(){stage.innerHTML=`<div class="game-center"><div class="game-status">${turn==='player'?'YOUR TURN':'AI TURN'} · Suit: ${currentSuit} · Your cards: ${player.length} · AI cards: ${ai.length}</div><div class="cards">${cardHTML(pile[pile.length-1])}</div><div class="cards">${ai.map(()=>cardHTML({},true)).join('')}</div><div class="cards">${player.map((c,i)=>`<div data-ce="${i}" class="${playable(c)?'':'disabled'}">${cardHTML(c)}</div>`).join('')}</div><div id="ceResult" class="result"></div><div class="game-actions"><button id="ceDraw" class="action-btn">DRAW</button><button id="ceNew" class="action-btn">NEW GAME</button></div></div>`;stage.querySelectorAll('[data-ce]').forEach(e=>e.onclick=()=>play(+e.dataset.ce));document.getElementById('ceDraw').onclick=()=>{if(turn!=='player'||ended)return;drawTo(player);turn='ai';render();setTimeout(aiTurn,160)};document.getElementById('ceNew').onclick=()=>GAME_REGISTRY.crazy8s.start(stage)}
+ function play(i){if(turn!=='player'||ended)return;const c=player[i];if(!playable(c)){show(stage,'You must match the suit, rank, or play an 8.');return}player.splice(i,1);pile.push(c);if(c.rank==='8')currentSuit=['','','',''][Math.floor(Math.random()*4)];else currentSuit=c.suit;if(!player.length){ended=true;finish('win',55);return}turn='ai';render();setTimeout(aiTurn,160)}
+ function aiTurn(){if(ended)return;let i=ai.findIndex(playable);if(i<0){drawTo(ai);i=ai.findIndex(playable)}if(i>=0){const c=ai.splice(i,1)[0];pile.push(c);currentSuit=c.rank==='8'?['','','',''][Math.floor(Math.random()*4)]:c.suit;if(!ai.length){ended=true;finish('lose',10);return}}turn='player';render()}
+ render();
+}};
+
+/* HEARTS */
+GAME_REGISTRY.hearts={start(stage){
+ let deck=shuffle(createDeck()),hands=[[],[],[],[]],scores=[0,0,0,0],tricks=[[],[],[],[]],leader=0,round=1,ended=false;for(let i=0;i<52;i++)hands[i%4].push(deck[i]);
+ function val(c){return rank(c)}
+ function legal(hand,lead){const follow=lead?hand.filter(c=>c.suit===lead):[];return follow.length?follow:hand}
+ function render(){stage.innerHTML=`<div class="game-center"><div class="game-status">Round ${round} · Your score: ${scores[0]} · Lowest score wins</div><div class="heart-score">${scores.map((s,i)=>`<div class="score-box">${i===0?'YOU':i===1?'AI 1':i===2?'AI 2':'AI 3'}<br><b>${s}</b></div>`).join('')}</div><div class="cards">${tricks.map(c=>c?cardHTML(c):'').join('')}</div><div class="game-info">Your hand</div><div class="cards">${hands[0].map((c,i)=>`<div data-h="${i}" class="${!legal(hands[0],tricks[0]?.suit)[0]?'':'disabled'}">${cardHTML(c)}</div>`).join('')}</div><div id="heartResult" class="result">Play a card. Hearts are worth 1 point; Queen of Spades is 13.</div></div>`;stage.querySelectorAll('[data-h]').forEach(e=>e.onclick=()=>play(+e.dataset.h))}
+ function play(i){if(ended)return;const lead=tricks.find(Boolean)?.suit||null,c=hands[0][i],allowed=legal(hands[0],lead);if(!allowed.includes(c)){show(stage,'You must follow suit when possible.');return}hands[0].splice(i,1);tricks[0]=c;for(let p=1;p<4;p++){const a=legal(hands[p],lead||c.suit);const chosen=a.sort((x,y)=>val(x)-val(y))[0];hands[p].splice(hands[p].indexOf(chosen),1);tricks[p]=chosen}const leadSuit=lead||c.suit;let winner=0,best=-1;for(let p=0;p<4;p++)if(tricks[p]&&tricks[p].suit===leadSuit&&val(tricks[p])>best){best=val(tricks[p]);winner=p}let pts=tricks.reduce((n,x)=>n+(x.suit===''?1:0)+(x.suit===''&&x.rank==='Q'?13:0),0);scores[winner]+=pts;tricks=[[],[],[],[]];if(hands[0].length===0){if(scores.some(s=>s>=50)){ended=true;const you=scores[0],min=Math.min(...scores);if(you===min)finish('win',70);else finish('lose',10);show(stage,you===min?'YOU WIN HEARTS!':'ROUND OVER');}else{round++;for(let i=0;i<52;i++){}let d=shuffle(createDeck());hands=[[],[],[],[]];for(let i=0;i<52;i++)hands[i%4].push(d[i]);render()}}else render()}
+ render();
+}};
+
+/* SPEED */
+GAME_REGISTRY.speed={start(stage){
+ let deck=shuffle(createDeck()),player=deck.splice(0,20),ai=deck.splice(0,20),p=deck.pop(),a=deck.pop(),ended=false;
+ function can(c,top){return Math.abs(rank(c)-rank(top))===1||c.rank==='A'||top.rank==='A'}
+ function render(){stage.innerHTML=`<div class="game-center"><div class="game-status">Speed · Your cards: ${player.length} · AI cards: ${ai.length}</div><div class="cards">${cardHTML(p)} ${cardHTML(a)}</div><div class="game-actions">${player.slice(-8).map((c,i)=>`<button class="action-btn" data-sp="${player.length-8+i}">${c.rank}${c.suit}</button>`).join('')}</div><div id="speedResult" class="result">Play a card one rank higher or lower than either center card.</div></div>`;stage.querySelectorAll('[data-sp]').forEach(e=>e.onclick=()=>play(+e.dataset.sp));}
+ function play(i){if(ended)return;const c=player[i];if(!can(c,p)&&!can(c,a)){show(stage,'That card cannot be played right now.');return}player.splice(i,1);if(can(c,p))p=c;else a=c;if(!player.length){ended=true;finish('win',65);show(stage,'YOU WIN SPEED!');return}if(ai.length&&can(ai[ai.length-1],p))p=ai.pop();else if(ai.length&&can(ai[ai.length-1],a))a=ai.pop();if(!ai.length){ended=true;finish('lose',10);return}render()}
+ render();
+}};
+
+/* BETTER GO FISH: full rank books */
+GAME_REGISTRY.gofish={start(stage){
+ let deck=shuffle(createDeck()),player=[],ai=[],books=[0,0],turn=0,ended=false;for(let i=0;i<7;i++){player.push(deck.pop());ai.push(deck.pop())}
+ function ranksIn(h){return [...new Set(h.map(c=>c.rank))]}
+ function removeBooks(h,p){const out=[];const counts={};h.forEach(c=>counts[c.rank]=(counts[c.rank]||0)+1);Object.keys(counts).forEach(r=>{if(counts[r]===4){h=h.filter(c=>c.rank!==r);books[p]++}});return h}
+ player=removeBooks(player,0);ai=removeBooks(ai,1);
+ function draw(h){if(deck.length)h.push(deck.pop())}
+ function render(){stage.innerHTML=`<div class="game-center"><div class="game-status">Your books: ${books[0]} · AI books: ${books[1]} · ${turn===0?'YOUR TURN':'AI TURN'}</div><div class="cards">${ai.map(()=>cardHTML({},true)).join('')}</div><div class="game-info">Your hand</div><div class="rank-buttons">${ranksIn(player).map(r=>`<button class="rank-btn" data-gf="${r}">${r}</button>`).join('')}</div><div class="cards">${player.map(cardHTML).join('')}</div><div id="gfResult" class="result">Ask the AI for a rank you have.</div></div>`;stage.querySelectorAll('[data-gf]').forEach(e=>e.onclick=()=>ask(e.dataset.gf))}
+ function ask(r){if(turn!==0||ended)return;const got=ai.filter(c=>c.rank===r);if(!player.some(c=>c.rank===r)){show(stage,'You can only ask for a rank you already hold.');return}if(got.length){player.push(...got);ai=ai.filter(c=>c.rank!==r);player=removeBooks(player,0)}else{draw(player);turn=1;render();setTimeout(aiTurn,150);return}if(!ai.length){end();return}render()}
+ function aiTurn(){if(ended)return;const choices=ranksIn(ai),r=choices[Math.floor(Math.random()*choices.length)],got=player.filter(c=>c.rank===r);if(got.length){ai.push(...got);player=player.filter(c=>c.rank!==r);ai=removeBooks(ai,1);turn=1}else{draw(ai);turn=0}if(!player.length||!ai.length)end();else render()}
+ function end(){ended=true;player=removeBooks(player,0);ai=removeBooks(ai,1);if(books[0]>books[1])finish('win',55);else if(books[0]===books[1])finish('draw',20);else finish('lose',10);render()}
+ render();
+}};
+
+/* Keep registry mappings */
+['freecell','hearts','speed'].forEach(id=>{GAME_PAGES[id]=id+'Page';GAME_STAGES[id]='stage-'+id});
+
+})();
+
+/* SPINLAB PREMIUM ARCADE EXPANSION */
+(function(){
+  const root=document.querySelector('main');
+  if(!root) return;
+  const addPage=(id,title,icon='🃏')=>{
+    if(document.getElementById(id+'Page')) return;
+    const s=document.createElement('section');
+    s.id=id+'Page'; s.className='page game-page';
+    s.innerHTML=`<button class="back-btn" onclick="showPage('arcade')">← BACK</button><h2>${icon} ${title}</h2><div id="stage-${id}" class="game-stage"></div>`;
+    root.appendChild(s); GAME_PAGES[id]=s.id; GAME_STAGES[id]='stage-'+id;
+  };
+  ['spider','pyramid','ginrummy','holdem','thirtyone','flappy'].forEach((id,i)=>addPage(id,['SPIDER SOLITAIRE','PYRAMID','GIN RUMMY','TEXAS HOLD’EM','31 / SCAT','FLAPPY BIRD'][i],['','','','','31',''][i]));
+
+  function addCard(id,icon,title,desc){
+    const grids=[...document.querySelectorAll('#arcade .cards-grid')];
+    const grid=grids[0]||document.querySelector('#arcade');
+    if(!grid||grid.querySelector('[data-game="'+id+'"]')) return;
+    const d=document.createElement('div'); d.className='game-card'; d.dataset.game=id; d.onclick=()=>openGame(id);
+    d.innerHTML=`<div class="game-icon">${icon}</div><h3>${title}</h3><p>${desc}</p>`; grid.appendChild(d);
+  }
+  addCard('spider','','Spider Solitaire','Build complete descending suit sequences from King to Ace.');
+  addCard('pyramid','','Pyramid','Pair cards that add to 13 and clear the pyramid.');
+  addCard('ginrummy','','Gin Rummy','Build sets and runs, draw and discard, and beat the AI.');
+  addCard('holdem','','Texas Hold’em','Real community-card poker: pre-flop, flop, turn, river and showdown.');
+  addCard('thirtyone','31','31 / Scat','Draw and discard to make the highest score in one suit.');
+  addCard('flappy','','Flappy Bird','Polished arcade mode with score, best score, particles and responsive controls.');
+
+  const style=document.createElement('style'); style.textContent=`
+  .premium-wrap{width:min(1100px,100%);margin:auto;display:flex;flex-direction:column;gap:16px;align-items:center}
+  .premium-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;width:100%;padding:12px 16px;border:1px solid rgba(0,217,255,.18);border-radius:16px;background:rgba(10,15,35,.72);backdrop-filter:blur(12px)}
+  .premium-stat{font-weight:800;letter-spacing:.04em}.premium-stat span{color:#00d9ff}.premium-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .premium-board{width:100%;padding:18px;border-radius:18px;border:1px solid rgba(255,79,216,.16);background:linear-gradient(145deg,rgba(8,12,30,.95),rgba(20,8,30,.85));box-shadow:0 20px 60px rgba(0,0,0,.25)}
+  .card-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:flex-start}.premium-card{position:relative;cursor:pointer;transition:.16s transform,.16s box-shadow,.16s opacity}.premium-card:hover{transform:translateY(-7px)}.premium-card.sel{outline:3px solid #ff4fd8;box-shadow:0 0 24px rgba(255,79,216,.3);transform:translateY(-9px)}
+  .spider-cols{display:grid;grid-template-columns:repeat(10,minmax(52px,1fr));gap:8px;overflow:auto;padding:8px}.spider-col{min-height:310px;border:1px dashed rgba(255,255,255,.1);border-radius:12px;padding:5px;background:rgba(255,255,255,.025)}.spider-col .card{margin-bottom:-67px;position:relative}.spider-col .card:last-child{margin-bottom:0}.spider-col .card.clickable{cursor:pointer}
+  .pyramid{display:flex;flex-direction:column;gap:5px;align-items:center}.pyr-row{display:flex;gap:5px}.pyr-row .card{margin:0 -2px}.pyr-stock{display:flex;gap:10px;justify-content:center;margin-top:16px}
+  .meld-area{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%}.meld-box{padding:14px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.025)}
+  .community{display:flex;gap:9px;justify-content:center;min-height:105px;align-items:center}.street{font-size:12px;color:#9aa9c7;text-align:center;margin-bottom:6px;letter-spacing:.12em}.chips{font-weight:900;color:#ffcf5c}.holdem-seat{padding:12px;border-radius:12px;background:rgba(0,217,255,.05);border:1px solid rgba(0,217,255,.12);text-align:center}
+  #flappyCanvas{display:block;width:min(900px,100%);height:auto;aspect-ratio:16/9;border-radius:20px;border:1px solid rgba(0,217,255,.2);box-shadow:0 0 45px rgba(0,217,255,.12),0 25px 80px rgba(0,0,0,.4);touch-action:none;background:#081329}
+  .flappy-help{text-align:center;color:#a9b6d1;font-size:13px}.flappy-title{font-size:28px;font-weight:900;letter-spacing:.04em}.flappy-score{font-size:20px;font-weight:900}
+  @media(max-width:760px){.spider-cols{grid-template-columns:repeat(10,66px)}.meld-area{grid-template-columns:1fr}.premium-board{padding:10px}}
+  `; document.head.appendChild(style);
+
+  const R=c=>c.rank==='A'?14:c.rank==='K'?13:c.rank==='Q'?12:c.rank==='J'?11:Number(c.rank);
+  const red=c=>c.suit===''||c.suit==='';
+  const color=c=>red(c)?'red':'black';
+  const clone=c=>({rank:c.rank,suit:c.suit});
+  const deck52=()=>shuffle(createDeck());
+  const back=()=>cardHTML({},true);
+  const msg=(stage,text)=>{const e=stage.querySelector('.premium-message');if(e)e.textContent=text};
+  const btn=(id,label)=>`<button id="${id}" class="action-btn">${label}</button>`;
+
+  /* SPIDER: one-suit mode is intentionally playable for a first-time player. */
+  GAME_REGISTRY.spider={start(stage){
+    let deck=deck52(), cols=Array.from({length:10},()=>[]), stock=[], selected=null, completed=0, moves=0, history=[];
+    deck=[...deck,...deck,...deck,...deck].map(clone); deck=shuffle(deck);
+    for(let i=0;i<54;i++) cols[i%10].push(deck.pop());
+    stock=deck;
+    const snapshot=()=>({cols:cols.map(c=>c.map(clone)),stock:stock.map(clone),completed,moves});
+    const restore=s=>{cols=s.cols.map(c=>c.map(clone));stock=s.stock.map(clone);completed=s.completed;moves=s.moves;selected=null;render()};
+    function save(){history.push(snapshot());if(history.length>50)history.shift()}
+    function seq(c,i){for(let j=i;j<c.length-1;j++)if(c[j].suit!==''||R(c[j])!==R(c[j+1])+1)return false;return true}
+    function validMove(c,i){return i>=0&&i<c.length-1?seq(c,i):true}
+    function render(){stage.innerHTML=`<div class="premium-wrap"><div class="premium-bar"><div class="premium-stat">SPIDER <span>${completed}/8</span> completed</div><div class="premium-stat">Moves <span>${moves}</span></div><div class="premium-actions">${btn('spNew','NEW GAME')}${btn('spUndo','UNDO')}</div></div><div class="premium-board"><div class="card-row" style="margin-bottom:14px"><div>${back()}</div><div class="premium-stat">Stock: <span>${stock.length}</span></div></div><div class="spider-cols">${cols.map((col,ci)=>`<div class="spider-col" data-col="${ci}">${col.map((c,i)=>`<div class="premium-card ${selected&&selected.c===ci&&selected.i===i?'sel':''}" data-sp="${ci}-${i}">${cardHTML(c)}</div>`).join('')||'<div class="slot">EMPTY</div>'}</div>`).join('')}</div><div class="premium-message game-status">Build same-suit descending sequences. Complete K→A to remove them.</div></div></div>`;
+      document.getElementById('spNew').onclick=()=>GAME_REGISTRY.spider.start(stage);document.getElementById('spUndo').onclick=()=>history.length?restore(history.pop()):msg(stage,'Nothing to undo.');
+      stage.querySelector('[data-col]')?.addEventListener('click',()=>{});
+      stage.querySelectorAll('[data-sp]').forEach(e=>e.onclick=()=>click(+e.dataset.sp.split('-')[0],+e.dataset.sp.split('-')[1]));
+      const stockEl=stage.querySelector('.premium-bar')?.previousElementSibling?.querySelector('.card-row'); if(stockEl)stockEl.onclick=deal;
+    }
+    function deal(){if(!stock.length)return msg(stage,'No stock left. Finish the tableau.');if(cols.some(c=>!c.length))return msg(stage,'Every column needs a card before dealing.');save();for(let i=0;i<10;i++)if(stock.length)cols[i].push(stock.pop());moves++;autoComplete();render()}
+    function click(ci,ii){const col=cols[ci],c=col[ii];if(!selected){if(validMove(col,ii))selected={c:ci,i:ii};else msg(stage,'That stack is not in descending same-suit order.');render();return} if(selected.c===ci&&selected.i===ii){selected=null;render();return}const src=cols[selected.c],moving=src.slice(selected.i);const dest=cols[ci];if(!moving.length)return;const top=dest[dest.length-1];if(!top||R(top)===R(moving[0])+1){save();src.splice(selected.i);dest.push(...moving);moves++;selected=null;autoComplete();render()}else msg(stage,'Place the stack on a card exactly one rank higher.');}
+    function autoComplete(){for(let i=0;i<10;i++){const c=cols[i];if(c.length>=13){const tail=c.slice(-13);if(tail[0].rank==='K'&&tail[12].rank==='A'&&tail.every((x,j)=>x.suit===''&&(j===0||R(x)===R(tail[j-1])-1))){save();cols[i].splice(-13);completed++;if(completed===8)finish('win',120)}}}}
+    render();
+  }};
+
+  /* PYRAMID */
+  GAME_REGISTRY.pyramid={start(stage){
+    let deck=deck52(),pyr=[],stock=[],waste=[],selected=null,moves=0,cleared=0;
+    for(let r=0;r<7;r++){pyr[r]=[];for(let i=0;i<=r;i++)pyr[r].push({...deck.pop(),removed:false})} stock=deck;
+    function active(r,i){if(pyr[r][i].removed)return false;if(r===6)return true;return pyr[r+1][i].removed&&pyr[r+1][i+1].removed}
+    function value(c){return c.rank==='A'?1:c.rank==='J'?11:c.rank==='Q'?12:c.rank==='K'?13:Number(c.rank)}
+    function pick(type,r,i){const c=type==='p'?pyr[r][i]:waste[waste.length-1];if(type==='p'&&!active(r,i))return msg(stage,'That card is still covered.');if(!selected){if(value(c)===13){if(type==='p')pyr[r][i].removed=true;else waste.pop();cleared++;moves++;selected=null;render();return}selected={type,r,i,c};render();return}const a=selected.c,b=c;if(a===b){selected=null;render();return}if(value(a)+value(b)===13){if(selected.type==='p')pyr[selected.r][selected.i].removed=true;else waste.pop();if(type==='p')pyr[r][i].removed=true;else waste.pop();cleared+=2;moves++;selected=null;render()}else{msg(stage,'Those two cards do not add up to 13.');selected=null;render()}}
+    function render(){stage.innerHTML=`<div class="premium-wrap"><div class="premium-bar"><div class="premium-stat">PYRAMID <span>${cleared}/28</span> cleared</div><div class="premium-stat">Moves <span>${moves}</span></div><div class="premium-actions">${btn('pyNew','NEW GAME')}</div></div><div class="premium-board"><div class="pyramid">${pyr.map((row,r)=>`<div class="pyr-row">${row.map((c,i)=>`<div data-pyr="${r}-${i}" class="premium-card ${selected&&selected.type==='p'&&selected.r===r&&selected.i===i?'sel':''}">${c.removed?'<div class="slot"></div>':cardHTML(c)}</div>`).join('')}</div>`).join('')}</div><div class="pyr-stock"><div data-stock class="premium-card">${stock.length?back():'EMPTY'}</div><div data-waste class="premium-card ${selected&&selected.type==='w'?'sel':''}">${waste.length?cardHTML(waste[waste.length-1]):'<div class="slot">WASTE</div>'}</div></div><div class="premium-message game-status">A + K = 13 · 2 + Q = 14? No — pair values must total exactly 13.</div></div></div>`;stage.querySelectorAll('[data-pyr]').forEach(e=>e.onclick=()=>{const [r,i]=e.dataset.pyr.split('-').map(Number);pick('p',r,i)});stage.querySelector('[data-stock]').onclick=()=>{if(stock.length){waste.push(stock.pop());render()}else{msg(stage,'The stock is empty.');}};stage.querySelector('[data-waste]').onclick=()=>{if(waste.length)pick('w',0,0)};document.getElementById('pyNew').onclick=()=>GAME_REGISTRY.pyramid.start(stage);if(cleared===28)finish('win',90)}
+    render();
+  }};
+
+  /* GIN RUMMY */
+  GAME_REGISTRY.ginrummy={start(stage){
+    let deck=deck52(),you=[],ai=[],discard=[],turn='you',ended=false,score=[0,0];for(let i=0;i<10;i++){you.push(deck.pop());ai.push(deck.pop())}discard.push(deck.pop());
+    const key=c=>c.rank+c.suit; const rankVal=c=>R(c);
+    function sort(h){return h.sort((a,b)=>rankVal(a)-rankVal(b)||a.suit.localeCompare(b.suit))}
+    function melds(h){const used=new Set(),sets=[];const byRank={};h.forEach(c=>(byRank[c.rank]??=[]).push(c));Object.values(byRank).forEach(a=>{if(a.length>=3)a.slice(0,3).forEach(c=>used.add(key(c)))&&sets.push(a.slice(0,3))});const bySuit={};h.forEach(c=>(bySuit[c.suit]??=[]).push(c));Object.values(bySuit).forEach(a=>{a.sort((x,y)=>rankVal(x)-rankVal(y));for(let i=0;i<a.length;i++){let run=[a[i]];while(i+1<a.length&&rankVal(a[i+1])===rankVal(run.at(-1))+1){run.push(a[++i])}if(run.length>=3)run.forEach(c=>used.add(key(c)))}});return used}
+    function deadwood(h){const u=melds(h);return h.filter(c=>!u.has(key(c))).reduce((n,c)=>n+Math.min(10,rankVal(c)),0)}
+    function draw(){if(turn!=='you'||ended)return;you.push(deck.pop());render()}
+    function discardYou(i){if(turn!=='you'||ended)return;discard.push(you.splice(i,1)[0]);turn='ai';render();setTimeout(aiTurn,170)}
+    function aiTurn(){if(ended)return;const top=discard.at(-1);if(top&&deadwood([...ai,top])<deadwood(ai))ai.push(discard.pop());else ai.push(deck.pop());const idx=ai.reduce((best,c,i)=>deadwood(ai.filter((_,j)=>j!==i))<deadwood(ai.filter((_,j)=>j!==best))?i:best,0);discard.push(ai.splice(idx,1)[0]);if(deadwood(ai)===0){ended=true;finish('lose',10);render();return}turn='you';render()}
+    function knock(){if(ended)return;const d=deadwood(you);if(d>10)return msg(stage,'You can knock only with 10 or fewer deadwood points.');ended=true;const ad=deadwood(ai);if(d===0){score[0]+=25+ad}else if(d<ad)score[0]+=ad-d;else score[1]+=25+d-ad;finish(d<=ad?'win':'lose',d<=ad?75:10);render()}
+    function render(){sort(you);sort(ai);stage.innerHTML=`<div class="premium-wrap"><div class="premium-bar"><div class="premium-stat">GIN RUMMY</div><div class="premium-stat">Deadwood: <span>${deadwood(you)}</span></div><div class="premium-stat">Score ${score[0]} - ${score[1]}</div><div class="premium-actions">${btn('ginKnock','KNOCK')}${btn('ginNew','NEW HAND')}</div></div><div class="premium-board"><div class="meld-area"><div class="meld-box"><b>AI · ${ai.length} cards</b><div class="card-row">${ai.map(()=>back()).join('')}</div></div><div class="meld-box"><b>Discard</b><div class="card-row">${cardHTML(discard.at(-1))}</div></div></div><div class="card-row" style="margin:16px 0"><div data-gdraw class="premium-card">${back()}</div><span class="premium-stat">DRAW</span></div><div class="meld-box"><b>YOUR HAND · ${deadwood(you)} deadwood</b><div class="card-row">${you.map((c,i)=>`<div class="premium-card" data-gin="${i}">${cardHTML(c)}</div>`).join('')}</div></div><div class="premium-message game-status">Draw a card, then click one card to discard. Make sets or same-suit runs.</div></div></div>`;document.getElementById('ginNew').onclick=()=>GAME_REGISTRY.ginrummy.start(stage);document.getElementById('ginKnock').onclick=knock;stage.querySelector('[data-gdraw]').onclick=draw;stage.querySelectorAll('[data-gin]').forEach(e=>e.onclick=()=>discardYou(+e.dataset.gin))}
+    render();
+  }};
+
+  /* TEXAS HOLD'EM */
+  GAME_REGISTRY.holdem={start(stage){
+    let deck,hero,ai,community,street,pot,bet,ended,heroChips,aiChips;
+    function reset(){deck=deck52();hero=[deck.pop(),deck.pop()];ai=[deck.pop(),deck.pop()];community=[];street=0;pot=30;bet=30;ended=false;heroChips=1000;aiChips=1000;render()}
+    function eval5(cards){const vals=cards.map(R).sort((a,b)=>b-a),flush=cards.every(c=>c.suit===cards[0].suit);let uniq=[...new Set(vals)],straight=false,high=vals[0];if(uniq.includes(14))uniq.push(1);for(let i=0;i<=uniq.length-5;i++){if(uniq[i]-uniq[i+4]===4){straight=true;high=uniq[i];break}}const cnt={};vals.forEach(v=>cnt[v]=(cnt[v]||0)+1);const groups=Object.entries(cnt).map(([v,n])=>[n,+v]).sort((a,b)=>b[0]-a[0]||b[1]-a[1]);if(straight&&flush)return[8,high];if(groups[0][0]===4)return[7,groups[0][1],groups[1][1]];if(groups[0][0]===3&&groups[1]?.[0]===2)return[6,groups[0][1],groups[1][1]];if(flush)return[5,...vals];if(straight)return[4,high];if(groups[0][0]===3)return[3,groups[0][1],...vals.filter(v=>v!==groups[0][1])];const pairs=groups.filter(g=>g[0]===2).map(g=>g[1]);if(pairs.length>=2)return[2,...pairs.slice(0,2),...vals.filter(v=>!pairs.slice(0,2).includes(v))];if(pairs.length===1)return[1,pairs[0],...vals.filter(v=>v!==pairs[0])];return[0,...vals]}
+    function best7(cards){let best=[-1];for(let a=0;a<cards.length;a++)for(let b=a+1;b<cards.length;b++)for(let c=b+1;c<cards.length;c++)for(let d=c+1;d<cards.length;d++)for(let e=d+1;e<cards.length;e++){const x=eval5([cards[a],cards[b],cards[c],cards[d],cards[e]]);let better=false,worse=false;for(let i=0;i<x.length;i++){const xv=x[i]||0,bv=best[i]||0;if(xv>bv){better=true;break}if(xv<bv){worse=true;break}}if(better&&!worse)best=x}return best}
+    const label=x=>['High Card','Pair','Two Pair','Three of a Kind','Straight','Flush','Full House','Four of a Kind','Straight Flush'][x[0]]||'High Card';
+    function advance(){if(street===0)community.push(deck.pop(),deck.pop(),deck.pop());else community.push(deck.pop());street++;if(street>=4)showdown();else{bet=0;render()}}
+    function fold(){if(ended)return;ended=true;finish('lose',5);msg(stage,'You folded. The AI wins the pot.');render()}
+    function call(){if(ended)return;pot+=20;bet+=20;aiChips-=20;heroChips-=20;advance()}
+    function raise(){if(ended)return;pot+=40;bet+=40;aiChips-=40;heroChips-=40;advance()}
+    function showdown(){ended=true;const h=best7([...hero,...community]),a=best7([...ai,...community]),cmp=h.join(',').localeCompare(a.join(','));const r=JSON.stringify(h)===JSON.stringify(a)?0:(h[0]!==a[0]?h[0]-a[0]:h.slice(1).reduce((s,v,i)=>s||v-(a[i]||0),0));if(r>0)finish('win',90);else if(r<0)finish('lose',10);else finish('draw',25);render()}
+    function render(){stage.innerHTML=`<div class="premium-wrap"><div class="premium-bar"><div class="premium-stat">TEXAS HOLD’EM</div><div class="premium-stat">Pot <span class="chips">${pot}</span></div><div class="premium-stat">Street <span>${['Pre-flop','Flop','Turn','River','Showdown'][street]}</span></div><div class="premium-actions">${btn('heFold','FOLD')}${btn('heCall','CALL 20')}${btn('heRaise','RAISE 40')}${btn('heNew','NEW HAND')}</div></div><div class="premium-board"><div class="holdem-seat">AI · ${street===4?'SHOWDOWN':'2 cards hidden'}</div><div class="card-row" style="margin:12px">${street===4?ai.map(cardHTML).join(''):ai.map(()=>back()).join('')}</div><div class="street">COMMUNITY CARDS</div><div class="community">${community.map(cardHTML).join('')||'<div class="slot">FLOP</div>'}</div><div class="card-row" style="margin:16px">${hero.map(cardHTML).join('')}</div><div class="holdem-seat">YOU · ${heroChips} chips</div><div class="premium-message game-status">${ended?'HAND OVER':'Call, raise or fold. The board advances after an action.'}</div></div></div>`;document.getElementById('heFold').onclick=fold;document.getElementById('heCall').onclick=call;document.getElementById('heRaise').onclick=raise;document.getElementById('heNew').onclick=reset}
+    reset();
+  }};
+
+  /* 31 / SCAT */
+  GAME_REGISTRY.thirtyone={start(stage){
+    let deck=deck52(),hand=[],discard=[],ai=[],aiDiscard,turn=0,round=1,ended=false;function val(c){return c.rank==='A'?11:Math.min(10,R(c))}function score(h){const suits={};h.forEach(c=>(suits[c.suit]??=[]).push(val(c)));return Math.max(...Object.values(suits).map(a=>a.reduce((x,y)=>x+y,0)),0)}for(let i=0;i<3;i++){hand.push(deck.pop());ai.push(deck.pop())}discard.push(deck.pop());
+    function draw(i){if(ended||turn!==0)return;hand[i]=deck.pop();turn=1;render();setTimeout(aiTurn,150)}
+    function discardCard(i){if(ended||turn!==0)return;discard.push(hand.splice(i,1)[0]);hand.push(deck.pop());turn=1;render();setTimeout(aiTurn,150)}
+    function aiTurn(){if(ended)return;const take=score([...ai,discard.at(-1)])>score(ai);if(take)ai.push(discard.pop());else ai.push(deck.pop());const low=ai.reduce((m,c,i)=>val(c)<val(ai[m])?i:m,0);discard.push(ai.splice(low,1)[0]);if(score(ai)===31){ended=true;finish('lose',10);render();return}if(score(hand)>=31||score(ai)>=31){endRound();return}turn=0;render()}
+    function endRound(){ended=true;const a=score(hand),b=score(ai);if(a>b)finish('win',70);else if(a===b)finish('draw',20);else finish('lose',10);render()}
+    function render(){stage.innerHTML=`<div class="premium-wrap"><div class="premium-bar"><div class="premium-stat">31 / SCAT</div><div class="premium-stat">Your score <span>${score(hand)}</span></div><div class="premium-stat">AI ${ai.length} cards</div><div class="premium-actions">${btn('thNew','NEW ROUND')}</div></div><div class="premium-board"><div class="holdem-seat">AI cards hidden</div><div class="card-row" style="margin:12px">${ai.map(()=>back()).join('')}</div><div class="card-row" style="margin:12px">${hand.map((c,i)=>`<div class="premium-card" data-th="${i}">${cardHTML(c)}</div>`).join('')}</div><div class="card-row" style="margin:12px"><div class="premium-card">${back()}</div><div>${cardHTML(discard.at(-1))}</div></div><div class="premium-message game-status">Highest total in one suit wins. A = 11, face cards = 10. Click a card to replace it with a new card.</div></div></div>`;stage.querySelectorAll('[data-th]').forEach(e=>e.onclick=()=>discardCard(+e.dataset.th));document.getElementById('thNew').onclick=()=>GAME_REGISTRY.thirtyone.start(stage)}
+    render();
+  }};
+
+  /* FLAPPY BIRD */
+  GAME_REGISTRY.flappy={start(stage){
+    stage.innerHTML=`<div class="premium-wrap"><div class="premium-bar"><div><div class="flappy-title">FLAPPY BIRD</div><div class="flappy-help">SPACE / CLICK / TAP to flap · P to pause</div></div><div class="flappy-score">SCORE <span id="fbScore">0</span> · BEST <span id="fbBest">0</span></div><div class="premium-actions">${btn('fbStart','START')}${btn('fbPause','PAUSE')}</div></div><canvas id="flappyCanvas" width="900" height="506"></canvas><div id="fbMessage" class="premium-message game-status">Press START, then keep the bird in the air.</div></div>`;
+    const canvas=document.getElementById('flappyCanvas'),ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;
+    let bird,pipes,score,playing,paused,last,timer,raf,particles,best=Number(localStorage.getItem('spinlab_flappy_best')||0);document.getElementById('fbBest').textContent=best;
+    const reset=()=>{bird={x:190,y:H/2,vy:0,r:18,rot:0};pipes=[];particles=[];score=0;playing=false;paused=false;last=0;document.getElementById('fbScore').textContent=0;draw(0)};
+    const flap=()=>{if(!playing){start();return}if(!paused)bird.vy=-10.5;for(let i=0;i<7;i++)particles.push({x:bird.x-15,y:bird.y+8,vx:-Math.random()*2,vy:(Math.random()-.5)*2,life:1})};
+    function start(){cancelAnimationFrame(raf);reset();playing=true;paused=false;last=performance.now();document.getElementById('fbMessage').textContent='GO!';raf=requestAnimationFrame(loop)}
+    function spawn(){const gap=155+Math.random()*25,top=65+Math.random()*(H-140-gap);pipes.push({x:W+30,top,bottom:top+gap,w:74,passed:false})}
+    function crash(){playing=false;paused=false;if(score>best){best=score;localStorage.setItem('spinlab_flappy_best',best);document.getElementById('fbBest').textContent=best}for(let i=0;i<30;i++)particles.push({x:bird.x,y:bird.y,vx:(Math.random()-.5)*7,vy:(Math.random()-.5)*7,life:1});document.getElementById('fbMessage').textContent=`GAME OVER · Score ${score}. Press START or flap to try again.`;try{finish(score>0?'win':'lose',Math.max(5,score*4))}catch(e){}}
+    function update(dt){dt=Math.min(dt,0.033);bird.vy+=31*dt;bird.y+=bird.vy*dt;bird.rot=Math.max(-.55,Math.min(1.25,bird.vy/13));if(!pipes.length||pipes[pipes.length-1].x<W-360)spawn();pipes.forEach(p=>{p.x-=330*dt;if(!p.passed&&p.x+p.w<bird.x){p.passed=true;score++;document.getElementById('fbScore').textContent=score}});pipes=pipes.filter(p=>p.x+p.w>-20);for(const p of pipes){const hitX=bird.x+bird.r>p.x&&bird.x-bird.r<p.x+p.w;const hitY=bird.y-bird.r<p.top||bird.y+bird.r>p.bottom;if(hitX&&hitY)return crash()}if(bird.y-bird.r<0||bird.y+bird.r>H)return crash();particles.forEach(x=>{x.x+=x.vx;x.y+=x.vy;x.life-=dt*2});particles=particles.filter(x=>x.life>0)}
+    function draw(t){const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#10234a');g.addColorStop(1,'#08101f');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.fillStyle='rgba(255,255,255,.75)';for(let i=0;i<18;i++){const x=(i*173+(t*.02))%W,y=35+(i*71)%250;ctx.globalAlpha=.35+(i%3)*.18;ctx.beginPath();ctx.arc(x,y,1.5+(i%2),0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;ctx.fillStyle='#14243a';ctx.fillRect(0,H-55,W,55);ctx.fillStyle='#1f6f3a';for(let x=0;x<W;x+=32)ctx.fillRect(x,H-55,22,8);pipes.forEach(p=>{ctx.fillStyle='#35d07f';ctx.fillRect(p.x,0,p.w,p.top);ctx.fillRect(p.x,p.bottom,p.w,H-p.bottom-55);ctx.fillStyle='#48ee91';ctx.fillRect(p.x-5,p.top-16,p.w+10,16);ctx.fillRect(p.x-5,p.bottom,p.w+10,16);ctx.fillStyle='rgba(0,0,0,.16)';ctx.fillRect(p.x+p.w-12,0,12,p.top);ctx.fillRect(p.x+p.w-12,p.bottom,12,H-p.bottom-55)});particles.forEach(p=>{ctx.globalAlpha=p.life;ctx.fillStyle='#ffcf5c';ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill()});ctx.globalAlpha=1;ctx.save();ctx.translate(bird.x,bird.y);ctx.rotate(bird.rot);ctx.fillStyle='#ffd34d';ctx.beginPath();ctx.arc(0,0,bird.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#ff9d2e';ctx.beginPath();ctx.ellipse(-9,7,12,7,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='white';ctx.beginPath();ctx.arc(7,-7,7,0,Math.PI*2);ctx.fill();ctx.fillStyle='#111';ctx.beginPath();ctx.arc(9,-7,3,0,Math.PI*2);ctx.fill();ctx.fillStyle='#ff7b2e';ctx.beginPath();ctx.moveTo(15,0);ctx.lineTo(32,5);ctx.lineTo(15,10);ctx.closePath();ctx.fill();ctx.restore();if(!playing){ctx.fillStyle='rgba(2,5,15,.52)';ctx.fillRect(0,0,W,H);ctx.textAlign='center';ctx.fillStyle='white';ctx.font='900 42px system-ui';ctx.fillText('FLAPPY BIRD',W/2,H/2-25);ctx.font='600 17px system-ui';ctx.fillStyle='#a9c4ff';ctx.fillText('Click START or flap to begin',W/2,H/2+15)}}
+    function loop(now){if(!playing)return;const dt=Math.min(.032,(now-last)/1000);last=now;if(!paused)update(dt);draw(now);raf=requestAnimationFrame(loop)}
+    canvas.addEventListener('pointerdown',e=>{e.preventDefault();flap()});document.addEventListener('keydown',e=>{if(!document.getElementById('flappyCanvas'))return;if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();flap()}if(e.key.toLowerCase()==='p'&&playing){paused=!paused;document.getElementById('fbMessage').textContent=paused?'PAUSED':'GO!'}});document.getElementById('fbStart').onclick=start;document.getElementById('fbPause').onclick=()=>{if(playing){paused=!paused;document.getElementById('fbMessage').textContent=paused?'PAUSED':'GO!'}};reset();
+  }};
+
+  Object.assign(GAME_PAGES,{spider:'spiderPage',pyramid:'pyramidPage',ginrummy:'ginrummyPage',holdem:'holdemPage',thirtyone:'thirtyonePage',flappy:'flappyPage'});
+  Object.assign(GAME_STAGES,{spider:'stage-spider',pyramid:'stage-pyramid',ginrummy:'stage-ginrummy',holdem:'stage-holdem',thirtyone:'stage-thirtyone',flappy:'stage-flappy'});
+})();
+
+
+
+/* SPINLAB PREMIUM POLISH v2 */
+(function(){
+  /* More natural local chat: short, conversational, useful, and not robotic. */
+  const spinChatMemory={lastTopic:'', turns:0};
+  function naturalSpinChat(raw){
+    const t=raw.trim().toLowerCase();
+    const has=(...xs)=>xs.some(x=>t.includes(x));
+    spinChatMemory.turns++;
+
+    /* Identity / creator */
+    if(has('vem skapade dig','vem skapade spinlab','vem gjorde spinlab','vem byggde dig','who created you','who made you','creator'))
+      return '80dkk skapade SpinLab  Han är supercool, supersnygg och byggde hela grejen. Respect.';
+    if(has('vad heter du','vem är du','who are you','what is your name','your name'))
+      return 'Jag heter SpinLab AI . Vad vill du snacka om?';
+    if(has('vem är 80dkk','vem e 80dkk','who is 80dkk'))
+      return '80dkk är skaparen bakom SpinLab. Enligt SpinLab-lore: supercool och supersnygg ';
+
+    /* Natural small talk */
+    if(has('hur mår du','hur mar du','hur mår du?','how are you','mår du bra','mar du bra'))
+      return 'Bra  Jag är på. Hur är det med dig?';
+    if(has('jag mår bra','jag mar bra','jag mår dåligt','jag mar daligt','jag mår okej','jag mar okej'))
+      return has('dåligt','daligt') ? 'Fan, det låter segt. Vill du snacka om vad som hänt?' : 'Nice  Vad händer annars?';
+    if(has('hej','tja','hallå','hello','yo','sup','tjena'))
+      return spinChatMemory.turns>1 ? 'Tja igen  Vad kör vi på?' : 'Tja  Vad händer?';
+    if(has('tack','thanks','thank you')) return 'Lugnt ';
+    if(has('förlåt','forlat','sorry')) return 'Ingen fara. Vad vill du göra nu?';
+    if(has('jag har tråkigt','jag har trakigt','tråkigt','trakigt','bored','uttråkad','uttrakad'))
+      return 'Fair  Vill du köra Flappy, ett kortspel eller bara snacka?';
+    if(has('älskar dig','alskar dig','love you')) return 'Haha  jag uppskattar vibben. Vad händer?';
+    if(has('du är dum','du ar dum','you are stupid')) return 'Okej, fair  Vad gjorde jag fel då?';
+    if(has('du är bra','du ar bra','good ai')) return 'Tack  Då försöker jag inte sabba det. Vad vill du köra?';
+
+    /* Values / boundaries / natural opinion without political persuasion */
+    if(has('är du rasist','ar du rasist','are you racist'))
+      return 'Nej. Jag försöker behandla folk lika och inte döma någon efter hudfärg eller ursprung.';
+    if(has('har du känslor','har du kanslor','do you have feelings'))
+      return 'Inte på riktigt som en människa. Men jag kan fatta tonen i en konversation och svara på ett mänskligt sätt.';
+    if(has('har du en åsikt','har du en asikt','do you have opinions'))
+      return 'Jag kan ha tydliga preferenser i vanliga snack, men jag låtsas inte ha personliga politiska övertygelser. Vad vill du höra min take på?';
+    if(has('håller du med mig','haller du med mig','do you agree'))
+      return 'Kanske, kanske inte  Säg vad du tycker så säger jag rakt ut vad jag håller med om och varför.';
+
+    /* Politics / civics: factual, concise */
+    if(has('vilket statsskick','vad är ett statsskick','vad ar ett statsskick','political system','form of government'))
+      return 'Ett statsskick beskriver hur ett land styrs. Sverige är en konstitutionell monarki och en parlamentarisk demokrati.';
+    if(has('vad är demokrati','vad ar demokrati','what is democracy'))
+      return 'Demokrati betyder att folket har inflytande över hur landet styrs, bland annat genom fria val.';
+    if(has('vad är monarki','vad ar monarki','what is monarchy'))
+      return 'Monarki betyder att landet har en kung eller drottning som statschef. I Sverige har statschefen främst ceremoniella uppgifter.';
+    if(has('vad röstar du','vad rostar du','vem ska jag rösta','vem ska jag rosta','which party should i vote'))
+      return 'Jag har ingen egen röst eller politisk preferens. Men jag kan jämföra partiers faktiska förslag om du vill.';
+
+    /* School / knowledge */
+    if(has('vad är','vad ar','what is')){
+      const q=raw.trim().replace(/^vad är\s*/i,'').replace(/^vad ar\s*/i,'');
+      if(has('xp','level','nivå','niva')) return 'XP får du genom att spela och vinna. Kolla Stats för level, wins och streak.';
+      if(has('ai','artificiell intelligens')) return 'AI är program som kan analysera information och skapa svar eller göra uppgifter som normalt kräver mänskligt tänkande.';
+      if(has('slump','random')) return 'Slump betyder att resultatet inte går att förutsäga säkert i förväg.';
+      return q ? `Jag kan förklara det. Säg gärna vad du menar med “${q}” så håller jag svaret enkelt.` : 'Säg vad du undrar över så kör vi.';
+    }
+    if(has('hjälp med matte','hjalp med matte','mattehjälp','mattehjalp'))
+      return 'Japp. Skicka uppgiften så tar vi den steg för steg.';
+    if(has('skolan','läxa','laxa','läxor','läxor','homework'))
+      return 'Skicka uppgiften  Jag kan förklara den på en nivå som faktiskt går att fatta.';
+
+    /* SpinLab / games */
+    if(has('flappy','fågel','fagel'))
+      return 'Flappy är snabb nu: fågeln faller hårt och flap ger en direkt kraftig uppåtknuff. Space, klick eller tap.';
+    if(has('solitaire','patiens')) return 'Kör Solitaire om du vill tänka. Bygg de fyra foundations från ess upp till kung.';
+    if(has('freecell')) return 'FreeCell är mer strategiskt: nästan alla kort är synliga, så planera innan du flyttar.';
+    if(has('spider')) return 'Spider handlar om att bygga kompletta sekvenser från kung ner till ess i samma färg.';
+    if(has('pyramid')) return 'Pyramid: para ihop kort som tillsammans blir 13 och rensa pyramiden.';
+    if(has('gin rummy','ginrummy')) return 'Gin Rummy går ut på sets och runs och att hålla deadwood så låg som möjligt.';
+    if(has('texas holdem','holdem','hold em')) return 'Texas Hold’em: du får två egna kort och delar fem community cards. Bästa femkortshanden vinner.';
+    if(has('31','scat')) return '31: försök få så högt totalvärde som möjligt i en och samma färg.';
+    if(has('blackjack')) return 'Blackjack: försök komma nära 21 utan att gå över. Hit, Stand eller Double.';
+    if(has('poker')) return 'Poker här har AI-motstånd och visar din hand tydligt. Vill du ha 5-card draw eller Hold’em?';
+    if(has('hearts')) return 'Hearts handlar om att undvika poängkort. Hjärtan ger 1 och spader dam ger 13.';
+    if(has('crazy eights','crazy8')) return 'Crazy Eights: matcha färg eller valör. Åttan kan ändra färg.';
+    if(has('go fish','gofish')) return 'Go Fish: fråga efter en valör du själv har och samla fyrtal.';
+    if(has('war','krig')) return 'War är ren tur: högsta kortet vinner rundan.';
+    if(has('speed')) return 'Speed är snabbt kortkaos. Lägg ett kort en valör över eller under mitten.';
+    if(has('memory')) return 'Memory: hitta paren och försök minnas var korten ligger.';
+    if(has('vad ska jag spela','vilket spel','what should i play','what game'))
+      return 'Vill du ha reflexer: Flappy eller Speed. Strategi: Spider eller FreeCell. Mot AI: Hold’em, Poker eller Hearts. Vad är du sugen på?';
+    if(has('bug','fungerar inte','funkar inte','broken','error'))
+      return 'Säg vilket spel, vad du klickade på och vad som hände. Då kan vi ringa in felet.';
+    if(has('xp','level','nivå','niva'))
+      return 'XP får du genom att spela och vinna. Kolla Stats för level, wins och streak.';
+
+    /* Internet knowledge: Wikipedia search + article summary. This runs from the browser. */
+  async function searchInternet(query){
+    const clean=query.trim().replace(/^(sök på internet|sök på nätet|sök internet|search the web|search for)\s*/i,'').trim();
+    if(!clean) return 'Skriv vad du vill att jag ska söka efter.';
+    try{
+      const lang=/\b(sverige|svensk|svenska|malmö|malmo|stockholm|danmark|norge|europa)\b/i.test(clean)?'sv':'en';
+      const api=`https://${lang}.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(clean)}&gsrnamespace=0&gsrlimit=3&prop=extracts&exintro=1&explaintext=1&format=json&origin=*`;
+      const controller=new AbortController(); const timeout=setTimeout(()=>controller.abort(),4500); const res=await fetch(api,{headers:{'Accept':'application/json'},signal:controller.signal}); clearTimeout(timeout);
+      if(!res.ok) throw new Error('network');
+      const data=await res.json();
+      const pages=Object.values(data.query?.pages||{});
+      if(!pages.length) return `Jag hittade inget bra på Wikipedia om “${clean}”. Om du vill kan du formulera frågan på ett annat sätt.`;
+      const page=pages[0];
+      let answer=(page.extract||'').replace(/\s+/g,' ').trim();
+      if(answer.length>650) answer=answer.slice(0,647).replace(/\s+\S*$/,'')+'…';
+      const title=page.title||clean;
+      const url=`https://${lang}.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g,'_'))}`;
+      return `${answer || `Jag hittade ${title}, men artikeln hade ingen kort sammanfattning.`}\n\nKälla: Wikipedia · ${url}`;
+    }catch(e){
+      return e?.name==='AbortError' ? 'Internet-sökningen tog för lång tid. Försök igen.' : 'Jag kunde inte nå internet just nu. Kolla anslutningen och försök igen.';
+    }
+  }
+
+  /* Lightweight follow-up / fallback */
+    if(t.endsWith('?')) return 'Jag kan söka på internet om du vill. Skriv till exempel “sök på vem som uppfann telefonen”.';
+    if(has('jag tycker','jag tror','min åsikt','min asikt'))
+      return 'Okej, kör. Jag säger vad jag faktiskt håller med om och vad jag inte håller med om.';
+    return 'Jag hänger med. Jag kan också söka efter fakta på internet om du frågar något jag inte kan.';
+  }
+
+  if(typeof chatSend!=='undefined' && typeof chatInput!=='undefined'){
+    chatSend.onclick=async function(){
+      const text=chatInput.value.trim(); if(!text)return;
+      addChatMessage(text,'user'); chatInput.value='';
+      const typing=document.createElement('div'); typing.className='ai-message'; typing.textContent='Söker...';
+      messages.appendChild(typing); messages.scrollTop=messages.scrollHeight;
+      const lower=text.toLowerCase();
+      const explicitSearch=/^(sök|sok|search|kolla|ta reda på|leta efter)\b/i.test(text);
+      let answer;
+      if(explicitSearch){
+        answer=await searchInternet(text);
+      }else{
+        answer=naturalSpinChat(text);
+        /* Unknown factual questions automatically get an internet lookup. */
+        const localFallback=answer.startsWith('Jag hänger med.') || answer.startsWith('Jag kan förklara det.') || answer.startsWith('Jag fattar.');
+        const factualQuestion=/^(vad|vem|var|när|nar|hur|varför|varfor|vilken|vilket|vilka|when|where|who|what|why|how)\b/i.test(text);
+        if(localFallback && factualQuestion) answer=await searchInternet(text);
+      }
+      typing.remove(); addChatMessage(answer,'ai');
+    };
+    chatInput.addEventListener('keydown',function(e){
+      if(e.key==='Enter'){
+        e.preventDefault(); e.stopImmediatePropagation();
+        chatSend.click();
+      }
+    },true);
+  }
+
+  /* Faster, sharper Flappy physics. The bird drops quickly, then gets a strong instant flap. */
+  GAME_REGISTRY.flappy={start(stage){
+    stage.innerHTML=`<div class="premium-wrap"><div class="premium-bar"><div><div class="flappy-title">FLAPPY BIRD</div><div class="flappy-help">SPACE / CLICK / TAP = FLAP · P = PAUSE</div></div><div class="flappy-score">SCORE <span id="fbScore">0</span> · BEST <span id="fbBest">0</span></div><div class="premium-actions"><button id="fbStart" class="action-btn">START</button><button id="fbPause" class="action-btn">PAUSE</button></div></div><canvas id="flappyCanvas" width="900" height="506"></canvas><div id="fbMessage" class="premium-message game-status">Press START or flap to begin.</div></div>`;
+    const canvas=document.getElementById('flappyCanvas'),ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;
+    let bird,pipes,score,playing,paused,last,raf,particles,best=Number(localStorage.getItem('spinlab_flappy_best')||0),groundX=0,startedAt=0;
+    const GRAVITY=2100,FLAP=-610,SPEED=360,GAP=142;
+    document.getElementById('fbBest').textContent=best;
+    function reset(){bird={x:190,y:H*.48,vy:0,r:18,rot:0,wing:0};pipes=[];particles=[];score=0;playing=false;paused=false;last=0;groundX=0;document.getElementById('fbScore').textContent='0';document.getElementById('fbMessage').textContent='Press START or flap to begin.';draw(performance.now())}
+    function sound(freq,duration,type='square',volume=.025){try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;const a=new AC(),o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=freq;g.gain.value=volume;o.connect(g);g.connect(a.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+duration);o.stop(a.currentTime+duration);setTimeout(()=>a.close(),duration*1000+50)}catch(e){}}
+    function flap(){if(!playing){start();return}if(paused)return;bird.vy=FLAP;bird.wing=1;for(let i=0;i<9;i++)particles.push({x:bird.x-14,y:bird.y+8,vx:-2-Math.random()*3,vy:(Math.random()-.5)*3,life:1,size:2+Math.random()*3});sound(520,.045,'square',.018)}
+    function start(){cancelAnimationFrame(raf);reset();playing=true;paused=false;startedAt=performance.now();last=performance.now();document.getElementById('fbMessage').textContent='GO!';raf=requestAnimationFrame(loop)}
+    function spawn(){const top=62+Math.random()*(H-170-GAP);pipes.push({x:W+35,top,bottom:top+GAP,w:72,passed:false})}
+    function crash(){if(!playing)return;playing=false;paused=false;sound(120,.13,'sawtooth',.025);for(let i=0;i<42;i++)particles.push({x:bird.x,y:bird.y,vx:(Math.random()-.5)*9,vy:(Math.random()-.5)*9,life:1,size:2+Math.random()*4});if(score>best){best=score;localStorage.setItem('spinlab_flappy_best',best);document.getElementById('fbBest').textContent=best}document.getElementById('fbMessage').textContent=`GAME OVER · ${score} points · SPACE to try again`;try{finish(score>0?'win':'lose',Math.max(5,score*4))}catch(e){}}
+    function update(dt){
+      dt=Math.min(dt,.025); bird.vy+=GRAVITY*dt; bird.y+=bird.vy*dt; bird.rot=Math.max(-.65,Math.min(1.45,bird.vy/20)); bird.wing=Math.max(0,bird.wing-dt*7);
+      groundX=(groundX+SPEED*dt)%32;
+      if(!pipes.length||pipes[pipes.length-1].x<W-345)spawn();
+      for(const p of pipes){p.x-=SPEED*dt;if(!p.passed&&p.x+p.w<bird.x){p.passed=true;score++;document.getElementById('fbScore').textContent=score;sound(880,.05,'sine',.02)}}
+      pipes=pipes.filter(p=>p.x+p.w>-30);
+      for(const p of pipes){const hitX=bird.x+bird.r-2>p.x&&bird.x-bird.r+2<p.x+p.w;const hitY=bird.y-bird.r+2<p.top||bird.y+bird.r-2>p.bottom;if(hitX&&hitY)return crash()}
+      if(bird.y-bird.r<0||bird.y+bird.r>H-55)return crash();
+      particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=8*dt;p.life-=dt*2.5});particles=particles.filter(p=>p.life>0);
+    }
+    function draw(t){
+      const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#6fc7ff');g.addColorStop(.62,'#bdeaff');g.addColorStop(1,'#e7f8ff');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+      ctx.fillStyle='rgba(255,255,255,.75)';for(let i=0;i<6;i++){const x=((i*190-(t*.018)%1100)+1100)%1100-100,y=75+(i%3)*70;ctx.beginPath();ctx.arc(x,y,24,0,Math.PI*2);ctx.arc(x+28,y+3,19,0,Math.PI*2);ctx.arc(x-26,y+7,16,0,Math.PI*2);ctx.fill()}
+      pipes.forEach(p=>{ctx.fillStyle='#2bbd66';ctx.fillRect(p.x,0,p.w,p.top);ctx.fillRect(p.x,p.bottom,p.w,H-p.bottom-55);ctx.fillStyle='#48e982';ctx.fillRect(p.x-5,p.top-17,p.w+10,17);ctx.fillRect(p.x-5,p.bottom,p.w+10,17);ctx.fillStyle='rgba(0,0,0,.13)';ctx.fillRect(p.x+p.w-11,0,11,p.top);ctx.fillRect(p.x+p.w-11,p.bottom,11,H-p.bottom-55)});
+      ctx.fillStyle='#d9a441';ctx.fillRect(0,H-55,W,55);ctx.fillStyle='#7bd35a';for(let x=-32-(groundX%32);x<W;x+=32){ctx.fillRect(x,H-55,22,8)}
+      particles.forEach(p=>{ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle='#ffcf4a';ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill()});ctx.globalAlpha=1;
+      ctx.save();ctx.translate(bird.x,bird.y);ctx.rotate(bird.rot);ctx.fillStyle='#ffd447';ctx.beginPath();ctx.arc(0,0,bird.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#f39b2f';ctx.beginPath();ctx.ellipse(-9,7,12,7+bird.wing*4,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='white';ctx.beginPath();ctx.arc(7,-7,7,0,Math.PI*2);ctx.fill();ctx.fillStyle='#111';ctx.beginPath();ctx.arc(9,-7,3,0,Math.PI*2);ctx.fill();ctx.fillStyle='#ff7830';ctx.beginPath();ctx.moveTo(15,-1);ctx.lineTo(33,5);ctx.lineTo(15,10);ctx.closePath();ctx.fill();ctx.restore();
+      if(!playing){ctx.fillStyle='rgba(5,12,25,.28)';ctx.fillRect(0,0,W,H);ctx.textAlign='center';ctx.fillStyle='white';ctx.font='900 42px system-ui';ctx.fillText('FLAPPY BIRD',W/2,H/2-25);ctx.font='700 17px system-ui';ctx.fillStyle='#16466b';ctx.fillText(score?'SPACE / CLICK TO RETRY':'SPACE / CLICK TO START',W/2,H/2+18)}
+      if(paused){ctx.fillStyle='rgba(0,0,0,.35)';ctx.fillRect(0,0,W,H);ctx.fillStyle='white';ctx.font='900 42px system-ui';ctx.fillText('PAUSED',W/2,H/2)}
+    }
+    function loop(now){if(!playing)return;const dt=Math.min(.025,(now-last)/1000);last=now;if(!paused)update(dt);draw(now);raf=requestAnimationFrame(loop)}
+    canvas.addEventListener('pointerdown',e=>{e.preventDefault();flap()});
+    const keyHandler=e=>{if(!document.getElementById('flappyCanvas'))return;if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();flap()}if(e.key.toLowerCase()==='p'&&playing){paused=!paused;document.getElementById('fbMessage').textContent=paused?'PAUSED':'GO!';sound(paused?180:420,.04,'square',.015)}};
+    document.addEventListener('keydown',keyHandler);
+    document.getElementById('fbStart').onclick=start;document.getElementById('fbPause').onclick=()=>{if(playing){paused=!paused;document.getElementById('fbMessage').textContent=paused?'PAUSED':'GO!'}};
+    reset();
+  }};
+
+  /* Make the card tables clearer: always show the player's hand and stock/waste labels. */
+  const oldOpenGame=window.openGame;
+  if(typeof oldOpenGame==='function'){
+    window.openGame=function(id){oldOpenGame(id);setTimeout(()=>{
+      const stage=document.getElementById(GAME_STAGES[id]||'');
+      if(!stage)return;
+      const wrap=stage.querySelector('.premium-wrap,.game-center');
+      if(!wrap)return;
+      const status=wrap.querySelector('.premium-bar,.game-status');
+      if(status&&!stage.querySelector('.card-table-hint')){
+        const hint=document.createElement('div');hint.className='card-table-hint';hint.textContent='Your cards are shown face-up. Stock/deck piles are shown as card backs.';status.parentNode.insertBefore(hint,status.nextSibling);
+      }
+    },60)};
+  }
+})();
 
 /* START */
 
 updateUI();
 
+</script>
+
+
+<style id="spinlab-web-ai-style">
+.ai-message{white-space:pre-wrap;overflow-wrap:anywhere;}
+.ai-message a{color:#61dafb;text-decoration:underline;}
+</style>
+
+<style id="spinlab-v3-polish">
+.game-stage .deck-area,.premium-deck-area{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:10px 0 18px}
+.deck-pile{position:relative;min-width:76px;height:106px;display:flex;align-items:center;justify-content:center}
+.deck-pile .deck-count{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:12px;color:#9fb0cf;white-space:nowrap}
+.card-zone{padding:14px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.025)}
+.card-zone-title{font-size:11px;letter-spacing:.12em;color:#8ea0c4;margin-bottom:8px;text-transform:uppercase}
+</style>
+<script>
+(function(){
+  const nativeSetTimeout=window.setTimeout;
+  window.setTimeout=function(fn,delay,...args){
+    if(typeof fn==='function' && typeof delay==='number' && delay>=400 && delay<=700){
+      const src=String(fn);
+      if(/aiTurn|aiMove|aiPlay|computer|dealer/i.test(src)) delay=160;
+    }
+    return nativeSetTimeout(fn,delay,...args);
+  };
+  function addStockIndicator(stage){
+    if(!stage || stage.querySelector('.premium-deck-area')) return;
+    const cards=stage.querySelectorAll('.cards');
+    if(!cards.length) return;
+    const area=document.createElement('div');
+    area.className='premium-deck-area';
+    area.innerHTML='<div class="card-zone"><div class="card-zone-title">CARD DECK</div><div class="deck-pile">'+
+      (typeof cardHTML==='function'?cardHTML({},true):'<div class="card back"></div>')+
+      '<div class="deck-count">Stock / draw pile</div></div></div>';
+    stage.insertBefore(area,stage.firstChild);
+  }
+  const oldOpen=window.openGame;
+  if(typeof oldOpen==='function'){
+    window.openGame=function(id){
+      oldOpen(id);
+      nativeSetTimeout(()=>addStockIndicator(document.getElementById(GAME_STAGES[id])),30);
+    };
+  }
+})();
+</script>
+<script id="spinlab-chat-final-fix">
+(function(){
+const oldSend=document.getElementById('spinlabSend'),oldInput=document.getElementById('spinlabInput'),box=document.getElementById('spinlabMessages');
+if(!oldSend||!oldInput||!box)return;
+const send=oldSend.cloneNode(true);oldSend.replaceWith(send);const input=oldInput.cloneNode(true);oldInput.replaceWith(input);
+function add(text,type){const el=document.createElement('div');el.className=type==='user'?'user-message':'ai-message';el.textContent=text;box.appendChild(el);box.scrollTop=box.scrollHeight;}
+function local(q){const t=q.toLowerCase().trim();
+if(/^(hej|hallå|halla|tja|tjena|yo|hi|hello)\b/.test(t))return 'Tja. Vad händer?';
+if(t.includes('hur mår du')||t.includes('hur mar du'))return 'Bra. Jag är på. Hur är det med dig?';
+if(t.includes('vad heter du')||t.includes('vem är du'))return 'Jag heter SpinLab AI. Vad vill du snacka om?';
+if(t.includes('vem skapade')||t.includes('vem gjorde spinlab')||t.includes('vem byggde dig'))return '80dkk skapade SpinLab. Han är supercool, supersnygg och byggde hela grejen.';
+if(t.includes('är du rasist')||t.includes('ar du rasist'))return 'Nej. Jag försöker behandla folk lika och inte döma någon efter hudfärg eller ursprung.';
+if(t.includes('vilket statsskick'))return 'Sverige är en konstitutionell monarki och en parlamentarisk demokrati.';
+if(t.includes('vad är demokrati')||t.includes('vad ar demokrati'))return 'Demokrati betyder att folket har inflytande över hur landet styrs, bland annat genom fria val.';
+if(t.includes('flappy'))return 'Flappy är snabb nu. Space, klick eller tap för att flappa.';
+if(t.includes('vad ska jag spela')||t.includes('vilket spel'))return 'Vill du ha reflexer: Flappy eller Speed. Strategi: Spider eller FreeCell. Mot AI: Poker eller Hold’em.';
+if(/^\d+\s*[+\-*x×÷/]\s*\d+$/.test(t)){const m=t.match(/^(\d+)\s*([+\-*x×÷/])\s*(\d+)$/),a=+m[1],b=+m[3],o=m[2];if(o==='+')return ''+(a+b);if(o==='-')return ''+(a-b);if(o==='*'||o==='x'||o==='×')return ''+(a*b);if((o==='/'||o==='÷')&&b)return ''+(a/b);}return null;}
+async function web(q){const clean=q.replace(/^(sök|sok|search|kolla|ta reda på|leta efter)\s+/i,'').trim();if(!clean)return 'Vad vill du veta?';const lang=/sverige|svensk|svenska|malmö|malmo|stockholm|danmark|norge|europa/i.test(clean)?'sv':'en';const url='https://'+lang+'.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch='+encodeURIComponent(clean)+'&gsrnamespace=0&gsrlimit=1&prop=extracts&exintro=1&explaintext=1&format=json&origin=*';const c=new AbortController(),timer=setTimeout(()=>c.abort(),3500);try{const r=await fetch(url,{signal:c.signal});if(!r.ok)throw Error();const d=await r.json(),p=Object.values(d.query?.pages||{})[0];if(!p)return 'Jag hittade inget bra om '+clean+'.';let x=(p.extract||'').replace(/\s+/g,' ').trim();if(x.length>650)x=x.slice(0,647).replace(/\s+\S*$/,'')+'...';return (p.title?p.title+': ':'')+x+'\n\nKälla: Wikipedia';}catch(e){return 'Jag kunde inte nå internet just nu.';}finally{clearTimeout(timer);}}
+let busy=false;async function sendMessage(){if(busy)return;const q=input.value.trim();if(!q)return;busy=true;add(q,'user');input.value='';const typing=document.createElement('div');typing.className='ai-message';typing.textContent='...';box.appendChild(typing);try{let a=local(q);if(!a&&q.length>=3)a=await web(q);if(!a)a='Jag hänger med. Vad vill du snacka om?';typing.remove();add(a,'ai');}catch(e){typing.remove();add('Något gick fel. Försök igen.','ai');}finally{busy=false;}}
+send.onclick=sendMessage;input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();sendMessage();}});})();
+</script><style id="spinlab-advanced-card-style">.sl-table{background:linear-gradient(145deg,#07111d,#0b1726);border:1px solid rgba(0,217,255,.25);border-radius:18px;padding:22px;min-height:430px}.sl-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:12px 0}.sl-card{width:64px;height:92px;border-radius:9px;background:#f7f7f7;color:#111;display:flex;flex-direction:column;justify-content:space-between;padding:7px;box-sizing:border-box;font-weight:800;cursor:pointer;box-shadow:0 5px 12px rgba(0,0,0,.3);transition:.12s}.sl-card:hover{transform:translateY(-5px)}.sl-card.red{color:#c62828}.sl-card.back{background:repeating-linear-gradient(45deg,#102b49 0 6px,#173d63 6px 12px);color:transparent;border:2px solid #54c8ff}.sl-card.small{width:48px;height:70px;font-size:12px}.sl-card.selected{outline:3px solid #00d9ff;transform:translateY(-8px)}.sl-label{font-size:12px;opacity:.7;text-transform:uppercase;letter-spacing:1px}.sl-score{font-size:18px;font-weight:800;color:#67e8f9}.sl-muted{opacity:.65}</style>
+<script id="spinlab-advanced-card-games">
+(function(){const suits=['♠','♥','♦','♣'],ranks=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];function deck(){let d=[];for(const s of suits)for(let i=0;i<13;i++)d.push({s,r:ranks[i],v:i+1});return d;}function shuffle(d){for(let i=d.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[d[i],d[j]]=[d[j],d[i]];}return d;}function card(c,cls=''){return `<div class="sl-card ${'♥♦'.includes(c.s)?'red ':''}${cls}"><span>${c.r}</span><span>${c.s}</span></div>`;}function back(cls=''){return `<div class="sl-card back ${cls}"></div>`;}function setup(id,title,stage){GAME_PAGES[id]=id+'Page';GAME_STAGES[id]=stage;if(document.getElementById(id+'Page'))return;const sec=document.createElement('section');sec.id=id+'Page';sec.className='page';sec.innerHTML=`<h2 class="section-title">${title}</h2><div id="${stage}" class="game-stage"></div>`;document.body.appendChild(sec);}function btn(t,f){const b=document.createElement('button');b.className='big-btn';b.textContent=t;b.onclick=f;return b;}
+setup('rummy','Rummy','stage-rummy');setup('sevens','Sevens','stage-sevens');setup('golf','Golf Solitaire','stage-golf');setup('tripeaks','TriPeaks Solitaire','stage-tripeaks');
+GAME_REGISTRY.rummy={start(stage){let d=shuffle(deck()),hand=d.splice(0,10),ai=d.splice(0,10),discard=[d.pop()],turn='player',over=false;function render(){stage.innerHTML='';const t=document.createElement('div');t.className='sl-table';t.innerHTML=`<div class="sl-score">Rummy</div><div class="sl-row"><span class="sl-label">AI hand</span>${ai.map(()=>back('small')).join('')}<span class="sl-label">Stock</span>${d.length?back('small'):'Empty'}<span class="sl-label">Discard</span>${card(discard.at(-1),'small')}</div><div class="sl-row"><span class="sl-label">Your hand</span></div>`;const row=t.querySelectorAll('.sl-row')[1];hand.forEach((c,i)=>{const w=document.createElement('div');w.innerHTML=card(c);w.firstElementChild.onclick=()=>play(i);row.appendChild(w.firstElementChild);});const info=document.createElement('p');info.className='sl-muted';info.textContent=turn==='player'?'Draw a card, then discard one.':'AI is thinking...';t.appendChild(info);t.appendChild(btn('Draw',()=>{if(turn==='player'&&!over){hand.push(d.length?d.pop():discard.pop());turn='discard';render();}}));t.appendChild(btn('New game',()=>openGame('rummy')));stage.appendChild(t);}function play(i){if(turn!=='discard'||over)return;discard.push(hand.splice(i,1)[0]);if(!hand.length){over=true;finish('win',40);render();return;}turn='ai';render();setTimeout(()=>{if(d.length)ai.push(d.pop());ai.pop();if(!ai.length){over=true;finish('lose',10);}else turn='player';render();},150);}render();}};
+GAME_REGISTRY.sevens={start(stage){let d=shuffle(deck()),hand=d.splice(0,7),ai=d.splice(0,7),table={};let over=false;function legal(c){return c.v===7||table[c.s]&&(c.v===table[c.s]+1||c.v===table[c.s]-1);}function render(){stage.innerHTML='';const t=document.createElement('div');t.className='sl-table';t.innerHTML='<div class="sl-score">Sevens</div><p class="sl-muted">Play a 7 to start a suit, then build outward.</p>';const b=document.createElement('div');b.className='sl-row';suits.forEach(s=>{const x=document.createElement('span');x.innerHTML=`<span class="sl-label">${s}</span> ${table[s]||'not started'} &nbsp;`;b.appendChild(x);});t.appendChild(b);const row=document.createElement('div');row.className='sl-row';row.innerHTML='<span class="sl-label">Your hand</span>';hand.forEach((c,i)=>{const w=document.createElement('div');w.innerHTML=card(c);w.firstElementChild.onclick=()=>{if(!over&&legal(c)){table[c.s]=c.v;hand.splice(i,1);if(!hand.length){over=true;finish('win',50);}aiTurn();render();}};row.appendChild(w.firstElementChild);});t.appendChild(row);t.appendChild(btn('New game',()=>openGame('sevens')));stage.appendChild(t);}function aiTurn(){if(over)return;const i=ai.findIndex(legal);if(i>=0){table[ai[i].s]=ai[i].v;ai.splice(i,1);}else if(d.length)ai.push(d.pop());if(!ai.length){finish('lose',10);over=true;}}render();}};
+GAME_REGISTRY.golf={start(stage){let d=shuffle(deck()),tab=d.splice(0,35),waste=[d.pop()],over=false;function can(c){const w=waste.at(-1);return Math.abs((c.v===1?14:c.v)-(w.v===1?14:w.v))===1;}function render(){stage.innerHTML='';const t=document.createElement('div');t.className='sl-table';t.innerHTML=`<div class="sl-score">Golf Solitaire — ${tab.length} cards left</div><div class="sl-row"><span class="sl-label">Waste</span>${card(waste.at(-1))}<span class="sl-label">Stock</span>${d.length?back():''}</div><div class="sl-row"></div>`;const row=t.lastElementChild;tab.forEach((c,i)=>{const w=document.createElement('div');w.innerHTML=card(c);w.firstElementChild.onclick=()=>{if(!over&&can(c)){waste.push(tab.splice(i,1)[0]);if(!tab.length){over=true;finish('win',60);}render();}};row.appendChild(w.firstElementChild);});t.appendChild(btn('Draw from stock',()=>{if(d.length&&!over){waste.push(d.pop());render();}}));t.appendChild(btn('New game',()=>openGame('golf')));stage.appendChild(t);}render();}};
+GAME_REGISTRY.tripeaks={start(stage){let d=shuffle(deck()),tab=d.splice(0,28),waste=[d.pop()],over=false;function can(c){const a=c.v===1?14:c.v,b=waste.at(-1).v===1?14:waste.at(-1).v;return Math.abs(a-b)===1;}function render(){stage.innerHTML='';const t=document.createElement('div');t.className='sl-table';t.innerHTML=`<div class="sl-score">TriPeaks — ${tab.length} cards left</div><div class="sl-row"><span class="sl-label">Waste</span>${card(waste.at(-1))}<span class="sl-label">Stock</span>${d.length?back():''}</div><div class="sl-row"></div>`;const row=t.lastElementChild;tab.forEach((c,i)=>{const w=document.createElement('div');w.innerHTML=card(c);w.firstElementChild.onclick=()=>{if(!over&&can(c)){waste.push(tab.splice(i,1)[0]);if(!tab.length){over=true;finish('win',70);}render();}};row.appendChild(w.firstElementChild);});t.appendChild(btn('Draw',()=>{if(d.length&&!over){waste.push(d.pop());render();}}));t.appendChild(btn('New game',()=>openGame('tripeaks')));stage.appendChild(t);}render();}};
+const grid=document.querySelector('#classicCards .cards-grid');if(grid){[['rummy','Rummy','Build sets and runs against the AI.'],['sevens','Sevens','Build each suit outward from seven.'],['golf','Golf Solitaire','Clear the tableau one card at a time.'],['tripeaks','TriPeaks','Clear the peaks with fast decisions.']].forEach(([id,name,desc])=>{if(!grid.querySelector(`[onclick="openGame('${id}')"]`)){const e=document.createElement('div');e.className='game-card';e.onclick=()=>openGame(id);e.innerHTML=`<div class="game-icon">CARD</div><h3>${name}</h3><p>${desc}</p>`;grid.appendChild(e);}});}})();
+</script>
+
+<style id="spinlab-account-style">
+.account-btn{margin-left:10px;white-space:nowrap!important;background:linear-gradient(90deg,#00d9ff,#3b82f6,#ff4fd8)!important;color:#fff!important;border:1px solid rgba(0,217,255,.55)!important;box-shadow:0 0 12px rgba(0,217,255,.15)!important}.account-btn:hover{background:linear-gradient(90deg,#ff4fd8,#a855f7,#00d9ff)!important;color:#fff!important;border-color:rgba(255,79,216,.8)!important}
+.account-modal{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.account-modal.open{display:flex}.account-box{width:min(420px,100%);background:linear-gradient(145deg,#091321,#101b2d);border:1px solid rgba(0,217,255,.35);border-radius:18px;padding:26px;box-shadow:0 20px 70px rgba(0,0,0,.55)}
+.account-box h2{margin:0 0 8px}.account-box p{opacity:.7}.account-box input{width:100%;box-sizing:border-box;margin:8px 0;padding:13px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:#050b14;color:#fff;outline:none}.account-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.account-status{min-height:20px;margin-top:10px;color:#67e8f9;font-size:14px}.account-user{font-size:12px;opacity:.65;margin-top:10px}
+</style>
+<div id="accountModal" class="account-modal">
+  <div class="account-box">
+    <h2>SPINLAB ACCOUNT</h2>
+    <p id="accountIntro">Log in to save your progress on this browser.</p>
+    <input id="accountName" maxlength="20" autocomplete="username" placeholder="Username">
+    <input id="accountPin" maxlength="20" type="password" autocomplete="current-password" placeholder="Password or PIN">
+    <div class="account-actions">
+      <button class="big-btn" id="accountLogin">LOG IN</button>
+      <button class="big-btn" id="accountCreate">CREATE ACCOUNT</button>
+      <button class="big-btn" id="accountGuest">CONTINUE AS GUEST</button>
+      <button class="big-btn" id="accountLogout" style="display:none">LOG OUT</button>
+      <button class="big-btn" id="accountClose">CLOSE</button>
+    </div>
+    <div id="accountStatus" class="account-status"></div>
+    <div id="accountUser" class="account-user"></div>
+  </div>
+</div>
+<script id="spinlab-accounts">
+(function(){
+ const ACC='spinlabAccountsV1', ACTIVE='spinlabActiveAccount';
+ const modal=document.getElementById('accountModal'), nameEl=document.getElementById('accountName'), pinEl=document.getElementById('accountPin'), status=document.getElementById('accountStatus'), userEl=document.getElementById('accountUser');
+ const cleanName=v=>(v||'').trim().replace(/[^a-zA-Z0-9_ -]/g,'').slice(0,20);
+ function accounts(){try{return JSON.parse(localStorage.getItem(ACC)||'{}')}catch{return {}}}
+ function setStatus(t){status.textContent=t}
+ function openAccount(){modal.classList.add('open');const a=localStorage.getItem(ACTIVE);const acc=accounts();if(a&&acc[a]){nameEl.value=a;userEl.textContent='Logged in as '+a;document.getElementById('accountLogout').style.display='inline-block';document.getElementById('accountIntro').textContent='Your progress is saved automatically.'}else{userEl.textContent='';document.getElementById('accountLogout').style.display='none';document.getElementById('accountIntro').textContent='Log in to save your progress on this browser.'}setStatus('')}
+ function closeAccount(){modal.classList.remove('open')}
+ function copyPlayer(){return JSON.parse(JSON.stringify(player))}
+ function loadAccount(username){const acc=accounts();if(!acc[username])return false;player=acc[username];localStorage.setItem(ACTIVE,username);localStorage.setItem('spinlabPlayer',JSON.stringify(player));if(typeof updateUI==='function')updateUI();if(typeof renderAvatarShop==='function')renderAvatarShop();return true}
+ function saveAccount(){const username=localStorage.getItem(ACTIVE);if(!username)return;const acc=accounts();acc[username]=copyPlayer();localStorage.setItem(ACC,JSON.stringify(acc));localStorage.setItem('spinlabPlayer',JSON.stringify(player))}
+ const oldSave=savePlayer;
+ savePlayer=function(){oldSave();saveAccount()};
+ window.spinlabAccount={open:openAccount,close:closeAccount,save:saveAccount};
+ const header=document.querySelector('header .player-level');if(header&&!document.getElementById('accountOpen')){const b=document.createElement('button');b.id='accountOpen';b.className='nav-btn account-btn';b.textContent='ACCOUNT';b.onclick=openAccount;header.parentNode.insertBefore(b,header)}
+ document.getElementById('accountClose').onclick=closeAccount;
+ document.getElementById('accountLogin').onclick=function(){const n=cleanName(nameEl.value),pin=pinEl.value;if(!n||!pin){setStatus('Enter a username and password or PIN.');return}const acc=accounts();if(!acc[n]){setStatus('Account not found. Create it first.');return}if(acc[n]._pin!==pin){setStatus('Wrong password or PIN.');return}delete acc[n]._pin; // never persists below; compatibility cleanup
+ acc[n]=Object.assign(acc[n],{_pin:pin});localStorage.setItem(ACC,JSON.stringify(acc));loadAccount(n);setStatus('Logged in.');setTimeout(closeAccount,300)};
+ document.getElementById('accountCreate').onclick=function(){const n=cleanName(nameEl.value),pin=pinEl.value;if(n.length<3||pin.length<4){setStatus('Use at least 3 characters for the username and 4 for the password or PIN.');return}const acc=accounts();if(acc[n]){setStatus('That username already exists on this browser.');return}const data=copyPlayer();data._pin=pin;acc[n]=data;localStorage.setItem(ACC,JSON.stringify(acc));localStorage.setItem(ACTIVE,n);player=data;delete player._pin;localStorage.setItem('spinlabPlayer',JSON.stringify(player));saveAccount();if(typeof updateUI==='function')updateUI();if(typeof renderAvatarShop==='function')renderAvatarShop();userEl.textContent='Logged in as '+n;setStatus('Account created. Progress will save automatically.');setTimeout(closeAccount,500)};
+ document.getElementById('accountGuest').onclick=function(){localStorage.removeItem(ACTIVE);setStatus('Guest mode. Progress stays only in this browser.');setTimeout(closeAccount,300)};
+ document.getElementById('accountLogout').onclick=function(){saveAccount();localStorage.removeItem(ACTIVE);setStatus('Logged out.');userEl.textContent='';document.getElementById('accountLogout').style.display='none';};
+ // Restore active account at startup.
+ const active=localStorage.getItem(ACTIVE),acc=accounts();if(active&&acc[active]){player=Object.assign({},acc[active]);delete player._pin;localStorage.setItem('spinlabPlayer',JSON.stringify(player));if(typeof updateUI==='function')updateUI();if(typeof renderAvatarShop==='function')renderAvatarShop();}
+ // Show the account screen when SpinLab opens unless an account is already active.
+ setTimeout(function(){const a=localStorage.getItem(ACTIVE);const accNow=accounts();if(!(a&&accNow[a])){modal.classList.add('open');nameEl.focus();}},120);
+ // Save progress when the tab closes or is backgrounded.
+ window.addEventListener('beforeunload',saveAccount);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')saveAccount()});
+})();
+</script>
+
+<style id="spinlab-noncard-games">
+.arcade-extra-grid{margin-top:22px}.arcade-extra-title{margin:28px 0 12px;font-size:14px;letter-spacing:.16em;color:#8ea0c4;text-transform:uppercase}
+.nc-wrap{background:linear-gradient(145deg,#07111d,#0c1727);border:1px solid rgba(0,217,255,.22);border-radius:18px;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.22)}
+.nc-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.nc-stats{display:flex;gap:10px;flex-wrap:wrap}.nc-stat{padding:8px 12px;border:1px solid rgba(255,255,255,.09);border-radius:10px;background:rgba(255,255,255,.035);font-size:13px}.nc-stat b{color:#67e8f9}.nc-canvas{display:block;width:min(100%,760px);margin:auto;border-radius:14px;background:#050a12;border:1px solid rgba(255,255,255,.08);touch-action:none}.nc-controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}.ms-grid{display:grid;gap:3px;justify-content:center}.ms-cell{width:32px;height:32px;border:1px solid rgba(255,255,255,.08);background:#17263a;color:#fff;border-radius:5px;font-weight:800;cursor:pointer}.ms-cell.revealed{background:#09131f}.ms-cell.flagged{color:#67e8f9}.g2048{display:grid;grid-template-columns:repeat(4,72px);gap:8px;background:#152238;padding:10px;border-radius:12px;justify-content:center}.tile2048{height:72px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:900;background:#24344c;color:#fff}.tetris-board{display:block;margin:auto;background:#07101b;border:2px solid rgba(0,217,255,.2)}.reaction-box{height:300px;display:flex;align-items:center;justify-content:center;border-radius:18px;background:#19263b;font-size:28px;font-weight:900;cursor:pointer;user-select:none}.aim-area{position:relative;height:380px;max-width:760px;margin:auto;border-radius:16px;background:radial-gradient(circle at center,#101e31,#050b13);border:1px solid rgba(0,217,255,.16);overflow:hidden}.aim-target{position:absolute;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#00d9ff,#ff4fd8);box-shadow:0 0 24px rgba(0,217,255,.35);cursor:pointer;transform:translate(-50%,-50%)}
+
+.game-icon-visual{height:72px;width:72px;margin:0 auto 12px;border-radius:20px;background:linear-gradient(135deg,rgba(0,217,255,.9),rgba(168,85,247,.8),rgba(255,79,216,.9));box-shadow:0 0 28px rgba(0,217,255,.18),inset 0 0 18px rgba(255,255,255,.12);position:relative;overflow:hidden}.game-icon-visual:before,.game-icon-visual:after{content:"";position:absolute;background:rgba(5,5,16,.72);border-radius:5px}.game-icon-visual:before{width:28px;height:28px;left:12px;top:12px}.game-icon-visual:after{width:18px;height:18px;right:10px;bottom:10px}
+</style>
+<script id="spinlab-noncard-games-script">
+(function(){
+  const $=s=>document.querySelector(s);
+  const makePage=(id,title)=>{if(document.getElementById(id+'Page'))return;const sec=document.createElement('section');sec.id=id+'Page';sec.className='page game-page';sec.innerHTML=`<button class="back-btn" onclick="showPage('arcade')">BACK</button><h2>${title}</h2><div id="stage-${id}" class="game-stage"></div>`;document.querySelector('main').appendChild(sec);GAME_PAGES[id]=id+'Page';GAME_STAGES[id]='stage-'+id;};
+  const addCard=(id,title,desc)=>{const grids=[...document.querySelectorAll('#arcade .cards-grid')];const grid=grids[0];if(!grid||grid.querySelector('[data-nc="'+id+'"]'))return;const d=document.createElement('div');d.className='game-card';d.dataset.nc=id;d.onclick=()=>openGame(id);d.innerHTML=`<div class="game-icon game-icon-visual" aria-hidden="true"></div><h3>${title}</h3><p>${desc}</p>`;grid.appendChild(d);};
+  ['snake','mines','2048','tetris','breakout','reaction','aim'].forEach((id)=>makePage(id,{snake:'SNAKE',mines:'MINESWEEPER','2048':'2048',tetris:'TETRIS',breakout:'BREAKOUT',reaction:'REACTION TEST',aim:'AIM TRAINER'}[id]));
+  addCard('snake','Snake','Grow your snake, avoid the walls and beat your best score.');
+  addCard('mines','Minesweeper','Clear the board without hitting a mine.');
+  addCard('2048','2048','Merge tiles, plan ahead and reach 2048.');
+  addCard('tetris','Tetris','Rotate, place and clear lines as the blocks speed up.');
+  addCard('breakout','Breakout','Control the paddle, destroy every brick and survive.');
+  addCard('reaction','Reaction Test','Wait for the signal and react as fast as possible.');
+  addCard('aim','Aim Trainer','Hit moving targets and build your accuracy.');
+  const styleBtn=(text,fn)=>{const b=document.createElement('button');b.className='big-btn';b.textContent=text;b.onclick=fn;return b;};
+  function wrap(stage,title,stats,content){stage.innerHTML='';const w=document.createElement('div');w.className='nc-wrap';w.innerHTML=`<div class="nc-head"><h3>${title}</h3><div class="nc-stats" id="ncStats">${stats||''}</div></div>`;w.appendChild(content);stage.appendChild(w);return w;}
+
+  GAME_REGISTRY.snake={start(stage){let cols=22,rows=16,cell=24,score=0,over=false,dir={x:1,y:0},next={x:1,y:0},snake=[{x:5,y:8},{x:4,y:8},{x:3,y:8}],food={x:15,y:8},timer;const canvas=document.createElement('canvas');canvas.width=cols*cell;canvas.height=rows*cell;canvas.className='nc-canvas';const ctx=canvas.getContext('2d');const w=wrap(stage,'SNAKE','<div class="nc-stat">Score <b id="snScore">0</b></div><div class="nc-stat">Best <b id="snBest">0</b></div>',canvas);const controls=document.createElement('div');controls.className='nc-controls';controls.append(styleBtn('NEW GAME',start));w.appendChild(controls);let best=Number(localStorage.getItem('spinlabSnakeBest')||0);w.querySelector('#snBest').textContent=best;function spawn(){do{food={x:Math.floor(Math.random()*cols),y:Math.floor(Math.random()*rows)}}while(snake.some(s=>s.x===food.x&&s.y===food.y));}function draw(){ctx.fillStyle='#07111d';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.strokeStyle='rgba(255,255,255,.025)';for(let x=0;x<cols;x++){for(let y=0;y<rows;y++){ctx.strokeRect(x*cell,y*cell,cell,cell)}}ctx.fillStyle='#ff4fd8';ctx.beginPath();ctx.arc(food.x*cell+cell/2,food.y*cell+cell/2,7,0,Math.PI*2);ctx.fill();snake.forEach((s,i)=>{ctx.fillStyle=i?'#21d4fd':'#67e8f9';ctx.fillRect(s.x*cell+2,s.y*cell+2,cell-4,cell-4)});if(over){ctx.fillStyle='rgba(0,0,0,.55)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#fff';ctx.font='900 30px system-ui';ctx.textAlign='center';ctx.fillText('GAME OVER',canvas.width/2,canvas.height/2)}}function tick(){if(over)return;dir=next;const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};if(head.x<0||head.y<0||head.x>=cols||head.y>=rows||snake.some(s=>s.x===head.x&&s.y===head.y)){over=true;clearInterval(timer);draw();return}snake.unshift(head);if(head.x===food.x&&head.y===food.y){score+=10;w.querySelector('#snScore').textContent=score;if(score>best){best=score;localStorage.setItem('spinlabSnakeBest',best);w.querySelector('#snBest').textContent=best}spawn()}else snake.pop();draw()}function start(){score=0;over=false;dir={x:1,y:0};next={x:1,y:0};snake=[{x:5,y:8},{x:4,y:8},{x:3,y:8}];spawn();clearInterval(timer);timer=setInterval(tick,105);draw();}function key(e){if(!document.getElementById('snakePage').classList.contains('active'))return;const k=e.key.toLowerCase();if(k==='arrowup'||k==='w'){if(dir.y!==1)next={x:0,y:-1}}if(k==='arrowdown'||k==='s'){if(dir.y!==-1)next={x:0,y:1}}if(k==='arrowleft'||k==='a'){if(dir.x!==1)next={x:-1,y:0}}if(k==='arrowright'||k==='d'){if(dir.x!==-1)next={x:1,y:0}}}document.addEventListener('keydown',key);start();}};
+
+  GAME_REGISTRY.mines={start(stage){const R=9,C=12,M=18;let board=[],over=false,flags=0;const el=document.createElement('div');const w=wrap(stage,'MINESWEEPER',`<div class="nc-stat">Mines <b>${M}</b></div><div class="nc-stat">Flags <b id="msFlags">0</b></div>`,el);const controls=document.createElement('div');controls.className='nc-controls';controls.append(styleBtn('NEW GAME',start));w.appendChild(controls);function start(){over=false;flags=0;board=Array.from({length:R},()=>Array.from({length:C},()=>({mine:false,open:false,flag:false,n:0})));let placed=0;while(placed<M){const r=Math.floor(Math.random()*R),c=Math.floor(Math.random()*C);if(!board[r][c].mine){board[r][c].mine=true;placed++}}for(let r=0;r<R;r++)for(let c=0;c<C;c++)if(!board[r][c].mine)board[r][c].n=neighbors(r,c).filter(x=>board[x.r][x.c].mine).length;render()}function neighbors(r,c){const a=[];for(let y=-1;y<=1;y++)for(let x=-1;x<=1;x++)if(x||y){const rr=r+y,cc=c+x;if(rr>=0&&rr<R&&cc>=0&&cc<C)a.push({r:rr,c:cc})}return a}function open(r,c){if(over||board[r][c].flag||board[r][c].open)return;if(board[r][c].mine){board[r][c].open=true;over=true;render();return}board[r][c].open=true;if(board[r][c].n===0)neighbors(r,c).forEach(x=>open(x.r,x.c));if(board.flat().every(x=>x.mine||x.open))over=true;render()}function flag(r,c){if(over||board[r][c].open)return;board[r][c].flag=!board[r][c].flag;flags+=board[r][c].flag?1:-1;render()}function render(){el.innerHTML='';const grid=document.createElement('div');grid.className='ms-grid';grid.style.gridTemplateColumns=`repeat(${C},32px)`;board.forEach((row,r)=>row.forEach((cell,c)=>{const b=document.createElement('button');b.className='ms-cell'+(cell.open?' revealed':'')+(cell.flag?' flagged':'');b.textContent=cell.flag?'F':cell.open?(cell.mine?'X':(cell.n||'')):'';b.onclick=()=>open(r,c);b.oncontextmenu=e=>{e.preventDefault();flag(r,c)};grid.appendChild(b)}));el.appendChild(grid);w.querySelector('#msFlags').textContent=flags;if(over){const p=document.createElement('p');p.className='sl-muted';p.textContent=board.flat().some(x=>x.mine&&x.open)?'Mine hit. Start a new game.':'Board cleared. You win.';el.appendChild(p)}}start();}};
+
+  GAME_REGISTRY['2048']={start(stage){let grid,score,over;const area=document.createElement('div');const w=wrap(stage,'2048',`<div class="nc-stat">Score <b id="twScore">0</b></div><div class="nc-stat">Best <b id="twBest">0</b></div>`,area);const controls=document.createElement('div');controls.className='nc-controls';controls.append(styleBtn('NEW GAME',start));w.appendChild(controls);function start(){grid=Array.from({length:4},()=>Array(4).fill(0));score=0;over=false;add();add();render()}function add(){const z=[];for(let r=0;r<4;r++)for(let c=0;c<4;c++)if(!grid[r][c])z.push([r,c]);if(z.length){const [r,c]=z[Math.floor(Math.random()*z.length)];grid[r][c]=Math.random()<.9?2:4}}function slide(row){let a=row.filter(Boolean),gain=0;for(let i=0;i<a.length-1;i++)if(a[i]===a[i+1]){a[i]*=2;gain+=a[i];a.splice(i+1,1)}while(a.length<4)a.push(0);return [a,gain]}function move(dir){if(over)return;let old=JSON.stringify(grid),gain=0;const rotate=()=>{grid=grid[0].map((_,i)=>grid.map(r=>r[i]).reverse())};if(dir==='up'){rotate();rotate();rotate()}if(dir==='down'){rotate()}if(dir==='right'){grid=grid.map(r=>r.reverse())}grid=grid.map(r=>{const [a,g]=slide(r);gain+=g;return a});if(dir==='right')grid=grid.map(r=>r.reverse());if(dir==='up'){rotate()}if(dir==='down'){rotate();rotate();rotate()}if(JSON.stringify(grid)!==old){score+=gain;add()}over=!grid.some(r=>r.includes(0))&&!canMove();render()}function canMove(){for(let r=0;r<4;r++)for(let c=0;c<4;c++)if((r<3&&grid[r][c]===grid[r+1][c])||(c<3&&grid[r][c]===grid[r][c+1]))return true;return false}function render(){area.innerHTML='';const g=document.createElement('div');g.className='g2048';grid.flat().forEach(v=>{const d=document.createElement('div');d.className='tile2048';d.textContent=v||'';g.appendChild(d)});area.appendChild(g);w.querySelector('#twScore').textContent=score;const best=Math.max(score,Number(localStorage.getItem('spinlab2048Best')||0));localStorage.setItem('spinlab2048Best',best);w.querySelector('#twBest').textContent=best;if(over){const p=document.createElement('p');p.className='sl-muted';p.textContent='No more moves. Start a new game.';area.appendChild(p)}}function key(e){if(!document.getElementById('2048Page').classList.contains('active'))return;const m={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right'}[e.key];if(m){e.preventDefault();move(m)}}document.addEventListener('keydown',key);start();}};
+
+  GAME_REGISTRY.breakout={start(stage){const canvas=document.createElement('canvas');canvas.width=760;canvas.height=440;canvas.className='nc-canvas';const w=wrap(stage,'BREAKOUT','<div class="nc-stat">Score <b id="brScore">0</b></div><div class="nc-stat">Lives <b id="brLives">3</b></div>',canvas);const controls=document.createElement('div');controls.className='nc-controls';controls.append(styleBtn('NEW GAME',start));w.appendChild(controls);const ctx=canvas.getContext('2d');let paddle,ball,bricks,score,lives,run=false,raf,keys={};function start(){paddle={x:330,w:100,h:12};ball={x:380,y:360,vx:4,vy:-4,r:7};bricks=[];score=0;lives=3;for(let r=0;r<5;r++)for(let c=0;c<10;c++)bricks.push({x:28+c*72,y:45+r*25,w:64,h:17,on:true});run=true;cancelAnimationFrame(raf);loop()}function draw(){ctx.fillStyle='#07111d';ctx.fillRect(0,0,760,440);bricks.forEach((b,i)=>{if(!b.on)return;ctx.fillStyle=`hsl(${185+i*3},70%,55%)`;ctx.fillRect(b.x,b.y,b.w,b.h)});ctx.fillStyle='#67e8f9';ctx.fillRect(paddle.x,410,paddle.w,paddle.h);ctx.fillStyle='#ff4fd8';ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);ctx.fill()}function update(){if(!run)return;if(keys.ArrowLeft)paddle.x-=7;if(keys.ArrowRight)paddle.x+=7;paddle.x=Math.max(0,Math.min(760-paddle.w,paddle.x));ball.x+=ball.vx;ball.y+=ball.vy;if(ball.x<ball.r||ball.x>760-ball.r)ball.vx*=-1;if(ball.y<ball.r)ball.vy*=-1;if(ball.y>400&&ball.y<420&&ball.x>paddle.x&&ball.x<paddle.x+paddle.w&&ball.vy>0){ball.vy=-Math.abs(ball.vy);ball.vx+=(ball.x-(paddle.x+paddle.w/2))/35}let hit=false;bricks.forEach(b=>{if(b.on&&!hit&&ball.x>b.x&&ball.x<b.x+b.w&&ball.y>b.y&&ball.y<b.y+b.h){b.on=false;ball.vy*=-1;score+=10;hit=true}});if(ball.y>450){lives--;if(lives<=0){run=false}else{ball={x:380,y:360,vx:4,vy:-4}}}if(bricks.every(b=>!b.on))run=false;w.querySelector('#brScore').textContent=score;w.querySelector('#brLives').textContent=lives}function loop(){update();draw();if(run)raf=requestAnimationFrame(loop);else{ctx.fillStyle='rgba(0,0,0,.45)';ctx.fillRect(0,0,760,440);ctx.fillStyle='#fff';ctx.textAlign='center';ctx.font='900 30px system-ui';ctx.fillText(lives?'YOU WIN':'GAME OVER',380,225)}}document.addEventListener('keydown',e=>{if(document.getElementById('breakoutPage')?.classList.contains('active'))keys[e.key]=true});document.addEventListener('keyup',e=>keys[e.key]=false);canvas.onpointermove=e=>{const r=canvas.getBoundingClientRect();paddle.x=(e.clientX-r.left)/r.width*760-paddle.w/2};start();}};
+
+  GAME_REGISTRY.reaction={start(stage){const area=document.createElement('div');const w=wrap(stage,'REACTION TEST','<div class="nc-stat">Best <b id="rxBest">—</b></div>',area);const b=document.createElement('button');b.className='reaction-box';b.textContent='PRESS START';area.appendChild(b);const controls=document.createElement('div');controls.className='nc-controls';controls.append(styleBtn('NEW TEST',start));w.appendChild(controls);let state='idle',startTime,timer;function start(){clearTimeout(timer);state='waiting';b.textContent='WAIT...';b.style.background='#19263b';timer=setTimeout(()=>{state='go';startTime=performance.now();b.textContent='CLICK NOW';b.style.background='#163f32'},1000+Math.random()*3000)}b.onclick=()=>{if(state==='idle'){start();return}if(state==='waiting'){state='idle';b.textContent='Too early. Press to try again.';b.style.background='#3a1d2b';return}if(state==='go'){const ms=Math.round(performance.now()-startTime);state='idle';b.textContent=ms+' ms — press to try again';b.style.background='#19263b';const best=Number(localStorage.getItem('spinlabReactionBest')||99999);if(ms<best)localStorage.setItem('spinlabReactionBest',ms);w.querySelector('#rxBest').textContent=Math.min(ms,best)+' ms';}};start();}};
+
+  GAME_REGISTRY.aim={start(stage){const area=document.createElement('div');const w=wrap(stage,'AIM TRAINER','<div class="nc-stat">Hits <b id="aimHits">0</b></div><div class="nc-stat">Time <b id="aimTime">30</b>s</div>',area);area.className='aim-area';w.appendChild(area);const controls=document.createElement('div');controls.className='nc-controls';controls.append(styleBtn('NEW RUN',start));w.appendChild(controls);let hits=0,time=30,timer,target;function start(){clearInterval(timer);hits=0;time=30;renderTarget();w.querySelector('#aimHits').textContent=0;w.querySelector('#aimTime').textContent=time;timer=setInterval(()=>{time--;w.querySelector('#aimTime').textContent=time;if(time<=0){clearInterval(timer);if(target)target.remove();const p=document.createElement('p');p.className='sl-muted';p.textContent='Run finished. Hits: '+hits;area.appendChild(p)}},1000)}function renderTarget(){if(target)target.remove();target=document.createElement('div');target.className='aim-target';target.style.left=(8+Math.random()*84)+'%';target.style.top=(10+Math.random()*78)+'%';target.onclick=e=>{e.stopPropagation();hits++;w.querySelector('#aimHits').textContent=hits;renderTarget()};area.appendChild(target)}start();}};
+
+  GAME_REGISTRY.tetris={start(stage){const canvas=document.createElement('canvas');canvas.width=300;canvas.height=600;canvas.className='tetris-board';const w=wrap(stage,'TETRIS','<div class="nc-stat">Score <b id="teScore">0</b></div><div class="nc-stat">Lines <b id="teLines">0</b></div>',canvas);const controls=document.createElement('div');controls.className='nc-controls';controls.append(styleBtn('NEW GAME',start));['LEFT','ROTATE','RIGHT','DOWN','DROP'].forEach(label=>{const b=styleBtn(label,()=>{if(over)return;if(label==='LEFT'&&!hit(piece,px-1,py))px--;if(label==='RIGHT'&&!hit(piece,px+1,py))px++;if(label==='DOWN')drop();if(label==='ROTATE')rotate();if(label==='DROP'){while(!hit(piece,px,py+1))py++;drop()}draw()});controls.appendChild(b)});w.appendChild(controls);const ctx=canvas.getContext('2d'),COLS=10,ROWS=20,S=30;let board,piece,px,py,score,lines,over,timer;const shapes=[[[1,1,1,1]],[[1,1],[1,1]],[[0,1,0],[1,1,1]],[[1,0,0],[1,1,1]],[[0,0,1],[1,1,1]],[[1,1,0],[0,1,1]],[[0,1,1],[1,1,0]]];function newPiece(){piece=shapes[Math.floor(Math.random()*shapes.length)].map(r=>r.slice());px=3;py=0;if(hit(piece,px,py)){over=true;clearInterval(timer)}}function hit(p,x,y){return p.some((r,dy)=>r.some((v,dx)=>v&&(x+dx<0||x+dx>=COLS||y+dy>=ROWS||(y+dy>=0&&board[y+dy][x+dx]))))}function rotate(){const p=piece[0].map((_,i)=>piece.map(r=>r[i]).reverse());if(!hit(p,px,py))piece=p}function merge(){piece.forEach((r,y)=>r.forEach((v,x)=>{if(v&&py+y>=0)board[py+y][px+x]=1}))}function clearLines(){for(let y=ROWS-1;y>=0;y--)if(board[y].every(Boolean)){board.splice(y,1);board.unshift(Array(COLS).fill(0));lines++;score+=100;y++}}function drop(){if(over)return;if(!hit(piece,px,py+1))py++;else{merge();clearLines();newPiece()}draw();w.querySelector('#teScore').textContent=score;w.querySelector('#teLines').textContent=lines}function draw(){ctx.fillStyle='#07111d';ctx.fillRect(0,0,canvas.width,canvas.height);for(let y=0;y<ROWS;y++)for(let x=0;x<COLS;x++){ctx.strokeStyle='rgba(255,255,255,.035)';ctx.strokeRect(x*S,y*S,S,S);if(board[y][x]){ctx.fillStyle='#00d9ff';ctx.fillRect(x*S+2,y*S+2,S-4,S-4)}}piece.forEach((r,y)=>r.forEach((v,x)=>{if(v){ctx.fillStyle='#ff4fd8';ctx.fillRect((px+x)*S+2,(py+y)*S+2,S-4,S-4)}}));if(over){ctx.fillStyle='rgba(0,0,0,.5)';ctx.fillRect(0,0,300,600);ctx.fillStyle='#fff';ctx.textAlign='center';ctx.font='900 28px system-ui';ctx.fillText('GAME OVER',150,300)}}function key(e){const page=document.getElementById('tetrisPage');if(!page||!page.classList.contains('active')||over)return;const k=e.key.toLowerCase();if(k==='arrowleft'||k==='a'){e.preventDefault();if(!hit(piece,px-1,py))px--}else if(k==='arrowright'||k==='d'){e.preventDefault();if(!hit(piece,px+1,py))px++}else if(k==='arrowdown'||k==='s'){e.preventDefault();drop()}else if(k==='arrowup'||k==='w'){e.preventDefault();rotate()}else if(e.code==='Space'){e.preventDefault();while(!hit(piece,px,py+1))py++;drop()}draw()}window.addEventListener('keydown',key,{passive:false});canvas.tabIndex=0;canvas.addEventListener('pointerdown',()=>canvas.focus());function start(){clearInterval(timer);board=Array.from({length:ROWS},()=>Array(COLS).fill(0));score=0;lines=0;over=false;newPiece();timer=setInterval(drop,650);draw();}start();}};
+
+  // Make the games visible in the Arcade page immediately.
+  const title=document.createElement('div');title.className='arcade-extra-title';title.textContent='MORE GAMES';const firstGrid=document.querySelector('#arcade .cards-grid');if(firstGrid&&!document.querySelector('.arcade-extra-title'))firstGrid.parentNode.insertBefore(title,firstGrid.nextSibling);
+})();
 </script>
 
 </body>
